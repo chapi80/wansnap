@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+
 
 def index(request):
     return render(request, 'portfolio/index.html')
@@ -15,6 +15,6 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(redirect, 'app/login.html', {'error': 'メールアドレスまたはパスワードが間違っています'})
+            return render(request, 'app/login.html', {'error': 'メールアドレスまたはパスワードが間違っています'})
     
     return render(request, 'app/login.html')
