@@ -14,20 +14,16 @@
 
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-            <label for="email">メールアドレス</label>
-            <br>
-            <input type="email" id="email" name="email" required placeholder="test@user.com">
+            {{ form.as_p }}
 
-            <br>
-            <label for="password">パスワード</label>
-            <br>
-            <input type="password" id="password" name="password" required placeholder="パスワードを入力してください">
+            {% if form.non_field_errors %}
+                <p style="color: red;">{{ form.non_field_errors }}</p>
+            {% endif %}
 
-            <br>
             <button type="submit">ログイン</button>
 
             <br>
-            <a heaf="">新規アカウント登録</a>
+            <a href="">新規アカウント登録</a>
         </form>
     </body>
 </html>
