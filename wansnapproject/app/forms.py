@@ -1,6 +1,6 @@
 from django import forms
 
-class LoginFrom(froms.From):
-    email = froms.EmailField(label='メールアドレス', required=True)
-    password = froms.CharFild(label='パスワード', widget=froms.PasswordInput, required=True)
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='メールアドレス', required=True)
+    password = forms.CharFild(label='パスワード', widget=forms.PasswordInput, required=True)
     

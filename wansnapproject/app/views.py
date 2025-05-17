@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from .forms import LoginForm
 
 
 def index(request):
@@ -15,6 +16,8 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'app/login.html', {'error': 'メールアドレスまたはパスワードが間違っています'})
-    
-    return render(request, 'app/login.html')
+            form.add_error(None, 'メールアドレスまたはパスワードが間違っています')
+    else:
+        form = LoginForm()
+        
+    return render(request, 'app/login.html', {'form':form})
