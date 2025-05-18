@@ -11,8 +11,8 @@ class SignupForm(forms.ModelForm):
     password2 = forms.CharField(label='パスワード（再入力）', widget=forms.PasswordInput)
     
     class Meta:
-        model =User
-        filrds = ['username', 'email']
+        model = User
+        fields = ['username', 'email']
         
         def clean(self):
             cleaned_date = super().clean()
