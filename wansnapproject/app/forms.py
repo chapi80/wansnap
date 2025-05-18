@@ -5,7 +5,7 @@ class LoginForm(forms.Form):
     email = forms.EmailField(label='メールアドレス', required=True)
     password = forms.CharField(label='パスワード', widget=forms.PasswordInput, required=True)
 
-class SignuoForm(forms.Modelform):
+class SignupForm(forms.Modelform):
     password = forms.CharField(label='パスワード', widget=forms.PasswordInput)
     password_confirm = cleaned_date.get("password_confirm")
     
