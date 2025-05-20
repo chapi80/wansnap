@@ -12,7 +12,7 @@
 
         <h2>新規アカウント登録</h2>
 
-        <form action="{% url 'signup' %}" method="POST">
+        <form action="{% url 'signup' %}" method="POST" enctype"multipart/form-date">
             {% csrf_token %}
             
             {{ user_form.username.label_tag }}<br>
@@ -20,40 +20,39 @@
             
             <div id="dog-forms-container">
                 <div class="dog-form">
-                    {{ }}
-                    <label>2.うちの子の名前</label><br>
-                    <input type="text" name="dog_name"><br><br>
+                    {{ dog_form.dog_name.label_tag }}<br>
+                    {{ dog_form.dog.name }}<br><br>
+                    
+                    {{ dog_form.breed.label_tag }}<br>
+                    {{ dog_form.breed }}<br><br>
+                    
+                    {{ dog_form.gender.label_tag}}<br>
+                    {{ dog_form.gender }}<br><br>
+                    
+                    {{ dog_form.birthday.label_tag }}<br>
+                    {{ dog_form.birthday }}<br><br>
+                    
+                    {{ dog_form.dog_image.label_tag }}<br>
+                    {{ dog_form.dog_image }}<br><br>
 
-                    <label>3.犬種</label><br>
-                    <input type="text" name="dog_breed"><br><br>
-
-                    <label>4.性別</label><br>
-                    {{ form.gender }}
-                    <br><br>
-
-                    <label>5.うちの子の誕生日</label><br>
-                    <input type="date" name="dog_birthday"><br><br>
-
-                    <label>6.マイページ用写真</label><br>
-                    <input type="file" name="dog_image"><br><br>
                 </div>
             </div><br>
 
             <button type="button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>
 
-            <label for="email">7.メールアドレス</label><br>
-            <input type="email" name="email" required><br><br>
+            {{ user_form.email.label_tag }}<br>
+            {{ user_form.email }}<br><br>
 
-            <label for="password1">8.パスワード</label><br>
-            <input type="password" name="password1" required><br>
-            <h3>8文字以上の英数字を含むパスワードを設定してください</h3><br><br>
+            {{ user_form.password1.label_tag }}<br>
+            {{ user_form.password1 }}<br><br>
+            <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
 
-            <label for="password2">9.パスワード再入力</label><br>
-            <input type="password" name="password2" required><br>
-            <h3>確認のため、同じパスワードを入力してください</h3><br><br>
+            {{ user_form.password2.label_tag }}<br>
+            {{ user_form.password2 }}<br><br>
+            <h5>確認のため、同じパスワードを入力してください</h5><br><br>
 
             <button type="submit">登録</button>
         </form>
        
         <br>
-        <a href="{% url 'login' %}">ログイン画面に戻る</a>
+<a href="{% url 'login' %}">ログイン画面に戻る</a>
