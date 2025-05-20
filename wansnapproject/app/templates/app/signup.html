@@ -12,7 +12,7 @@
 
         <h2>新規アカウント登録</h2>
 
-        <form action="{% url 'signup' %}" method="POST" enctype"multipart/form-date">
+        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             
             {{ user_form.username.label_tag }}<br>
@@ -21,7 +21,7 @@
             <div id="dog-forms-container">
                 <div class="dog-form">
                     {{ dog_form.dog_name.label_tag }}<br>
-                    {{ dog_form.dog.name }}<br><br>
+                    {{ dog_form.dog_name }}<br><br>
                     
                     {{ dog_form.breed.label_tag }}<br>
                     {{ dog_form.breed }}<br><br>
@@ -44,11 +44,11 @@
             {{ user_form.email }}<br><br>
 
             {{ user_form.password1.label_tag }}<br>
-            {{ user_form.password1 }}<br><br>
+            {{ user_form.password1 }}<br>
             <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
 
             {{ user_form.password2.label_tag }}<br>
-            {{ user_form.password2 }}<br><br>
+            {{ user_form.password2 }}<br>
             <h5>確認のため、同じパスワードを入力してください</h5><br><br>
 
             <button type="submit">登録</button>

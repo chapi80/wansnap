@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
-from django.contrib.auth.models import User
 from .forms import SignupForm
 from .forms import DogForm
 
@@ -30,10 +29,11 @@ def signup_view(request):
     if request.method == 'POST':
         user_form = SignupForm(request.POST)
         dog_form = DogForm(request.POST, request.FILES)
+
         
         if user_form.is_valid() and dog_form.is_valid():
             user = user_form.save(commit=False)
-            password = user_form.cleaned_date['password']
+            password = user_form.cleaned_data['password']
             user.set_password(password)
             user.save()
             

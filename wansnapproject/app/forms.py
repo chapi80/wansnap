@@ -1,7 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from .models import Dog
+from .models import User, Dog
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='メールアドレス', required=True)
@@ -14,11 +13,15 @@ class SignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+        labels = {
+            'username':'ユーザー名',
+            'email':'メールアドレス',
+        }
         
         def clean(self):
-            cleaned_date = super().clean()
-            password1 = cleaned_date.get("password1")
-            password2 = cleaned_date.get("password2")
+            cleaned_data = super().clean()
+            password1 = cleaned_data.get("password1")
+            password2 = cleaned_data.get("password2")
             
             if password1 and password2 and password1 != password2:
                 self.add_error('password2', "パスワードが一致しません")
@@ -31,11 +34,17 @@ class DogForm(forms.ModelForm):
     
     gender = forms.ChoiceField(
         choices=GENDER_CHOICES,
-        widget=forms.RadioSelect
+        widget=forms.RadioSelect,
+        label='性別',
     )
     
-    dog_name = forms.CharField(label='うちの子の名前')
-    
+      
     class Meta:
         model = Dog
-        fields = ['dog_name', 'breed', 'birthday', 'gender', 'dog_image']                
+        fields = ('dog_name', 'breed', 'birthday', 'gender', 'dog_image')
+        labels = {
+            'dog_name':'うちの子の名前',
+            'breed':'犬種',
+            'birthday':'うちの子の誕生日',
+            'dog_image':'マイページ用写真',
+        }       
