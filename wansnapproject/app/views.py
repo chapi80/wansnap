@@ -36,9 +36,18 @@ def signup_view(request):
             password = form.cleaned_date['password']
             user.set_password(password)
             user.save()
+            
+            dog = dog_form.save(commit=False)
+            dog.owner = user
+            dog.save()
+            
             login(request, user)
             return redirect('home')
     else:
-        form =SignupForm()
+        user_form = SignupForm()
+        dog_form = DogForm()
         
-    return render(request, 'app/signup.html', {'form':form})
+    return render(request, 'app/signup.html', {
+        'user_form': user_form,
+        'dog_form': dog_form,
+    })
