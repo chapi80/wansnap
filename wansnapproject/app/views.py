@@ -33,9 +33,9 @@ def signup_view(request):
             password = form.cleaned_date['password']
             user.set_password(password)
             user.save()
-            login(request.user)
+            login(request, user)
             return redirect('home')
-        else:
-            form =SignupForm()
+    else:
+        form =SignupForm()
         
-        return render(request, 'app/signup.html', {'form':form})
+    return render(request, 'app/signup.html', {'form':form})

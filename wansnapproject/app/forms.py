@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import Dog
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='メールアドレス', required=True)
@@ -21,3 +22,18 @@ class SignupForm(forms.ModelForm):
             
             if password1 and password2 and password1 != password2:
                 self.add_error('password2', "パスワードが一致しません")
+
+class DogForm(forms.ModelForm):
+    GENDER_CHOICES = [
+        ('男の子', '男の子'),
+        ('女の子', '女の子'),
+    ]
+    
+    gender = forms.ChoiceField(
+        choices=GENDER_CHOICES,
+        widget=forms.RadioSelect
+    )
+    
+    class Meta:
+        model = Dog
+        fields = ['name', 'breed', 'birthday', 'gender', 'dog_image']                

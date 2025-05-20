@@ -27,17 +27,16 @@
                     <input type="text" name="dog_breed"><br><br>
 
                     <label>4.性別</label><br>
-                    <input type="radio" name="gender" value="男の子">
-                    <input type="radio" name="gender" value="女の子">
+                    {{ form.gender }}
                     <br><br>
 
                     <label>5.うちの子の誕生日</label><br>
                     <input type="date" name="dog_birthday"><br><br>
 
                     <label>6.マイページ用写真</label><br>
-                    <input type="file" name="dog_image"<br><br>
+                    <input type="file" name="dog_image"><br><br>
                 </div>
-            </div>
+            </div><br>
 
             <button type="button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>
 
