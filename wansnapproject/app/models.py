@@ -17,7 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         
 class Dog(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dogs')
-    name = models.CharField(max_length=50)
+    dog_name = models.CharField(max_length=50)
     breed = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=[('男の子','男の子'), ('女の子','女の子')])
     birthday = models.DateField(null=True, blank=True)

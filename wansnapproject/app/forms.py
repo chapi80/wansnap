@@ -34,6 +34,8 @@ class DogForm(forms.ModelForm):
         widget=forms.RadioSelect
     )
     
+    dog_name = forms.CharField(label='うちの子の名前')
+    
     class Meta:
         model = Dog
-        fields = ['name', 'breed', 'birthday', 'gender', 'dog_image']                
+        fields = ['dog_name', 'breed', 'birthday', 'gender', 'dog_image']                

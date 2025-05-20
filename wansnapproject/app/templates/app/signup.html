@@ -15,11 +15,12 @@
         <form action="{% url 'signup' %}" method="POST">
             {% csrf_token %}
             
-            <label for="username">1.ユーザー名</label><br>
-            <input type="text" name="username" required><br><br>
-
+            {{ user_form.username.label_tag }}<br>
+            {{ user_form.username }}<br><br>
+            
             <div id="dog-forms-container">
                 <div class="dog-form">
+                    {{ }}
                     <label>2.うちの子の名前</label><br>
                     <input type="text" name="dog_name"><br><br>
 

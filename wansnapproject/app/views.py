@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 from django.contrib.auth.models import User
 from .forms import SignupForm
+from .forms import DogForm
 
 
 def index(request):
@@ -27,8 +28,10 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
+        user_form = SignupForm(request.POST)
+        dog_form = DogForm(request.POST, request.FILES)
+        
+        if user_form.is_valid() and dog_form.is_valid():
             user = form.save(commit=False)
             password = form.cleaned_date['password']
             user.set_password(password)
