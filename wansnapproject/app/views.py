@@ -51,3 +51,7 @@ def signup_view(request):
         'user_form': user_form,
         'dog_form': dog_form,
     })
+    
+def home_view(request):
+    return render(request, 'app/home.html')
+ 
