@@ -8,6 +8,23 @@
     </head>
 
     <body>
-        <h1>ホーム</h1>
+        <h1>🏠ホーム🏠</h1>
+
+        <a href="">
+            <button type = "button">うちの子投稿</button>
+        </a>
+
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
+            <button type="submit" aria-label="検索">🔍</button>
+        </form>
+
+        <form method="get" action"{% url 'home' %}>
+            <button type="submit" name="order" value="new">新しい順</button>
+            <button type="submit" name="order" value="old">古い順</button>
+        </form>
+        
+
+
 
     
