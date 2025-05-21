@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 from .forms import SignupForm
 from .forms import DogForm
+from .models import Post
 
 
 def index(request):
@@ -53,5 +54,17 @@ def signup_view(request):
     })
     
 def home_view(request):
+    sort_order = request.GET.get('sort','new')
+    
+    if sort_order == 'old':
+        posts = Post.objects.all().order_by('created_at')
+    else:
+        posts = Post.objects.all().order_by('-created_at')
+        
+    context = {
+        'posts':posts,
+        'sort_order':sort_order,
+    }
+    
     return render(request, 'app/home.html')
  
