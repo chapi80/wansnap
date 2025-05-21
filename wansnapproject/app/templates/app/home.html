@@ -19,11 +19,15 @@
             <button type="submit" aria-label="検索">🔍</button>
         </form>
 
-        <form method="get" action"{% url 'home' %}>
-            <button type="submit" name="order" value="new">新しい順</button>
-            <button type="submit" name="order" value="old">古い順</button>
-        </form>
-        
+        <label>
+            <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+            新しい順
+        </label>
+        <label>
+            <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+            古い順
+        </label>
+
 
 
 
