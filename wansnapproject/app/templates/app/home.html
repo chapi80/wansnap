@@ -27,6 +27,18 @@
             <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
             古い順
         </label>
+    
+        <div class="post-list">
+            {% for post in posts %}
+                <div class="post">
+                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" oneclick="ooenMdal('{{ post.id }}')">
+                </div>
+            {% empty %}
+                <p>まだ投稿がありません</p>
+            {% endfor%}
+            </div>
+
+
 
 
 
