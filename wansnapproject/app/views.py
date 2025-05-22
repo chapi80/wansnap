@@ -67,4 +67,9 @@ def home_view(request):
     }
     
     return render(request, 'app/home.html')
- 
+
+def mypage_view(request):
+    return render(request, 'app/mypage.html')
+
+def dog_detail_view(request):
+    return render(request, 'app/dog_detail.html')
