@@ -25,3 +25,10 @@ class Dog(models.Model):
     
     def __str__(self):
         return f"{self.name}({self.owner.username}のうちの子)"
+
+class Post(models.Model):
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='post_images/')
+    caption = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+       
