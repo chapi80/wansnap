@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
-from .forms import SignupForm
-from .forms import DogForm
+from .forms import LoginForm, SignupForm, DogForm
 from .models import Post
 
 
