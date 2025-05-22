@@ -12,7 +12,18 @@
 
         <h2>うちの子一覧</h2>
 
-        
+        <ul>
+            {% for dog in dogs %}
+                <li>
+                    <a href="{% url 'dog_detail' dog.id %}">{{ dog.dog_name }}の部屋</a>
+                </li>
+            
+            {% empty %}
+                <li>まだ登録されていません</li>
+            
+            {% endfor %}
+        </ur>
+
 
         <a href="">
             <button type = "button">うちの子投稿</button>
