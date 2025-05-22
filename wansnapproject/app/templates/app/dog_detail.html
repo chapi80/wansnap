@@ -8,4 +8,14 @@
     </head>
 
     <body>
-        <h1>の部屋</h1>
+        <h1>{{ dog.dog_name }}の部屋</h1>
+
+        <imag src="{{ dog.dog_image.url }}" alt="うちの子の写真">
+
+        <p>うちの子の名前:{{ dog.dog_name }}</p><br><br>
+
+        <p>犬種:{{ dog.breed }}</p><br><br>
+
+        <p>性別:{{ dog.gender }}</p><br><br>
+
+        <p>うちの子の誕生日:{{ dog.birthday }}</p><br><br>
