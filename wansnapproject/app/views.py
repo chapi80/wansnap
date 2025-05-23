@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignupForm, DogForm
 from .models import Post, Dog
+from django.db.models import Q
+
 
 
 def index(request):

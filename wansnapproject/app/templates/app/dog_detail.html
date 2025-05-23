@@ -10,7 +10,7 @@
     <body>
         <h1>{{ dog.dog_name }}の部屋</h1>
 
-        <imag src="{{ dog.dog_image.url }}" alt="うちの子の写真">
+        <img src="{{ dog.dog_image.url }}" alt="うちの子の写真">
 
         <p>うちの子の名前:{{ dog.dog_name }}</p><br><br>
 
@@ -31,16 +31,16 @@
         <form method="get">
 
             <label>
-                <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+                <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
                 新しい順
             </label>
         
             <label>
-                <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+                <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
                 古い順
             </label>
 
-            <imput type="text" name='q' placeholder="2025-5 などで検索" valeu="{{ request.GET.q }}">
+            <input type="text" name='q' placeholder="2025-5 などで検索" value="{{ request.GET.q }}">
             <button type="submit">🔍</button>
 
         </form>
