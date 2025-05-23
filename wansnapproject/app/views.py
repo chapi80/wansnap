@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignupForm, DogForm
-from .models import Post
+from .models import Post, Dog
 
 
 def index(request):
@@ -69,5 +69,27 @@ def home_view(request):
 def mypage_view(request):
     return render(request, 'app/mypage.html')
 
-def dog_detail_view(request):
-    return render(request, 'app/dog_detail.html')
+def dog_detail_view(request, dog_id):
+    dog = get_object_or_404(Dog, id=dog_id)
+    posts = Post.objects.filter(dog=dog)
+    
+    sort_order = request.GET.get('sort','new')
+    
+    if sort_order == 'old':
+        posts = Post.objects.all().order_by('created_at')
+    else:
+        posts = Post.objects.all().order_by('-created_at')
+    
+    q = request.GET.get('q')
+    if q:
+        try:
+            year, month = map(int, q.split('-'))
+            posts = posts.filter(created_at__year=year, created_at__month=month)
+        except:
+            pass
+    
+    return render(request, 'app/dog_detail.html'), {
+        'dog':dog,
+        'posts':posts,
+        'request':request,
+    }

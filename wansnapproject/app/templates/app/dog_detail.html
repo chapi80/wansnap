@@ -28,19 +28,21 @@
 
         <h1>🐶今までの思い出🐶</h1>
 
-        <label>
-            <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
-            新しい順
-        </label>
-        
-        <label>
-            <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
-            古い順
-        </label>
+        <form method="get">
 
-        <form method="get" action="{% url 'dog_detail' %}">
-            <input type="text" name="q" placeholder="投稿年月で検索">
-            <button type="submit" aria-label="検索">🔍</button>
+            <label>
+                <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+                新しい順
+            </label>
+        
+            <label>
+                <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+                古い順
+            </label>
+
+            <imput type="text" name='q' placeholder="2025-5 などで検索" valeu="{{ request.GET.q }}">
+            <button type="submit">🔍</button>
+
         </form>
 
         <div class="post-list">
@@ -52,3 +54,4 @@
                 <p>まだ投稿がありません</p>
             {% endfor%}
             </div>
+    </body>
