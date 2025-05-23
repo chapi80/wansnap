@@ -22,4 +22,33 @@
 
         <p>うちの子からひとこと:{{ dog.biography }}</p><br><br>
 
+        <a href="">
+            <button type = "button">登録情報修正</button>
+        </a><br><br>
+
+        <h1>🐶今までの思い出🐶</h1>
+
+        <label>
+            <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+            新しい順
+        </label>
         
+        <label>
+            <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+            古い順
+        </label>
+
+        <form method="get" action="{% url 'dog_detail' %}">
+            <input type="text" name="q" placeholder="投稿年月で検索">
+            <button type="submit" aria-label="検索">🔍</button>
+        </form>
+
+        <div class="post-list">
+            {% for post in posts %}
+                <div class="post">
+                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" oneclick="ooenMdal('{{ post.id }}')">
+                </div>
+            {% empty %}
+                <p>まだ投稿がありません</p>
+            {% endfor%}
+            </div>
