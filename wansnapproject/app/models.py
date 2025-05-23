@@ -40,6 +40,7 @@ class Dog(models.Model):
     breed = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=[('男の子','男の子'), ('女の子','女の子')])
     birthday = models.DateField(null=True, blank=True)
+    biography = models.TextField(blank=True)
     dog_image = models.ImageField(upload_to='dog_image/', null=True, blank=True)
     
     def __str__(self):
