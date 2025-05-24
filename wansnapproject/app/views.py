@@ -97,5 +97,6 @@ def dog_detail_view(request, dog_id):
     }
     
 def favorite_list_view(request):
-    favorites = Post.objects.filter(favorite_users=request.user)
+    favorites = Post.objects.filter(favorite_users=request.user).select_related('post')
+    posts = [fav.post for fav in favorites]
     return render(request, 'app/favorite.html', {'posts':favorites})
