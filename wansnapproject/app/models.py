@@ -52,4 +52,6 @@ class Post(models.Model):
     caption = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
-    
+class Favorite(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
