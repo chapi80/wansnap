@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignupForm, DogForm
-from .models import Post, Dog
+from .models import Post, Dog, Favorite
 from django.db.models import Q
 
 
@@ -95,3 +95,6 @@ def dog_detail_view(request, dog_id):
         'posts':posts,
         'request':request,
     }
+    
+def favorite_view(request):
+    return render(request, 'app/favorite.html')
