@@ -10,4 +10,12 @@
     <body>
         <h1>★お気に入り一覧★</h1>
 
-        
+        <div class="post-list">
+            {% for post in posts %}
+                <div class="post">
+                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" oneclick="openModal('{{ post.id }}')">
+                </div>
+            {% empty %}
+                <p>まだお気に入りが登録されていません</p>
+            {% endfor%}
+            </div>
