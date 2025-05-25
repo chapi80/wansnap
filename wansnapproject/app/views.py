@@ -119,11 +119,11 @@ def edit_view(request, dog_id):
     dog = get_object_or_404(Dog, id=dog_id, owner=request.user)
     
     if request.method == 'POST':
-        form = DogForm(request.POST, request.FILES, instance=dog)
-        if form.is_valid():
-            form.save()
+        dog_form = DogForm(request.POST, request.FILES, instance=dog)
+        if dog_form.is_valid():
+            dog_form.save()
             return redirect('dog_detail', dog_id=dog.id)
     else:
-        form = DogForm(instance=dog)
+        dog_form = DogForm(instance=dog)
         
-    return render(request, 'app/edit_dog.html', {'dog_form':form, 'dog':dog})
+    return render(request, 'app/edit_dog.html', {'dog_form':dog_form, 'dog':dog})
