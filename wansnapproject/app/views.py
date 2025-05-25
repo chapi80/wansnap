@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignupForm, DogForm
 from .models import Post, Dog, Favorite
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -100,3 +101,16 @@ def favorite_list_view(request):
     favorites = Post.objects.filter(favorite_users=request.user).select_related('post')
     posts = [fav.post for fav in favorites]
     return render(request, 'app/favorite.html', {'posts':favorites})
+
+def add_dog_view(request):
+    if request.method == 'POST':
+        form = DogForm(request.POST, request.FILES)
+        if form.is_valid():
+            dog = form.save(commit=False)
+            dog.owner = request.user
+            dog.save()
+            return redirect('dog_detail', dog_id=dog.id)
+    else:
+        form = DogForm()
+    
+    return render(request, 'app/add_dog.html', {'form':form})
