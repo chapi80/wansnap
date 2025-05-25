@@ -115,7 +115,7 @@ def add_dog_view(request):
     
     return render(request, 'app/add_dog.html', {'dog_form':dog_form})
 
-def edit_view(request, dog_id):
+def edit_dog_view(request, dog_id):
     dog = get_object_or_404(Dog, id=dog_id, owner=request.user)
     
     if request.method == 'POST':
