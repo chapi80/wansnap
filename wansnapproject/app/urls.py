@@ -10,6 +10,6 @@ urlpatterns = [
     path('dog/<int:dog_id>/', views.dog_detail_view, name='dog_detail'),
     path('favorite/', views.favorite_list_view, name='favorite_list'),
     path('add_dog/', views.add_dog_view, name='add_dog'),
-    path('edit_dog/', views.edit_dog_view, name='edit_dog'),
+    path('dog/<int:dog_id>/', views.edit_dog_view, name='edit_dog'),
     
 ]
