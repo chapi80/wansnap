@@ -104,13 +104,13 @@ def favorite_list_view(request):
 
 def add_dog_view(request):
     if request.method == 'POST':
-        form = DogForm(request.POST, request.FILES)
-        if form.is_valid():
-            dog = form.save(commit=False)
+        dog_form = DogForm(request.POST, request.FILES)
+        if dog_form.is_valid():
+            dog = dog_form.save(commit=False)
             dog.owner = request.user
             dog.save()
-            return redirect('dog_detail', dog_id=dog.id)
+            return redirect('home')
     else:
-        form = DogForm()
+        dog_form = DogForm()
     
-    return render(request, 'app/add_dog.html', {'form':form})
+    return render(request, 'app/add_dog.html', {'dog_form':dog_form})
