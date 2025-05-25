@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>うちの子追加登録画面</title>
+    </head>
+
+    <body>
+        <h1>ワンスナップ</h1>
+
+        <h2>うちの子追加登録</h2>
+
+        <form action="{% url 'add_dog' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+          <div id="dog-forms-container">
+                <div class="dog-form">
+                    {{ dog_form.dog_name.label_tag }}<br>
+                    {{ dog_form.dog_name }}<br><br>
+                    
+                    {{ dog_form.breed.label_tag }}<br>
+                    {{ dog_form.breed }}<br><br>
+                    
+                    {{ dog_form.gender.label_tag}}<br>
+                    {{ dog_form.gender }}<br><br>
+                    
+                    {{ dog_form.birthday.label_tag }}<br>
+                    {{ dog_form.birthday }}<br><br>
+                    
+                    {{ dog_form.dog_image.label_tag }}<br>
+                    {{ dog_form.dog_image }}<br><br>
+
+                </div>
+            </div><br>  
