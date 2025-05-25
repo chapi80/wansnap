@@ -9,5 +9,6 @@ urlpatterns = [
     path('mypage/', views.mypage_view, name='mypage'),
     path('dog/<int:dog_id>/', views.dog_detail_view, name='dog_detail'),
     path('favorite/', views.favorite_list_views, name='favorite_list'),
+    path('add_dog/', views.add_dog_view, name='add_dog'),
     
 ]
