@@ -52,10 +52,10 @@ class DogForm(forms.ModelForm):
 
 User = get_user_model()
         
-class EmailChangeForm(forms.MdelForm):
-    class meta:
+class EmailChangeForm(forms.ModelForm):
+    class Meta:
         model = User
-        fileds = ['email']
+        fields = ['email']
         labels = {
             'email':'新しいメールアドレス',
         }       
