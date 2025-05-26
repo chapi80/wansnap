@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm, SignupForm, DogForm
+from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm
 from .models import Post, Dog, Favorite
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 
 
@@ -127,3 +128,15 @@ def edit_dog_view(request, dog_id):
         dog_form = DogForm(instance=dog)
         
     return render(request, 'app/edit_dog.html', {'dog_form':dog_form, 'dog':dog})
+
+def edit_user_email_view(request):
+    if request.method == 'POST':
+        email_form = EmailChangeForm(request.POST, instance=request.user)
+        if email_form.is_valid():
+            email_form.save()
+            return redirect('home')
+    else:
+        email_form = EmailChangeForm(instance=request.user)
+    return render(request, 'app/edit_user_email.html',{
+        'user_form':email_form,
+        })

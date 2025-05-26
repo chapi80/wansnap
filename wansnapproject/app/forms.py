@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import User, Dog
+from django.contrib.auth import get_user_model
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='メールアドレス', required=True)
@@ -47,4 +48,14 @@ class DogForm(forms.ModelForm):
             'breed':'犬種',
             'birthday':'うちの子の誕生日',
             'dog_image':'マイページ用写真',
+        }
+
+User = get_user_model()
+        
+class EmailChangeForm(forms.MdelForm):
+    class meta:
+        model = User
+        fileds = ['email']
+        labels = {
+            'email':'新しいメールアドレス',
         }       
