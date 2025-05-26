@@ -12,5 +12,6 @@ urlpatterns = [
     path('add_dog/', views.add_dog_view, name='add_dog'),
     path('dog/<int:dog_id>/', views.edit_dog_view, name='edit_dog'),
     path('edit_user_email/', views.edit_user_email_view, name='edit_user_email'),
+    path('edit_user_password/', views.edit_user_password_view, name='edit_user_password'),
     
 ]
