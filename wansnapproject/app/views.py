@@ -152,29 +152,29 @@ def edit_user_email_view(request):
 @login_required
 def edit_user_password_view(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(user=request.user, date=request.POST)
-        if form.is_valid():
-            user = form.save()
+        password_form = PasswordChangeForm(user=request.user, date=request.POST)
+        if password_form.is_valid():
+            user = password_form.save()
             update_session_auth_hash(request, user)
             return redirect('home')
     else:
-        form = PasswordChangeForm(user=request.user)
+        password_form = PasswordChangeForm(user=request.user)
         
     return render(request, 'app/edit_user_password.html', {
-        'form':form
+        'form':password_form
     })
 
 @login_required
 def create_post_view(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES, user=request.user)
-        if form.is_valid():
-            post = form.save(commit=False)
+        create_post_form = PostForm(request.POST, request.FILES, user=request.user)
+        if create_post_form.is_valid():
+            post = create_post_form.save(commit=False)
             post.save()
             return render('home')
     else:
-        form = PostForm(user=request.user)
+        create_post_form = PostForm(user=request.user)
     
     return render(request, 'app/create_post.html',{
-        'form':form,
+        'form':create_post_form,
     })
