@@ -5,7 +5,7 @@ from .models import Post, Dog, Favorite
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django import forms
-from django.contrib.auth.forms import PaawordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 
@@ -148,3 +148,18 @@ def edit_user_email_view(request):
     return render(request, 'app/edit_user_email.html',{
         'user_form':email_form,
         })
+    
+@login_required
+def edit_user_password_view(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, date=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('home')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        
+    return render(request, 'app/edit_user_password.html', {
+        'form':form
+    })
