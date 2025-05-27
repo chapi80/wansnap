@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm
 from .models import Post, Dog, Favorite
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.contrib.auth.forms import PaawordChangeForm
 
 
 
@@ -55,6 +56,7 @@ def signup_view(request):
         'dog_form': dog_form,
     })
     
+@login_required
 def home_view(request):
     sort_order = request.GET.get('sort','new')
     
@@ -70,9 +72,11 @@ def home_view(request):
     
     return render(request, 'app/home.html')
 
+@login_required
 def mypage_view(request):
     return render(request, 'app/mypage.html')
 
+@login_required
 def dog_detail_view(request, dog_id):
     dog = get_object_or_404(Dog, id=dog_id)
     posts = Post.objects.filter(dog=dog)
@@ -98,11 +102,13 @@ def dog_detail_view(request, dog_id):
         'request':request,
     }
     
+@login_required
 def favorite_list_view(request):
     favorites = Post.objects.filter(favorite_users=request.user).select_related('post')
     posts = [fav.post for fav in favorites]
     return render(request, 'app/favorite.html', {'posts':favorites})
 
+@login_required
 def add_dog_view(request):
     if request.method == 'POST':
         dog_form = DogForm(request.POST, request.FILES)
@@ -116,6 +122,7 @@ def add_dog_view(request):
     
     return render(request, 'app/add_dog.html', {'dog_form':dog_form})
 
+@login_required
 def edit_dog_view(request, dog_id):
     dog = get_object_or_404(Dog, id=dog_id, owner=request.user)
     
@@ -129,6 +136,7 @@ def edit_dog_view(request, dog_id):
         
     return render(request, 'app/edit_dog.html', {'dog_form':dog_form, 'dog':dog})
 
+@login_required
 def edit_user_email_view(request):
     if request.method == 'POST':
         email_form = EmailChangeForm(request.POST, instance=request.user)
