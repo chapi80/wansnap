@@ -177,3 +177,20 @@ def create_post_view(request):
     return render(request, 'app/create_post.html',{
         'create_post_form':create_post_form,
     })
+
+@login_required
+def edit_post_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id, owner=request.user)
+    
+    if request.method == 'POST':
+        edit_post_form = PostForm(request.POST, request.FILES, isinstance=post, user=request.user)
+        if edit_post_form.is_valid():
+            post = edit_post_form.save()
+            return redirect('home')
+    else:
+        edit_post_form = PostForm(isinstance=post, user=request.user)
+        
+    return render(request, 'app/edit_post.html',{
+        'edit_post_form':edit_post_form
+    })
+        
