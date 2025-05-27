@@ -60,7 +60,7 @@ class EmailChangeForm(forms.ModelForm):
             'email':'新しいメールアドレス',
         }
         
-class PostForm(forms.Modelform):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['dog', 'image', 'caption'] 
