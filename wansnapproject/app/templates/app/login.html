@@ -14,10 +14,10 @@
 
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ login_form.as_p }}
 
-            {% if form.non_field_errors %}
-                <p style="color: red;">{{ form.non_field_errors }}</p>
+            {% if login_form.non_field_errors %}
+                <p style="color: red;">{{ flogin_orm.non_field_errors }}</p>
             {% endif %}
 
             <button type="submit">ログイン</button>

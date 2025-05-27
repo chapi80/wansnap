@@ -13,10 +13,10 @@ def index(request):
     return render(request, 'portfolio/index.html')
 
 def login_view(request):
-    form = LoginForm(request.POST or None)
+    login_form = LoginForm(request.POST or None)
     
     if request.method == 'POST':
-        if form.is_valid():
+        if login_form.is_valid():
             email = request.POST.get('email')
             password = request.POST.get('password')
             user = authenticate(request, username=email, password=password)
@@ -25,9 +25,9 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
             else:
-                form.add_error(None, 'メールアドレスまたはパスワードが間違っています')
+                login_form.add_error(None, 'メールアドレスまたはパスワードが間違っています')
        
-    return render(request, 'app/login.html', {'form':form})
+    return render(request, 'app/login.html', {'login_form':login_form})
 
 def signup_view(request):
     if request.method == 'POST':
@@ -70,7 +70,7 @@ def home_view(request):
         'sort_order':sort_order,
     }
     
-    return render(request, 'app/home.html')
+    return render(request, 'app/home.html', context)
 
 @login_required
 def mypage_view(request):
@@ -96,16 +96,15 @@ def dog_detail_view(request, dog_id):
         except:
             pass
     
-    return render(request, 'app/dog_detail.html'), {
+    return render(request, 'app/dog_detail.html', {
         'dog':dog,
         'posts':posts,
         'request':request,
-    }
+    })
     
 @login_required
 def favorite_list_view(request):
-    favorites = Post.objects.filter(favorite_users=request.user).select_related('post')
-    posts = [fav.post for fav in favorites]
+    favorites = Post.objects.filter(favorite_users=request.user)
     return render(request, 'app/favorite.html', {'posts':favorites})
 
 @login_required
@@ -152,7 +151,7 @@ def edit_user_email_view(request):
 @login_required
 def edit_user_password_view(request):
     if request.method == 'POST':
-        password_form = PasswordChangeForm(user=request.user, date=request.POST)
+        password_form = PasswordChangeForm(user=request.user, data=request.POST)
         if password_form.is_valid():
             user = password_form.save()
             update_session_auth_hash(request, user)
@@ -171,10 +170,10 @@ def create_post_view(request):
         if create_post_form.is_valid():
             post = create_post_form.save(commit=False)
             post.save()
-            return render('home')
+            return redirect('home')
     else:
         create_post_form = PostForm(user=request.user)
     
     return render(request, 'app/create_post.html',{
-        'form':create_post_form,
+        'reate_post_form':create_post_form,
     })
