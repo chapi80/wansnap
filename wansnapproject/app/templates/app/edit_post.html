@@ -11,3 +11,21 @@
         <h1>ワンスナップ</h1>
 
         <h2>うちの子投稿編集ページ</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ edit_post_form.dog.label_tag }}<br>
+            {{ edit_post_form.dog }}<br><br>
+
+            {{ edit_post_form.image.label_tag }}<br>
+            {{ edit_post_form.image }}<br><br>
+
+            {{ edit_post_form.caption.label_tag }}<br>
+            {{ edit_post_form.caption }}<br><br>
+
+            <button type="submit">登録する</button><br>
+
+        </form>
+    </body>
+</html>
