@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import User, Dog
+from .models import User, Dog, Post
 from django.contrib.auth import get_user_model
 
 class LoginForm(forms.Form):
@@ -58,4 +58,20 @@ class EmailChangeForm(forms.ModelForm):
         fields = ['email']
         labels = {
             'email':'新しいメールアドレス',
-        }       
+        }
+        
+class PostForm(forms.Modelform):
+    class Meta:
+        model = Post
+        fields = ['dog', 'image', 'caption'] 
+        labels = {
+            'dog':'投稿するうちの子',
+            'image':'写真',
+            'caption':'うちの子からひとこと',
+        }
+    
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user',None)
+        super().__init__(*args,**kwargs)
+        if user is not None:
+            self.fields['dog'].queryset = Dog.objects.filter(owner=user)
