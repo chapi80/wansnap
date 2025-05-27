@@ -14,6 +14,6 @@ urlpatterns = [
     path('edit_user_email/', views.edit_user_email_view, name='edit_user_email'),
     path('edit_user_password/', views.edit_user_password_view, name='edit_user_password'),
     path('create_post/', views.create_post_view, name='create_post'),
-    path('edit_post/', views.edit_post_view, name='edit_post'),
+    path('edit_post/<int:post_id>/', views.edit_post_view, name='edit_post'),
     
 ]
