@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ワンスナップ{% endlock %}</title>
+</head>
+<body>
+    <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
+    <nav>
+        <a href="{% url 'home' %}">ホーム</a> |
+        <a href="{% url 'mypage' %}">マイページ</a> |
+        <a href="{% url 'logout' %}">ログアウト</a> |
+    </nav>
+    <hr>
+
+    <main>
+        {% block content %}{% endlock %}
+    </main>
+</body>
+</html>
