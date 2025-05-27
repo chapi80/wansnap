@@ -175,5 +175,5 @@ def create_post_view(request):
         create_post_form = PostForm(user=request.user)
     
     return render(request, 'app/create_post.html',{
-        'reate_post_form':create_post_form,
+        'create_post_form':create_post_form,
     })
