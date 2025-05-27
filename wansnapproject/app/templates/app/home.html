@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ホーム画面</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>🏠ホーム🏠</h1>
+{% block title %}ホーム画面 - ワンスナップ{% endblock %}
 
-        <a href="">
-            <button type = "button">うちの子投稿</button>
-        </a>
+{% block content %}
+    <h2>🏠ホーム🏠</h2>
 
-        <form method="get" action="{% url 'home' %}">
-            <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
-            <button type="submit" aria-label="検索">🔍</button>
-        </form>
-
-        <label>
-            <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
-            新しい順
-        </label>
-        
-        <label>
-            <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
-            古い順
-        </label>
+    <button type = "button" onclick="location.href='{% url 'create_post' %}'">うちの子投稿</button>
     
-        <div class="post-list">
-            {% for post in posts %}
-                <div class="post">
-                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" onclick="openModal('{{ post.id }}')">
-                </div>
-            {% empty %}
-                <p>まだ投稿がありません</p>
-            {% endfor %}
+    <form method="get" action="{% url 'home' %}">
+        <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
+        <button type="submit" aria-label="検索">🔍</button>
+    </form>
+
+    <label>
+        <input type="radio" name="sort" valeu="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+        新しい順
+    </label>
+        
+    <label>
+        <input type="radio" name="sort" valeu="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+        古い順
+    </label>
+    
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post">
+                <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" onclick="openModal('{{ post.id }}')">
             </div>
-
-
-
-
-
-
+        {% empty %}
+            <p>まだ投稿がありません</p>
+        {% endfor %}
+    </div>
+{% endblock %}
     
