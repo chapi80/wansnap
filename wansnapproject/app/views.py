@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, update_session_auth_hash
-from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm
+from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm, PostForm
 from .models import Post, Dog, Favorite
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -162,4 +162,19 @@ def edit_user_password_view(request):
         
     return render(request, 'app/edit_user_password.html', {
         'form':form
+    })
+
+@login_required
+def create_post_view(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return render('home')
+    else:
+        form = PostForm(user=request.user)
+    
+    return render(request, 'app/create_post.html',{
+        'form':form,
     })
