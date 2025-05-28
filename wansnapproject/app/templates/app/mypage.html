@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>マイページ</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>🐶マイページ🐶</h1>
+{% block title %}マイページ画面 - ワンスナップ{% endblock %}
 
-        <h2>うちの子一覧</h2>
+{% block content %}
+    <h2>🐶マイページ🐶</h2>
+
+    <h4>うちの子一覧</h4>
 
         <ul>
             {% for dog in dogs %}
@@ -22,21 +20,22 @@
                 <li>まだ登録されていません</li>
             
             {% endfor %}
-        </ur><br><br>
+        </ul><br><br>
 
 
-        <a href="">
+        <a href="{% url 'create_post' %}">
             <button type = "button">うちの子投稿</button>
         </a><br><br>
 
-        <a href="">
+        <a href="{% url 'favorite_list' %}">
             <button type = "button">お気に入り一覧</button>
         </a><br><br>
 
-        <a href="">
+        <a href="{% url 'add_dog' %}">
             <button type = "button">うちの子新規追加</button>
         </a><br><br>
 
         <a href="">
             <button type = "button">ユーザー登録変更</button>
         </a><br><br>
+{% endblock %}
