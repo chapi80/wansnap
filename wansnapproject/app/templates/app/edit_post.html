@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>うちの子投稿編集画面</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>ワンスナップ</h1>
+{% block title %}うちの子投稿編集ページ画面 - ワンスナップ{% endblock %}
 
-        <h2>うちの子投稿編集ページ</h2>
+{% block content %}
+    <h2>うちの子投稿編集ページ</h2>        
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -29,5 +25,4 @@
             <button type="button" onclick="openModal()">削除する</button>
 
         </form>
-    </body>
-</html>
+{% endblock %}
