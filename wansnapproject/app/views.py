@@ -37,7 +37,7 @@ def signup_view(request):
         
         if user_form.is_valid() and dog_form.is_valid():
             user = user_form.save(commit=False)
-            password = user_form.cleaned_data['password']
+            password = user_form.cleaned_data['password1']
             user.set_password(password)
             user.save()
             
