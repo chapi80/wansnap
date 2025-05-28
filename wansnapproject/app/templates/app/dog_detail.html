@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>うちの子個別ページ</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>ワンスナップ</h1>
+{% block title %}うちの子の部屋画面 - ワンスナップ{% endblock %}
 
-        <h2>{{ dog.dog_name }}の部屋</h2>
+{% block content %}
+    <h2>{{ dog.dog_name }}の部屋</h2>       
 
         <img src="{{ dog.dog_image.url }}" alt="うちの子の写真">
 
@@ -24,7 +20,7 @@
 
         <p>うちの子からひとこと:{{ dog.biography }}</p><br><br>
 
-        <a href="">
+        <a href="{% url 'edit_dog' %}">
             <button type = "button">登録情報修正</button>
         </a><br><br>
 
@@ -55,5 +51,5 @@
             {% empty %}
                 <p>まだ投稿がありません</p>
             {% endfor%}
-            </div>
-    </body>
+        </div>
+{% endblock %}
