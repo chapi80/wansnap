@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>メールアドレス変更画面</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>ワンスナップ</h1>
+{% block title %}メールアドレス変更画面 - ワンスナップ{% endblock %}
 
-        <h2>メールアドレス変更</h2>
+{% block content %}
+    <h2>メールアドレス変更</h2>        
 
         <form action="{% url 'edit_user_email' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -29,5 +25,4 @@
         <a href="{% url 'home' %}">
             <button type="submit">キャンセル</button>
         </a>
-    </body>
-</html>
+{% endblock %}
