@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>うちの子追加登録画面</title>
-    </head>
+{% extends "app/base.html" %}
 
-    <body>
-        <h1>ワンスナップ</h1>
+{% block title %}うちの子追加登録画面 - ワンスナップ{% endblock %}
 
-        <h2>うちの子追加登録</h2>
+{% block content %}
+    <h2>うちの子追加登録</h2>      
 
         <form action="{% url 'add_dog' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -41,6 +37,5 @@
                 <button type="submit">キャンセル</button>
             </a>
         </form>
-    </body>
-</html>
+{% endblock %}
             
