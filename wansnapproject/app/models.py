@@ -3,7 +3,9 @@ from django.contrib.auth.models import(
     AbstractBaseUser, PermissionsMixin
 )
 from django.contrib.auth.base_user import BaseUserManager
-
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+import os
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -56,3 +58,9 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+@receiver(post_delete, sender=Post)
+def delete_image_file(sender, instance, **kwargs):
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
