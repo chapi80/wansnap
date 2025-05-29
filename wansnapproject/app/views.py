@@ -31,15 +31,21 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
+        print("じゅしん")
         user_form = SignupForm(request.POST)
         dog_form = DogForm(request.POST, request.FILES)
 
         
         if user_form.is_valid() and dog_form.is_valid():
+            print("ばりつうか")
             user = user_form.save(commit=False)
             password = user_form.cleaned_data['password1']
-            user.set_password(password)
+            if password:
+                user.set_password(password)
+            user.is_active = True
             user.save()
+            
+            print("is_active:", user.is_active)
             
             dog = dog_form.save(commit=False)
             dog.owner = user
@@ -47,9 +53,14 @@ def signup_view(request):
             
             login(request, user)
             return redirect('home')
+        else:
+            print("ばり失敗")
+            print("user_form.errors:", user_form.errors)
+            print("dog_form.errors:", dog_form.errors)
     else:
         user_form = SignupForm()
         dog_form = DogForm()
+        print("フォーム完了")
         
     return render(request, 'app/signup.html', {
         'user_form': user_form,
