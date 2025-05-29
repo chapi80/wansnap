@@ -54,12 +54,19 @@
     </div>
 
     <script>
-        function openModal(postId){
-            const img = document.querySelector(`img[data-post-id='${postId}']`);
-            const caption = img.getAttribute('data-caption');
+        function openModal(imgElement){
+            const image = imgElement.getAttribute('data-image');
+            const name = imgElement.getAttribute('data-name');
+            const breed = imgElement.getAttribute('data-breed');
+            const gender = imgElement.getAttribute('data-gender');
+            const caption = imgElement.getAttribute('data-caption');
 
-            document.getElementById('modal-image').src = img.src;
-            document.getElementById('modal-caption').textContent = caption;
+            document.getElementById('modal-image').src = image;
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-breed').textContent = breed;
+            document.getElementById('modal-gender').textContent = gender;
+            document.getElementById('modal-caption').textContent = caption; 
+            
             document.getElementById('postModal').style.display = "block";
         }
 
