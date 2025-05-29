@@ -28,7 +28,10 @@
     <div class="post-list">
         {% for post in posts %}
             <div class="post">
-                <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" onclick="openModal('{{ post.id }}')">
+                <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image"
+                onclick="openModal('{{ post.id }}')"
+                data-post-id="{{ post.id }}"
+                data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}">
             </div>
         {% empty %}
             <p>まだ投稿がありません</p>
@@ -36,37 +39,36 @@
     </div>
 
     <div id ="postModal" class="modal" style="display: none;">
-        <div clss="modal-content"
+        <div class="modal-content">
             <span class="close">&times;</span>
-            <img id="modal-image" src="" akt="投稿画像" style="width: 100%;">
+            <img id="modal-image" src="" alt="投稿画像" style="width: 100%;">
             <p id="modal-caption"></p>
         </div>
     </div>
 
     <script>
         function openModal(postId){
-
             const img = document.querySelector(`img[data-post-id='${postId}']`);
             const caption = img.getAttribute('data-caption');
 
-            document.getElemntById('modal-image').src = imag.src;
-            document.getElemntById('modal-caption').textContent = caption;
-            document.getElemntById('postModal').style.display = "block";
+            document.getElementById('modal-image').src = img.src;
+            document.getElementById('modal-caption').textContent = caption;
+            document.getElementById('postModal').style.display = "block";
         }
 
         document.addEventListener('DOMContentLoaded', function (){
-            const modal = document.getElemntById('postModal');
+            const modal = document.getElementById('postModal');
             const closeBtn = modal.querySelector('.close');
 
             closeBtn.onclick = function () {
                 modal.style.display = "none";
             }
 
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-        }
         });
     </script>
     
