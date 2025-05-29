@@ -6,9 +6,13 @@
 {% block title %}うちの子の部屋画面 - ワンスナップ{% endblock %}
 
 {% block content %}
-    <h2>{{ dog.dog_name }}の部屋</h2>       
-
-        <img src="{{ dog.dog_image.url }}" alt="うちの子の写真">
+    <h2>{{ dog.dog_name }}の部屋</h2>
+    
+        {% if dog.dog_image and dog.dog_image.name %}
+            <img src="{{ dog.dog_image.url }}" alt="{{ dog.dog_name }}" width="200">
+        {% else %}
+            <p>画像は登録されていません</p>
+        {% endif %}
 
         <p>うちの子の名前:{{ dog.dog_name }}</p><br><br>
 
@@ -20,7 +24,7 @@
 
         <p>うちの子からひとこと:{{ dog.biography }}</p><br><br>
 
-        <a href="{% url 'edit_dog' %}">
+        <a href="{% url 'edit_dog' dog.id %}">
             <button type = "button">登録情報修正</button>
         </a><br><br>
 
