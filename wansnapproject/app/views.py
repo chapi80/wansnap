@@ -77,7 +77,8 @@ def home_view(request):
 
 @login_required
 def mypage_view(request):
-    return render(request, 'app/mypage.html')
+    dogs = Dog.objects.filter(owner=request.user)
+    return render(request, 'app/mypage.html', {'dogs':dogs})
 
 @login_required
 def dog_detail_view(request, dog_id):
