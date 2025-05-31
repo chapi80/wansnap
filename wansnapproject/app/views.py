@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
+from django.forms import modelformset_factory
 
 
 
@@ -30,33 +31,36 @@ def login_view(request):
     return render(request, 'app/login.html', {'login_form':login_form})
 
 def signup_view(request):
+    DogFormSet = modelformset_factory(Dog, form=DogForm, extra=1,  can_delete=False)
+    
     if request.method == 'POST':
         user_form = SignupForm(request.POST)
-        dog_form = DogForm(request.POST, request.FILES)
+        dog_formset = DogFormSet(request.POST, request.FILES, queryset=Dog.objects.none())
 
         
-        if user_form.is_valid() and dog_form.is_valid():
+        if user_form.is_valid() and dog_formset.is_valid():
             user = user_form.save(commit=False)
             password = user_form.cleaned_data['password1']
             if password:
                 user.set_password(password)
             user.is_active = True
             user.save()
-                       
-            dog = dog_form.save(commit=False)
-            dog.owner = user
-            dog.save()
             
+            for form in dog_formset:
+                dog = form.save(commit=False)
+                dog.owner = user
+                dog.save()          
+                       
             login(request, user)
             return redirect('home')
 
     else:
         user_form = SignupForm()
-        dog_form = DogForm()
+        dog_formset = DogFormSet(queryset=Dog.objects.none())
         
     return render(request, 'app/signup.html', {
         'user_form': user_form,
-        'dog_form': dog_form,
+        'dog_formset': dog_formset,
     })
     
 @login_required
