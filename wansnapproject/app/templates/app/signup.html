@@ -38,6 +38,19 @@
                 </div>
             </div><br>
 
+        <script>
+            function addDogForm(){
+                const container = document.getElementById("dog-form-container");
+                const originalForm = container.querySelector(".dog-form");
+                const newForm = originalForm.cloneNode(ture);
+                const inputs = newForm.querySekectorAll("input, select");
+                inputs.forEach(input => {
+                    input.value ='';
+                });
+                container.appendChild(newForm);
+            }
+        </script>
+
             <button type="button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>
 
             {{ user_form.email.label_tag }}<br>
