@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, update_session_auth_hash
-from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm, PostForm
+from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm, PostForm,DogFormSet
 from .models import Post, Dog, Favorite
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -30,24 +30,21 @@ def login_view(request):
        
     return render(request, 'app/login.html', {'login_form':login_form})
 
-def signup_view(request):
-    DogFormSet = modelformset_factory(Dog, form=DogForm, extra=1,  can_delete=False)
-    
+def signup_view(request):   
     if request.method == 'POST':
         user_form = SignupForm(request.POST)
-        dog_formset = DogFormSet(request.POST, request.FILES, queryset=Dog.objects.none())
-
+        dog_formset = DogFormSet(request.POST, request.FILES)
         
         if user_form.is_valid() and dog_formset.is_valid():
             user = user_form.save(commit=False)
-            password = user_form.cleaned_data['password1']
+            password = user_form.cleaned_data.get('password1')
             if password:
                 user.set_password(password)
             user.is_active = True
             user.save()
             
-            for form in dog_formset:
-                dog = form.save(commit=False)
+            dogs = dog_formset.save(commit=False)
+            for dog in dogs:
                 dog.owner = user
                 dog.save()          
                        

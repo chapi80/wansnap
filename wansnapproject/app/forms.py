@@ -1,7 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import User, Dog, Post
+from django.forms import modelformset_factory
 from django.contrib.auth import get_user_model
+from .models import User, Dog, Post
+
+User = get_user_model()
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='メールアドレス', required=True)
@@ -49,9 +52,9 @@ class DogForm(forms.ModelForm):
             'birthday':'うちの子の誕生日',
             'dog_image':'マイページ用写真',
         }
-
-User = get_user_model()
-        
+ 
+DogFormSet = modelformset_factory(Dog, form=DogForm, extra=1, can_delete=False)       
+       
 class EmailChangeForm(forms.ModelForm):
     class Meta:
         model = User

@@ -61,12 +61,101 @@
 
         <script>
             function addDogForm(){
-                const totalForms = document.getElementById("id-form-TOTAL_FORMS");
+                const totalForms = document.getElementById("id_form-TOTAL_FORMS");
                 const container = document.getElementById("dog-forms-container");
                 const formCount = parseInt(totalForms.value);
-                const newFormHtml = container.querySelector(".dog-form").outerHTML.replace(/form-0/g, `form-${formCount}`);
-                container.insertAdjacentHTML('beforeend', newFormHtml);
-                totalForms.value = formCount + 1;
+                const originalForm = container.querySelector(".dog-form");
+                
+                const newForm = originalForm.cloneNode(true);
+
+                const fields = newForm.querySelectorAll("input, select, textarea, label");
+                fields.forEach(field => {
+                    if (field.name) {
+                        field.name = field.name.replace(/form-\d+/, `form-${formCount}`);
+                    }
+                    if (field.id) {
+                        field.id = field.id.replace<!DOCTYPE html>
+<html lang='ja'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>新規アカウント登録画面</title>
+    </head>
+
+    <body>
+        <h1>ワンスナップ</h1>
+
+        <h2>新規アカウント登録</h2>
+
+        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ user_form.username.label_tag }}<br>
+            {{ user_form.username }}<br><br>
+            
+            <div id="dog-forms-container">
+                {{ dog_formset.management_form }}
+                {% for dog_form in dog_formset %}
+
+                    <div class="dog-form">
+                        {{ dog_form.dog_name.label_tag }}<br>
+                        {{ dog_form.dog_name }}<br><br>
+                    
+                        {{ dog_form.breed.label_tag }}<br>
+                        {{ dog_form.breed }}<br><br>
+                    
+                        {{ dog_form.gender.label_tag}}<br>
+                        {{ dog_form.gender }}<br><br>
+                    
+                        {{ dog_form.birthday.label_tag }}<br>
+                        {{ dog_form.birthday }}<br><br>
+                    
+                        {{ dog_form.dog_image.label_tag }}<br>
+                        {{ dog_form.dog_image }}<br><br>
+
+                    </div>
+                {% endfor %}
+            </div><br>
+
+            <button type="button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>           
+
+            {{ user_form.email.label_tag }}<br>
+            {{ user_form.email }}<br><br>
+
+            {{ user_form.password1.label_tag }}<br>
+            {{ user_form.password1 }}<br>
+            <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
+
+            {{ user_form.password2.label_tag }}<br>
+            {{ user_form.password2 }}<br>
+            <h5>確認のため、同じパスワードを入力してください</h5><br><br>
+
+            <button type="submit">登録</button>
+            
+        </form>
+
+        <script>
+            function addDogForm() {
+                const totalForms = document.getElementById("id_form-TOTAL_FORMS");
+                const container = document.getElementById("dog-forms-container");
+                const formCount = parseInt(totalForms.value);
+                const originalForm = container.querySelector(".dog-form");
+                
+                const newForm = originalForm.cloneNode(true);
+
+                const regex = new RegExp(`form-(\\d+)`, 'g');
+                newForm.innerHTML = newForm.innerHTML.replace(`form-(\\d+)`, 'g');
+
+                const fields = newForm.querySelectorAll("input, select, textarea");
+                fields.forEach(field => {
+                    if (field.type !== "hidden") {
+                        field.value = "";
+                    }
+                });
+
+                container.appendChild(newForm);
+                totalForms.value = formCount + 1;                
             }
         </script>
        
