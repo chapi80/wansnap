@@ -34,7 +34,49 @@
             <button type = "button">うちの子新規追加</button>
         </a><br><br>
 
-        <a href="">
-            <button type = "button">ユーザー登録変更</button>
-        </a><br><br>
+        <button id = "openUserEditModal" type = "button">
+            ユーザー登録変更
+        </button><br><br>
+
+        <div id = "userEditModal" class="modal hidden">
+            <div class = "modal-content">
+                <span id="closeModalButton" class="close-btn">&times;</span>
+
+                <h2>何を変更しますか？</h2>
+                <ul>
+                    <li>
+                        <a href="{% url 'edit_user_email' %}">メールアドレス変更</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'edit_user_password' %}">パスワード変更変更</a>
+                    </li>
+                </ul>
+            </div>
+        </div>       
 {% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const openBtn = document.getElementById("openUserEditModal");
+            const modal = document.getElementById("userEditModal");
+            const closeBtn = document.getElementById("closeUserEditModal");
+
+            if (openBtn && modal && closeBtn) {
+                openBtn.addEventListener("click", function () {
+                    modal.classList.remove("hidden");
+                });
+
+                closeBtn.addEventListener("click", function () {
+                    modal.classList.add("hidden");
+                });
+
+                modal.addEventListener("click", function (e) {
+                    if (e.target === modal){
+                        modal.classList.add("hidden");
+                    }
+                });
+            }
+        });
+    </script>
