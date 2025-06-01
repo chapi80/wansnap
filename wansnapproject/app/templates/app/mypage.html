@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
-{% extends "static/base.html" %}
+{% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}マイページ画面 - ワンスナップ{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'static/mypage.css' %}">
+<link rel="stylesheet" href="{% static 'app/mypage.css' %}">
 {% endblock %}
 
 {% block content %}
