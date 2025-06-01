@@ -69,16 +69,16 @@
 
             if (openBtn && modal && closeBtn) {
                 openBtn.addEventListener("click", function () {
-                    modal.classList.remove("hidden");
+                    modal.style.display = "flex";
                 });
 
                 closeBtn.addEventListener("click", function () {
-                    modal.classList.add("hidden");
+                    modal.style.display = "none";
                 });
 
                 modal.addEventListener("click", function (e) {
                     if (e.target === modal){
-                        modal.classList.add("hidden");
+                        modal.style.display = "none";
                     }
                 });
             }
