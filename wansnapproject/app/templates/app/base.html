@@ -2,9 +2,13 @@
 <html lang="ja">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ワンスナップ{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'app/base.css' %}">
+
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
