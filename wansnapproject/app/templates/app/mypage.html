@@ -48,7 +48,7 @@
                         <a href="{% url 'edit_user_email' %}">メールアドレス変更</a>
                     </li>
                     <li>
-                        <a href="{% url 'edit_user_password' %}">パスワード変更変更</a>
+                        <a href="{% url 'edit_user_password' %}">パスワード変更</a>
                     </li>
                 </ul>
             </div>
@@ -61,7 +61,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const openBtn = document.getElementById("openUserEditModal");
             const modal = document.getElementById("userEditModal");
-            const closeBtn = document.getElementById("closeUserEditModal");
+            const closeBtn = document.getElementById("closeEditButton");
 
             if (openBtn && modal && closeBtn) {
                 openBtn.addEventListener("click", function () {
@@ -80,3 +80,4 @@
             }
         });
     </script>
+{% endblock %}
