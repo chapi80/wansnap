@@ -22,5 +22,14 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <div id="logoutModal" style="display:none; position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
+        <div style="background:#fff; margin:100px auto; padding:20px; width:300px; text-align:center;">
+            <p>ログアウトしますか？</p>
+            <button onclick="confirmLogout()">ログアウトする</button>
+            <button onclick="closeLogoutModal()">キャンセル</button>
+        </div>
+    </div>
+
 </body>
 </html>
