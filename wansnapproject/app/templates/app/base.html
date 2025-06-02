@@ -31,5 +31,18 @@
         </div>
     </div>
 
+    <script>
+        function openLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'block';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        function confirmLogout() {
+            window.location.href = "{% url 'logout' %}";
+        }
+    </script>
 </body>
 </html>
