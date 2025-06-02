@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('portfolio/', views.index, name='index'),
@@ -15,5 +16,5 @@ urlpatterns = [
     path('edit_user_password/', views.edit_user_password_view, name='edit_user_password'),
     path('create_post/', views.create_post_view, name='create_post'),
     path('edit_post/<int:post_id>/', views.edit_post_view, name='edit_post'),
-    
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
