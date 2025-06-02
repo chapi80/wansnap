@@ -56,4 +56,50 @@
                 <p>まだ投稿がありません</p>
             {% endfor%}
         </div>
+        
+        <div id ="postModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
+
+            <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
+            <p><strong>犬種：</strong><span id="modal-breed"></span></p>
+            <p><strong>性別：</strong><span id="modal-gender"></span></p>
+            <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(imgElement){
+            const image = imgElement.getAttribute('data-image');
+            const name = imgElement.getAttribute('data-name');
+            const breed = imgElement.getAttribute('data-breed');
+            const gender = imgElement.getAttribute('data-gender');
+            const caption = imgElement.getAttribute('data-caption');
+
+            document.getElementById('modal-image').src = image;
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-breed').textContent = breed;
+            document.getElementById('modal-gender').textContent = gender;
+            document.getElementById('modal-caption').textContent = caption; 
+            
+            document.getElementById('postModal').style.display = "block";
+        }
+
+        document.addEventListener('DOMContentLoaded', function (){
+            const modal = document.getElementById('postModal');
+            const closeBtn = modal.querySelector('.close');
+
+            closeBtn.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+
 {% endblock %}
