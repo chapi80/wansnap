@@ -66,11 +66,12 @@ class EmailChangeForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['dog', 'image', 'caption'] 
+        fields = ['dog', 'image', 'caption', 'memo'] 
         labels = {
             'dog':'投稿するうちの子',
             'image':'写真',
             'caption':'うちの子からひとこと',
+            'memo':'メモ欄（体調など）',
         }
     
     def __init__(self, *args, **kwargs):
