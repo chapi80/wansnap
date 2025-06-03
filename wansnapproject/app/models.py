@@ -52,6 +52,7 @@ class Post(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='post_images/')
     caption = models.TextField(blank=True)
+    memo = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
 class Favorite(models.Model):
