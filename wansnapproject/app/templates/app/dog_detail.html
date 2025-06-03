@@ -50,7 +50,22 @@
         <div class="post-list">
             {% for post in posts %}
                 <div class="post">
-                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" oneclick="ooenMdal('{{ post.id }}')">
+                    <img
+                        src="{{ post.dog_image.url }}"
+                        alt="投稿画像"
+                        class="post-image"
+                        onclick="openMdal(this)"
+                        data-image="{{ post.dog_image.url }}"
+                        data-name="{{ dog.dog_name }}"
+                        data-breed="{{ dog.breed }}"
+                        data-gender="{{ dog.gender }}"
+                        data-image="{{ post.caption }}"
+                        {% if post:is_own post %}
+                            data-memo="{{ post.memo }}"
+                        {% else %}
+                            data-memo=""
+                        {% endif %}
+                    >
                 </div>
             {% empty %}
                 <p>まだ投稿がありません</p>
@@ -66,6 +81,7 @@
             <p><strong>犬種：</strong><span id="modal-breed"></span></p>
             <p><strong>性別：</strong><span id="modal-gender"></span></p>
             <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
+            <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
         </div>
     </div>
 
@@ -76,12 +92,21 @@
             const breed = imgElement.getAttribute('data-breed');
             const gender = imgElement.getAttribute('data-gender');
             const caption = imgElement.getAttribute('data-caption');
+            const memo = imgElement.getAttribute('data-memo');
 
             document.getElementById('modal-image').src = image;
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
-            document.getElementById('modal-caption').textContent = caption; 
+            document.getElementById('modal-caption').textContent = caption;
+            document.getElementById('modal-memo').textContent = memo;
+            
+            const memoLine = document.getElementById('memo-line');
+            if (memo) {
+                memoLine.style.display = "block";
+            } else {
+                memoLine.style.display = "none";
+            }
             
             document.getElementById('postModal').style.display = "block";
         }
