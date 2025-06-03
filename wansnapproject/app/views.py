@@ -98,8 +98,11 @@ def dog_detail_view(request, dog_id):
         try:
             year, month = map(int, q.split('-'))
             posts = posts.filter(created_at__year=year, created_at__month=month)
-        except:
+        except ValueError:
             pass
+    
+    for post in posts:
+        post.is_own_post = (post.dog.owner == request.user)
     
     return render(request, 'app/dog_detail.html', {
         'dog':dog,
