@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import modelformset_factory
+from django.contrib import messages
 
 
 
@@ -149,7 +150,7 @@ def edit_user_email_view(request):
         email_form = EmailChangeForm(request.POST, instance=request.user)
         if email_form.is_valid():
             email_form.save()
-            return redirect('home')
+            return redirect('mypage')
     else:
         email_form = EmailChangeForm(instance=request.user)
     return render(request, 'app/edit_user_email.html',{
@@ -163,12 +164,12 @@ def edit_user_password_view(request):
         if password_form.is_valid():
             user = password_form.save()
             update_session_auth_hash(request, user)
-            return redirect('home')
+            return redirect('mypage')
     else:
         password_form = PasswordChangeForm(user=request.user)
         
     return render(request, 'app/edit_user_password.html', {
-        'form':password_form
+        'password_form':password_form
     })
 
 @login_required
