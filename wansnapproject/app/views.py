@@ -201,4 +201,13 @@ def edit_post_view(request, post_id):
     return render(request, 'app/edit_post.html',{
         'edit_post_form':edit_post_form
     })
-        
+
+@login_required
+def delete_post_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id, dog_owner=request.user)
+    
+    if request.method == 'POST':
+        post.delete()
+        return redirect('dog_detail')
+    
+    return redirect('edit_post', post_id=post_id)
