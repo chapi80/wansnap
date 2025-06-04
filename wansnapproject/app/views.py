@@ -164,6 +164,7 @@ def edit_user_password_view(request):
         if password_form.is_valid():
             user = password_form.save()
             update_session_auth_hash(request, user)
+            messages.success(request, 'パスワードを変更しました')
             return redirect('mypage')
     else:
         password_form = PasswordChangeForm(user=request.user)
