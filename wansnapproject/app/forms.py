@@ -22,13 +22,13 @@ class SignupForm(forms.ModelForm):
             'email':'メールアドレス',
         }
         
-        def clean(self):
-            cleaned_data = super().clean()
-            password1 = cleaned_data.get("password1")
-            password2 = cleaned_data.get("password2")
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
             
-            if password1 and password2 and password1 != password2:
-                self.add_error('password2', "パスワードが一致しません")
+        if password1 and password2 and password1 != password2:
+            self.add_error('password2', "パスワードが一致しません")
 
 class DogForm(forms.ModelForm):
     GENDER_CHOICES = [
@@ -45,7 +45,10 @@ class DogForm(forms.ModelForm):
       
     class Meta:
         model = Dog
-        fields = ('dog_name', 'breed', 'birthday', 'gender', 'dog_image')
+        fields = ['dog_name', 'breed', 'birthday', 'gender', 'dog_image']
+        widgets = {
+            'birthday': forms.DateInput(attrs={'type': 'date'}),
+        }
         labels = {
             'dog_name':'うちの子の名前',
             'breed':'犬種',

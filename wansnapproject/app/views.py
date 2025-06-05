@@ -36,6 +36,11 @@ def signup_view(request):
         user_form = SignupForm(request.POST)
         dog_formset = DogFormSet(request.POST, request.FILES)
         
+        print("user_form valid:", user_form.is_valid())
+        print("dog_formset valid:", dog_formset.is_valid())
+        print("user_form errors:", user_form.errors)
+        print("dog_formset errors:", dog_formset.errors)
+        
         if user_form.is_valid() and dog_formset.is_valid():
             user = user_form.save(commit=False)
             password = user_form.cleaned_data.get('password1')
