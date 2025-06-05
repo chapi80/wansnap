@@ -103,7 +103,7 @@ def dog_detail_view(request, dog_id):
             pass
     
     for post in posts:
-        post.is_own_post = (post.dog.owner == request.user)
+        post.is_own = (post.dog.owner == request.user)
     
     return render(request, 'app/dog_detail.html', {
         'dog':dog,

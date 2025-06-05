@@ -54,13 +54,13 @@
                         src="{{ post.dog_image.url }}"
                         alt="投稿画像"
                         class="post-image"
-                        onclick="openMdal(this)"
+                        onclick="openModal(this)"
                         data-image="{{ post.dog_image.url }}"
                         data-name="{{ dog.dog_name }}"
                         data-breed="{{ dog.breed }}"
                         data-gender="{{ dog.gender }}"
                         data-image="{{ post.caption }}"
-                        {% if post:is_own post %}
+                        {% if post.is_own %}
                             data-memo="{{ post.memo }}"
                         {% else %}
                             data-memo=""
@@ -73,17 +73,17 @@
         </div>
         
         <div id ="postModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
 
-            <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
-            <p><strong>犬種：</strong><span id="modal-breed"></span></p>
-            <p><strong>性別：</strong><span id="modal-gender"></span></p>
-            <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
-            <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
+                <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
+                <p><strong>犬種：</strong><span id="modal-breed"></span></p>
+                <p><strong>性別：</strong><span id="modal-gender"></span></p>
+                <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
+                <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
+            </div>
         </div>
-    </div>
 
     <script>
         function openModal(imgElement){
