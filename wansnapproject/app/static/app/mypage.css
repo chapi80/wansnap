@@ -15,8 +15,9 @@
     animation: fadeout 5s forwards;
 }
 
-.popup.succces {
+.popup.success {
     background-color: #b2a017;
+    color: black;
 }
 
 .popup.error {

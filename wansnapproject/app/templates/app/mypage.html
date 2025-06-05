@@ -16,7 +16,7 @@
     <h2>🐶マイページ🐶</h2>
 
     {% if messages %}
-        <div id="popup-messages">
+        <div id="popup-message">
             {% for message in messages %}
                 <div class="popup {{ message.tags }}">{{ message }}</div>
             {% endfor %}
