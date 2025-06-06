@@ -8,6 +8,7 @@ from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import modelformset_factory
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 
@@ -125,6 +126,20 @@ def favorite_list_view(request):
     return render(request, 'app/favorite.html', {'favorites':favorites})
 
 @login_required
+def toggle_favorite(request):
+    if request.method == "POST":
+        post_id = request.POST.get('post_id')
+        post = get_object_or_404(Post, id=post_id)
+        favorite, created = Favorite.objects.get_or_create(user=request.user, post=post)
+        
+        if not created:
+            favorite.delete()
+            return JsonResponse({'status': 'removed'})
+        else:
+            return JsonResponse({'status': 'added'})
+        
+    
+@login_required   
 def add_dog_view(request):
     if request.method == 'POST':
         dog_form = DogForm(request.POST, request.FILES)
