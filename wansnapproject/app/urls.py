@@ -20,4 +20,5 @@ urlpatterns = [
     path('edit_post/<int:post_id>/', views.edit_post_view, name='edit_post'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     path('post/<int:post_id>/delete/', views.delete_post_view, name='delete_post'),
+    path('toggle_favorite/', views.toggle_favorite, name='toggle_favorite'),
 ]
