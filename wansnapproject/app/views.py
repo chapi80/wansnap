@@ -49,10 +49,11 @@ def signup_view(request):
             user.is_active = True
             user.save()
             
-            dogs = dog_formset.save(commit=False)
-            for dog in dogs:
-                dog.owner = user
-                dog.save()          
+            for dog_form in dog_formset:
+                if dog_form.cleaned_data and not dog_form.cleaned_data.get('DELETE', False):
+                    dog = dog_form.save(commit=False)
+                    dog.owner = user
+                    dog.save()          
                        
             login(request, user)
             return redirect('home')

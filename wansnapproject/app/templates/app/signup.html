@@ -80,6 +80,9 @@
                 const originalForm = container.querySelector(".dog-form");
                 
                 const newForm = originalForm.cloneNode(true);
+                const regex = new RegExp(`form-(\\d+)-`, 'g');
+
+                newForm.innerHTML = newForm.innerHTML.replace(regex, `form-${formCount}-`);
 
                 const fields = newForm.querySelectorAll("input, select, textarea, label");
                 fields.forEach(field => {
