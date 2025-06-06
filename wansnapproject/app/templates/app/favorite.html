@@ -8,13 +8,19 @@
 {% block content %}
     <h2>お気に入り一覧</h2>
 
+    {% if favorites %}
         <div class="post-list">
-            {% for post in posts %}
+            {% for fav in favorites %}
                 <div class="post">
-                    <img src="{{ post.dog_image.url }}" alt="投稿画像" class="post-image" onclick="openModal('{{ post.id }}')">
+                    <img src="{{ fav.post.image.url }}" alt="お気に入り画像" width="200">
+                    <p>うちの子：{{ fav.post.dog.dog_name}}</p>
+                    <p>{{ fav.post.captuon }}</p>
+                    <p>{{ fav.post.created_at|date:"Y年m月d日" }}</p>
                 </div>
-            {% empty %}
-                <p>まだお気に入りが登録されていません</p>
             {% endfor %}
-            </div>
+        </div>
+
+    {% else %}
+        <p>まだお気に入りが登録されていません</p>
+    {% endif %}
 {% endblock %}

@@ -6,6 +6,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 import os
+from django.contrib.auth.models import User
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
