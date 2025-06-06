@@ -94,14 +94,14 @@ def dog_detail_view(request, dog_id):
     posts = Post.objects.filter(dog=dog)
     
     sort_order = request.GET.get('sort','new')
-    q = redirect.GET.get('q')
+    q = request.GET.get('q')
     
     posts = Post.objects.filter(dog=dog)
     
     if sort_order == 'old':
-        posts = Post.order_by('created_at')
+        posts = posts.order_by('created_at')
     else:
-        posts = Post.order_by('-created_at')
+        posts = posts.order_by('-created_at')
     
     if q:
         try:
