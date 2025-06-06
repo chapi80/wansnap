@@ -94,13 +94,15 @@ def dog_detail_view(request, dog_id):
     posts = Post.objects.filter(dog=dog)
     
     sort_order = request.GET.get('sort','new')
+    q = redirect.GET.get('q')
+    
+    posts = Post.objects.filter(dog=dog)
     
     if sort_order == 'old':
-        posts = Post.objects.all().order_by('created_at')
+        posts = Post.order_by('created_at')
     else:
-        posts = Post.objects.all().order_by('-created_at')
+        posts = Post.order_by('-created_at')
     
-    q = request.GET.get('q')
     if q:
         try:
             year, month = map(int, q.split('-'))
