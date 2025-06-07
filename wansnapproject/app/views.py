@@ -137,7 +137,14 @@ def toggle_favorite(request):
             return JsonResponse({'status': 'removed'})
         else:
             return JsonResponse({'status': 'added'})
-        
+
+@login_required
+def is_favorited(request):
+    if request.method == "GET":
+        post_id = request.GET.get('post_id')
+        post = get_object_or_404(Post, id=post_id)
+        is_fav = Favorite.objects.filter(user=request.user, post=post).exists()
+        return JsonResponse({'is_favorited: is_fav'})
     
 @login_required   
 def add_dog_view(request):
