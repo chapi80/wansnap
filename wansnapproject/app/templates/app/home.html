@@ -54,7 +54,7 @@
             <p><strong>犬種：</strong><span id="modal-breed"></span></p>
             <p><strong>性別：</strong><span id="modal-gender"></span></p>
             <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
-            <button id="favorite-button" data-post-id="">★</button>
+            <button id="favorite-button" data-post-id="">☆</button>
 
         </div>
     </div>
@@ -75,6 +75,13 @@
             document.getElementById('modal-caption').textContent = caption; 
 
             document.getElementById('favorite-button').setAttribute('data-post-id', postId);
+
+            fetch(`/is_favorited/?post_id=${postId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const favBtn = document.getElementById('favorite-button');
+                    favBtn.textContent = data.is_favorited ? '★' : '☆';
+                });
             
             document.getElementById('postModal').style.display = "block";
         }

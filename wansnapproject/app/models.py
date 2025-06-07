@@ -50,7 +50,7 @@ class Dog(models.Model):
         return f"{self.dog_name}({self.owner.username}のうちの子)"
 
 class Post(models.Model):
-    dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='posts')
     image = models.ImageField(upload_to='post_images/')
     caption = models.TextField(blank=True)
     memo = models.TextField(blank=True, null=True)

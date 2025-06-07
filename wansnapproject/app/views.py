@@ -73,9 +73,9 @@ def home_view(request):
     sort_order = request.GET.get('sort','new')
     
     if sort_order == 'old':
-        posts = Post.objects.all().order_by('created_at')
+        posts = Post.objects.select_related('dog').all().order_by('created_at')
     else:
-        posts = Post.objects.all().order_by('-created_at')
+        posts = Post.objects.select_related('dog').all().order_by('-created_at')
         
     context = {
         'posts':posts,
@@ -97,7 +97,7 @@ def dog_detail_view(request, dog_id):
     sort_order = request.GET.get('sort','new')
     q = request.GET.get('q')
     
-    posts = Post.objects.filter(dog=dog)
+    posts = Post.objects.select_related('dog').filter(dog=dog)
     
     if sort_order == 'old':
         posts = posts.order_by('created_at')
@@ -144,7 +144,7 @@ def is_favorited(request):
         post_id = request.GET.get('post_id')
         post = get_object_or_404(Post, id=post_id)
         is_fav = Favorite.objects.filter(user=request.user, post=post).exists()
-        return JsonResponse({'is_favorited: is_fav'})
+        return JsonResponse({'is_favorited': is_fav})
     
 @login_required   
 def add_dog_view(request):
