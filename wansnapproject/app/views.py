@@ -209,6 +209,7 @@ def create_post_view(request):
         create_post_form = PostForm(request.POST, request.FILES, user=request.user)
         if create_post_form.is_valid():
             post = create_post_form.save(commit=False)
+            post.dog = create_post_form.cleaned_data['dog']
             post.save()
             return redirect('home')
     else:
