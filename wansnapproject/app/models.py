@@ -58,7 +58,7 @@ class Post(models.Model):
     
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='favorites')
     created_at = models.DateTimeField(auto_now_add=True)
     
 @receiver(post_delete, sender=Post)

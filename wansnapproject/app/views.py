@@ -122,8 +122,8 @@ def dog_detail_view(request, dog_id):
     
 @login_required
 def favorite_list_view(request):
-    favorites = Post.objects.filter(user=request.user).select_related('post_dog')
-    return render(request, 'app/favorite.html', {'favorites':favorites})
+    favorite_posts = Post.objects.filter(favorites__user=request.user).order_by('-created_at')
+    return render(request, 'app/favorite.html', {'favorites':favorite_posts})
 
 @login_required
 def toggle_favorite(request):
