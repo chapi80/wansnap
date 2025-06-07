@@ -36,7 +36,9 @@
                 data-name="{{ post.dog.dogname }}"
                 data-breed="{{ post.dog.breed }}"
                 data-gender="{{ post.dog.gender }}"
-                data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}">
+                data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
+                data-post-id="{{ post.id }}"
+                >
             </div>
         {% empty %}
             <p>まだ投稿がありません</p>
@@ -64,12 +66,15 @@
             const breed = imgElement.getAttribute('data-breed');
             const gender = imgElement.getAttribute('data-gender');
             const caption = imgElement.getAttribute('data-caption');
+            const postId = imgElement.getAttribute('data-post-id');
 
             document.getElementById('modal-image').src = image;
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
             document.getElementById('modal-caption').textContent = caption; 
+
+            document.getElementById('favorite-button').setAttribute('data-post-id', postId);
             
             document.getElementById('postModal').style.display = "block";
         }
@@ -77,16 +82,37 @@
         document.addEventListener('DOMContentLoaded', function (){
             const modal = document.getElementById('postModal');
             const closeBtn = modal.querySelector('.close');
+            const favBtn = document.getElementById('favorite-button');
 
             closeBtn.onclick = function () {
                 modal.style.display = "none";
-            }
+            };
 
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
-            }
+            };
+                
+            favBtn.onclick = function () {
+                const postId = this.getAttribute('data-post-id');
+                fetch(`/toggle_favorite/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `post_id=${postId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.status === 'added') {
+                        favBtn.textContent = '★';
+                    } else if (data.status === 'removed') {
+                        favBtn.textContent = '☆';
+                    }
+                });
+            };
         });
     </script>
     
