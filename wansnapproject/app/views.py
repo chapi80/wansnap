@@ -142,6 +142,10 @@ def toggle_favorite(request):
 def is_favorited(request):
     if request.method == "GET":
         post_id = request.GET.get('post_id')
+        
+        if not post_id or not post_id.isdigit():
+            return JsonResponse({'error': 'Invalid post_id'}, status=400)
+        
         post = get_object_or_404(Post, id=post_id)
         is_fav = Favorite.objects.filter(user=request.user, post=post).exists()
         return JsonResponse({'is_favorited': is_fav})

@@ -7,20 +7,126 @@
 
 {% block content %}
     <h2>お気に入り一覧</h2>
+  
+{% if favorites %}
+    <div class="post-list">
+        {% for fav in favorites %}
+            <div class="post">
+                <img src="{{ fav.post.image.url }}"
+                alt="お気に入り画像"
+                class ="post-image"
+                onclick="openModal(this)"
+                data-image="{{ fav.post.image.url }}"
+                data-name="{{ fav.post.dog.dog_name }}"
+                data-breed="{{ fav.post.dog.breed }}"
+                data-gender="{{ fav.post.dog.gender }}"
+                data-caption="{{ fav.post.caption|default:' (キャプションなし)'|escapejs  }}"
+                data-post-id="{{ fav.post.id }}">
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>まだお気に入りが登録されていません</p>
+{% endif %}
 
-    {% if favorites %}
-        <div class="post-list">
-            {% for fav in favorites %}
-                <div class="post">
-                    <img src="{{ fav.post.image.url }}" alt="お気に入り画像" width="200">
-                    <p>うちの子：{{ fav.post.dog.dog_name}}</p>
-                    <p>{{ fav.post.caption }}</p>
-                    <p>{{ fav.post.created_at|date:"Y年m月d日" }}</p>
-                </div>
-            {% endfor %}
-        </div>
+<div id="postModal"
+    class="modal"
+    style="display: none;"
+>
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image"
+            src=""
+            alt="投稿画像"
+            style="width: 100%;"<br><br>
 
-    {% else %}
-        <p>まだお気に入りが登録されていません</p>
-    {% endif %}
+        <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
+        <p><strong>犬種：</strong><span id="modal-breed"></span></p>
+        <p><strong>性別：</strong><span id="modal-gender"></span></p>
+        <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
+        <button id="favorite-button" data-post-id="">☆</button>
+    </div>
+</div>
+
+<style>
+    .post-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .post {
+        width: 100%;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+</style>
+
+<script>
+    function openModal(imgElement){
+        const postId = imgElement.getAttribute('data-post-id');
+        if(!postId) {
+            console.error("postIdが取得できませんでした")
+            return;
+        }
+        const image = imgElement.getAttribute('data-image');
+        const name = imgElement.getAttribute('data-name');
+        const breed = imgElement.getAttribute('data-breed');
+        const gender = imgElement.getAttribute('data-gender');
+        const caption = imgElement.getAttribute('data-caption');
+        const postId = imgElement.getAttribute('data-post-id');      
+
+        document.getElementById('modal-image').src = image;
+        document.getElementById('modal-name').textContent = name;
+        document.getElementById('modal-breed').textContent = breed;
+        document.getElementById('modal-gender').textContent = gender;
+        document.getElementById('modal-caption').textContent = caption;
+        document.getElementById('favorite-button').setAttribute('data-post-id', postId);
+
+        fetch(`/is_favorited/?post_id=${postId}`)
+            .then(response => response.json())
+            .then(data => {
+                const favBtn = document.getElementById('favorite-button');
+                favBtn.textContent = data.is_favorited ? '★':'☆';
+            });
+
+        document.getElementById('postModal').style.display = "block";
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+        const modal =document.getElementById('postModal');
+        const closeBtn = modal.querySelector('.close');
+        const favBtn = document.getElementById('favorite-button');
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+            if(event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+        
+        favBtn.onclick = function() {
+            const postId = this.getAttribute('data-post-id');
+            fetch(`/toggle_favorite/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token}}',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `post_id=${postId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'added') {
+                    favBtn.textContent = '★';
+                } else if (data.status === 'removed') {
+                    favBtn.textContent = '☆';
+                }
+            });
+        };
+    });
+</script>
+
 {% endblock %}
