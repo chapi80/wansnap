@@ -10,18 +10,18 @@
   
 {% if favorites %}
     <div class="post-list">
-        {% for fav in favorites %}
+        {% for post in favorites %}
             <div class="post">
-                <img src="{{ fav.post.image.url }}"
-                alt="お気に入り画像"
-                class ="post-image"
-                onclick="openModal(this)"
-                data-image="{{ fav.post.image.url }}"
-                data-name="{{ fav.post.dog.dog_name }}"
-                data-breed="{{ fav.post.dog.breed }}"
-                data-gender="{{ fav.post.dog.gender }}"
-                data-caption="{{ fav.post.caption|default:' (キャプションなし)'|escapejs  }}"
-                data-post-id="{{ fav.post.id }}">
+                <img src="{{ post.image.url }}"
+                    alt="お気に入り画像"
+                    class ="post-image"
+                    onclick="openModal(this)"
+                    data-image="{{ post.image.url }}"
+                    data-name="{{ post.dog.dog_name|default:'' }}"
+                    data-breed="{{ post.dog.breed|default:'' }}"
+                    data-gender="{{ post.dog.gender|default:'' }}"
+                    data-caption="{{ post.caption|default:' (キャプションなし)'|escapejs }}"
+                    data-post-id="{{ post.id }}">
             </div>
         {% endfor %}
     </div>
@@ -61,6 +61,7 @@
     }
 </style>
 
+{% block extra_js %}
 <script>
     function openModal(imgElement){
         const postId = imgElement.getAttribute('data-post-id');
@@ -72,8 +73,7 @@
         const name = imgElement.getAttribute('data-name');
         const breed = imgElement.getAttribute('data-breed');
         const gender = imgElement.getAttribute('data-gender');
-        const caption = imgElement.getAttribute('data-caption');
-        const postId = imgElement.getAttribute('data-post-id');      
+        const caption = imgElement.getAttribute('data-caption');     
 
         document.getElementById('modal-image').src = image;
         document.getElementById('modal-name').textContent = name;
@@ -128,5 +128,6 @@
         };
     });
 </script>
+{% endblock %}
 
 {% endblock %}
