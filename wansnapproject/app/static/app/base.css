@@ -1,0 +1,33 @@
+body {
+    background-color: #ffffff;
+    color: #333;
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+header {
+    background-color: #d2c06a;
+    color: #a49771;
+    padding: 12px 20px;
+    font-weight: bold;
+}
+
+header a {
+    color: #a49771;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+.modal-content p strong {
+    background-color: #ebdfbe;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    font-family: "Helvetica", "Arial", sans-serif;
+}
