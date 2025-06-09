@@ -9,9 +9,9 @@
     <h2>お気に入り一覧</h2>
   
 {% if favorites %}
-    <div class="post-list">
+    <div class="image-grid">
         {% for post in favorites %}
-            <div class="post">
+            <div class="image-card">
                 <img src="{{ post.image.url }}"
                     alt="お気に入り画像"
                     class ="post-image"
