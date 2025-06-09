@@ -12,13 +12,17 @@
 
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
-    <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
-    <nav>
-        <a href="{% url 'home' %}">ホーム</a> |
-        <a href="{% url 'mypage' %}">マイページ</a> |
-        <a href="javascript:void(0);" onclick="openLogoutModal()">ログアウト</a>
-    </nav>
+
+    <header>
+        <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
+        <nav>
+            <a href="{% url 'home' %}">ホーム</a> |
+            <a href="{% url 'mypage' %}">マイページ</a> |
+            <a href="javascript:void(0);" onclick="openLogoutModal()">ログアウト</a>
+        </nav>
+    </header>
     <hr>
 
     <main>

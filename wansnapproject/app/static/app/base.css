@@ -6,7 +6,7 @@ body {
 
 header {
     background-color: #d2c06a;
-    color: #a49771;
+    color: #58827e;
     padding: 12px 20px;
     font-weight: bold;
 }
@@ -40,7 +40,7 @@ header a:hover {
     object-fit: cover;
     display: block;
     border-radius: 8px;
-    transition: transfrom 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .post img:hover {
