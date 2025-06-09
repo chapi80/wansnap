@@ -2,9 +2,13 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    max-width: 100%;
+    padding: 16px;
+    box-sizing: border-box;   
 }
 
 .image-card {
+    width: 100%;
     aspect-ratio: 1/1;
     overflow: hidden;
     border-radius: 8px;
