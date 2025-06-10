@@ -9,7 +9,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import modelformset_factory
 from django.contrib import messages
 from django.http import JsonResponse
-
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 
 def index(request):
@@ -108,6 +109,17 @@ def dog_detail_view(request, dog_id):
     
     for post in posts:
         post.is_own = (post.dog.owner == request.user)
+        
+    if dog.birthday:
+        today = date.today()
+        diff = relativedelta(today, dog.birthday)
+        if diff.years == 0:
+            age_display = f"{diff.months}ヶ月"
+        else:
+            age_display = f"{diff.years}歳{diff.months}ヶ月"
+    else:
+        age_display = "不明"
+    
     
     dog_breed = dog.breed
     dog_gender = dog.gender
@@ -120,7 +132,8 @@ def dog_detail_view(request, dog_id):
         'dog_breed':dog_breed,
         'dog_gender':dog_gender,
         'dog_birthday':dog_birthday,
-        'dog_biography':dog_biography,       
+        'dog_biography':dog_biography,
+        'dog_age_months':age_display,       
         'request':request,
     })
     
