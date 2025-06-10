@@ -2,15 +2,21 @@
 <html lang='ja'>
 
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}うちの子の部屋画面 - ワンスナップ{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/base.css' %}">
+<link rel="stylesheet" href="{% static 'app/dog_detail_photo.css' %}">
+{% endblock %}
 
 {% block content %}
     <h2>{{ dog.dog_name }}の部屋</h2>
     
         {% if dog.dog_image and dog.dog_image.name %}
-            <div class="dog-photo-detail-container">
-                <img src="{{ dog.dog_image.url }}" alt="{{ dog.dog_name }}" class="dog-photo-detail-container">
+            <div class="dog-detail-photo-container">
+                <img src="{{ dog.dog_image.url }}" alt="{{ dog.dog_name }}" class="dog-detail-photo">
             </div>
         {% else %}
             <p>画像は登録されていません</p>
