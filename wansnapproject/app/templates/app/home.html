@@ -2,8 +2,14 @@
 <html lang='ja'>
 
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}ホーム画面 - ワンスナップ{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/base.css' %}">
+<link rel="stylesheet" href="{% static 'app/post.css' %}">
+{% endblock %}
 
 {% block content %}
     <h2>🏠ホーム🏠</h2>
@@ -39,6 +45,8 @@
                 data-name="{{ post.dog.dog_name }}"
                 data-breed="{{ post.dog.breed }}"
                 data-gender="{{ post.dog.gender }}"
+                date-birthday="{{ post.dog.birthday }}"
+                date-age-months="{{ post.dog.age_months}}"
                 data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
                 data-post-id="{{ post.id }}"
                 >
@@ -53,12 +61,29 @@
             <span class="close">&times;</span>
             <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
 
-            <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
-            <p><strong>犬種：</strong><span id="modal-breed"></span></p>
-            <p><strong>性別：</strong><span id="modal-gender"></span></p>
-            <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
-            <button id="favorite-button" data-post-id="">☆</button>
+            <button id="favorite-button" data-post-id="">☆</button><br>
 
+            <div class="dog-info-box">
+
+            <div class="label">うちの子の名前</div>
+            <div class="value" id="modal-name"></div><br>
+
+            <div class="label">犬種</div>
+            <div class="value" id="modal-breed"></div><br>
+        
+            <div class="label">性別</div>
+            <div class="value" id="modal-gender"></div><br>
+        
+            <div class="label">うちの子の誕生日</div>
+            <div class="value" id="modal-birthday"></div><br>
+
+            <div class="label">月齢</div>
+            <div class="value" id="modal-age-months"></div><br>
+
+            <div class="label">うちの子からひとこと</div>
+            <div class="value" id="modal-caption"></div><br>
+
+            </div>
         </div>
     </div>
 

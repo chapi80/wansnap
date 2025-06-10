@@ -19,7 +19,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: cubic-bezier(transition 0.2s ease);
+    transition: transition 0.2s ease;
 }
 
 .image-card img:hover {

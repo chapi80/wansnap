@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+{% load static %}
+
 <head>
-    {% load static %}
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ワンスナップ{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'app/base.css' %}">
     <link rel="stylesheet" href="{% static 'app/photo_style.css'%}">
-    <link rel="stylesheet" href="{% static 'app/modal.css'%}">
+    <link rel="stylesheet" href="{% static 'app/post.css'%}">
 
     {% block extra_css %}{% endblock %}
 </head>
