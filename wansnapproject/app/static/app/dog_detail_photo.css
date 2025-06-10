@@ -1,0 +1,14 @@
+.dog-detail-photo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dog-detail-photo {
+    width: 80vw;
+    max-width: 400px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
