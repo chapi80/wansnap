@@ -162,7 +162,7 @@ def add_dog_view(request):
             dog = dog_form.save(commit=False)
             dog.owner = request.user
             dog.save()
-            return redirect('home')
+            return redirect('mypage')
     else:
         dog_form = DogForm()
     
