@@ -15,9 +15,11 @@
 
 <body>
 
-    <header>
-        <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
-        <nav>
+    <header class="site-header">
+        <div class="header-left">
+            <h1><a href="{% url 'home' %}">ワンスナップ</a></h1>
+        </div>
+        <nav class="header-right">
             <a href="{% url 'home' %}">ホーム</a> |
             <a href="{% url 'mypage' %}">マイページ</a> |
             <a href="javascript:void(0);" onclick="openLogoutModal()">ログアウト</a>

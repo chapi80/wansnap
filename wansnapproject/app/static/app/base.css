@@ -4,26 +4,60 @@ body {
     font-family: "Helvetica", "Arial", sans-serif;
 }
 
-header {
-    background-color: #d2c06a;
-    color: #58827e;
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a49771;
     padding: 12px 20px;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-right a {
+    margin-left: 20px;
+    color: #58827e;
+    text-decoration: none;
     font-weight: bold;
 }
 
-header a {
-    color: #a49771;
-    text-decoration: none;
-}
-
-header a:hover {
+.header-right a:hover {
     text-decoration: underline;
 }
 
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 main {
-    max-width: 1000px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+}
+
+main h2 {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-right {
+        margin-top: 10px;
+    }
+
+    .header-right a {
+        margin: 0 10px;
+    }
 }
 
 .modal-content p strong {

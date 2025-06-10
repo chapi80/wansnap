@@ -8,22 +8,25 @@
 {% block content %}
     <h2>🏠ホーム🏠</h2>
 
-    <button type = "button" onclick="location.href='{% url 'create_post' %}'">うちの子投稿</button>
+    <div class="centered">
+        <button type = "button" onclick="location.href='{% url 'create_post' %}'">うちの子投稿</button>
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
+            <button type="submit" aria-label="検索">🔍</button>
     
-    <form method="get" action="{% url 'home' %}">
-        <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
-        <button type="submit" aria-label="検索">🔍</button>
-    </form>
-
-    <label>
-        <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
-        新しい順
-    </label>
+            <div>
+                <label>
+                    <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+                    新しい順
+                </label>
         
-    <label>
-        <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
-        古い順
-    </label>
+                <label>
+                    <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+                    古い順
+                </label>
+            </div>
+        </form>
+    </div>
     
     <div class="image-grid">
         {% for post in posts %}
