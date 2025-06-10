@@ -45,7 +45,8 @@
                 data-name="{{ post.dog.dog_name }}"
                 data-breed="{{ post.dog.breed }}"
                 data-gender="{{ post.dog.gender }}"
-                data-birthday="{{ post.dog.birthday }}"
+                data-birthday-raw="{{ post.dog.birthday }}"
+                data-birthday="{{ post.dog.birthday|date:'Y-m-d' }}"
                 data-age-months="{{ post.dog.age_months}}"
                 data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
                 data-post-id="{{ post.id }}"
@@ -95,6 +96,7 @@
             const name = imgElement.getAttribute('data-name');
             const breed = imgElement.getAttribute('data-breed');
             const gender = imgElement.getAttribute('data-gender');
+            const birthdayRaw = imgElement.getAttribute('data-birthday-raw');
             const birthday = imgElement.getAttribute('data-birthday');
             const caption = imgElement.getAttribute('data-caption');
             const postId = imgElement.getAttribute('data-post-id');
@@ -103,7 +105,7 @@
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
-            document.getElementById('modal-birthday').textContent = birthday;
+            document.getElementById('modal-birthday').textContent = birthdayRaw;
             document.getElementById('modal-caption').textContent = caption; 
 
             if (birthday) {
