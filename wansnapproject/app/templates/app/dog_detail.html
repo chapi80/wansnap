@@ -9,7 +9,9 @@
     <h2>{{ dog.dog_name }}の部屋</h2>
     
         {% if dog.dog_image and dog.dog_image.name %}
-            <img src="{{ dog.dog_image.url }}" alt="{{ dog.dog_name }}" width="200">
+            <div class="dog-photo-detail-container">
+                <img src="{{ dog.dog_image.url }}" alt="{{ dog.dog_name }}" class="dog-photo-detail-container">
+            </div>
         {% else %}
             <p>画像は登録されていません</p>
         {% endif %}
