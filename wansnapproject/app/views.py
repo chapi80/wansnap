@@ -114,9 +114,18 @@ def dog_detail_view(request, dog_id):
     for post in posts:
         post.is_own = (post.dog.owner == request.user)
     
+    dog_breed = dog.breed
+    dog_gender = dog.gender
+    dog_birthday = dog.birthday
+    dog_biography = dog.biography
+    
     return render(request, 'app/dog_detail.html', {
         'dog':dog,
         'posts':posts,
+        'dog_breed':dog_breed,
+        'dog_gender':dog_gender,
+        'dog_birthday':dog_birthday,
+        'dog_biography':dog_biography,       
         'request':request,
     })
     
