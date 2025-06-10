@@ -19,22 +19,19 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 12px;
-    background-color: #f9f6ed;
-    border-radius: 8px;
 }
 
 .dog-info-box .label {
     background-color: #ebdfbe;
     color: #333;
     font-weight: bold;
-    padding: 6px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    max-width: fit-content;
+    padding: 8px 12px;
+    border-radius: 4px;
 }
 
 .dog-info-box .value {
-    padding-left: 8px;
-    color: #444;
+    background-color: #fff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
 }
