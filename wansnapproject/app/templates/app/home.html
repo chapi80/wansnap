@@ -45,8 +45,8 @@
                 data-name="{{ post.dog.dog_name }}"
                 data-breed="{{ post.dog.breed }}"
                 data-gender="{{ post.dog.gender }}"
-                date-birthday="{{ post.dog.birthday }}"
-                date-age-months="{{ post.dog.age_months}}"
+                data-birthday="{{ post.dog.birthday }}"
+                data-age-months="{{ post.dog.age_months}}"
                 data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
                 data-post-id="{{ post.id }}"
                 >
@@ -89,10 +89,13 @@
 
     <script>
         function openModal(imgElement){
+            const modal = document.getElementById("postModal");
+            const modalImage = document.getElementById("modal-image");
             const image = imgElement.getAttribute('data-image');
             const name = imgElement.getAttribute('data-name');
             const breed = imgElement.getAttribute('data-breed');
             const gender = imgElement.getAttribute('data-gender');
+            const birthday = imgElement.getAttribute('data-birthday');
             const caption = imgElement.getAttribute('data-caption');
             const postId = imgElement.getAttribute('data-post-id');
 
@@ -100,7 +103,36 @@
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
+            document.getElementById('modal-birthday').textContent = birthday;
             document.getElementById('modal-caption').textContent = caption; 
+
+            if (birthday) {
+                const birthDate = new Date(birthday);
+                const today = new Date();
+
+                let months =
+                    (today.getFullYear() - birthDate.getFullYear()) * 12 +
+                    (today.getMonth() - birthDate.getMonth());
+
+                if (today.getDate() < birthDate.getDate()) {
+                    months -= 1;
+                }
+
+                const year = Math.floor(months/12);
+                const remainingMonths = months % 12;
+
+                let ageText ="";
+                if (year > 0) {
+                    ageText += `${year}歳`;
+                }
+                if (remainingMonths > 0 || year === 0) {
+                    ageText += `${remainingMonths}ヶ月`;
+                }
+
+                document.getElementById('modal-age-months').textContent = ageText;
+            } else {
+                document.getElementById('modal-age-months').textContent = "不明";
+            }
 
             document.getElementById('favorite-button').setAttribute('data-post-id', postId);
 
