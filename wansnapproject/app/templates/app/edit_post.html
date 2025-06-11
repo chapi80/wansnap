@@ -6,8 +6,8 @@
 {% block title %}うちの子投稿編集ページ画面 - ワンスナップ{% endblock %}
 
 {% block content %}
-    <h2>うちの子投稿編集ページ</h2>        
-
+    <h2>うちの子投稿編集ページ</h2>
+    
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -21,9 +21,9 @@
             {{ edit_post_form.caption }}<br><br>
 
             <button type="submit">登録する</button><br>
-
-            <button type="button" onclick="openDeleteDeleteModal()">投稿を削除する</button>
         </form>
+
+        <button type="button" onclick="openDeleteModal()">投稿を削除する</button>
 
         <div id="deleteModal" class="modal hidden">
             <div class="modal-content">
@@ -38,7 +38,7 @@
         </div>
 
         <script>
-        function openDeleteDeleteModal() {
+        function openDeleteModal() {
             document.getElementById("deleteModal").classList.remove("hidden");
         }
         function closeDeleteModal() {
