@@ -29,7 +29,7 @@
             <div class="modal-content">
                 <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
                 <p>投稿を削除しますか？</p>
-                <form method="POST" action="{% url 'delete_post' post.id %}">
+                <form method="POST" action="{% url 'delete_post' post_id %}">
                     {% csrf_token%}
                     <button type="submit">削除する</button>
                     <button type="button" onclick="closeDeleteModal()">キャンセル</button>

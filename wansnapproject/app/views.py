@@ -242,23 +242,24 @@ def create_post_view(request):
 
 @login_required
 def edit_post_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id, owner=request.user)
+    post = get_object_or_404(Post, id=post_id, dog__owner=request.user)
     
     if request.method == 'POST':
-        edit_post_form = PostForm(request.POST, request.FILES, isinstance=post, user=request.user)
+        edit_post_form = PostForm(request.POST, request.FILES, instance=post, user=request.user)
         if edit_post_form.is_valid():
             post = edit_post_form.save()
-            return redirect('home')
+            return redirect('mypage')
     else:
-        edit_post_form = PostForm(isinstance=post, user=request.user)
+        edit_post_form = PostForm(instance=post, user=request.user)
         
     return render(request, 'app/edit_post.html',{
-        'edit_post_form':edit_post_form
+        'edit_post_form':edit_post_form,
+        'post_id':post.id,
     })
 
 @login_required
 def delete_post_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id, dog_owner=request.user)
+    post = get_object_or_404(Post, id=post_id, dog__owner=request.user)
     
     if request.method == 'POST':
         post.delete()
