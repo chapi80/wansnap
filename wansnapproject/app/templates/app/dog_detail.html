@@ -97,7 +97,7 @@
             {% endfor%}
         </div>
         
-        <div id ="postModal" class="modal" style="display: none;">
+        <div id ="postDetailModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
@@ -108,7 +108,7 @@
                 <p><strong>うちの子からひとこと</strong><span id="modal-caption"></span></p>
                 <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
                 <button id="favorite-button" data-post-id="">★</button>
-                <button id="edit_button" style="display: none;">編集する</button>
+                <button id="edit-post-button" style="display: none;">編集する</button>
             </div>
         </div>
 
@@ -137,7 +137,7 @@
                 memoLine.style.display = "none";
             }
 
-            const editButton = document.getElementById('edit_button');
+            const editButton = document.getElementById('edit-post-button');
             if (isOwn) {
                 editButton.style.display = "inline-block";
                 editButton.onclick = function() {
@@ -148,11 +148,11 @@
                 editButton.onclick = null;
             }
             
-            document.getElementById('postModal').style.display = "block";
+            document.getElementById('postDetailModal').style.display = "flex";
         }
 
         document.addEventListener('DOMContentLoaded', function (){
-            const modal = document.getElementById('postModal');
+            const modal = document.getElementById('postDetailModal');
             const closeBtn = modal.querySelector('.close');
 
             closeBtn.onclick = function () {
