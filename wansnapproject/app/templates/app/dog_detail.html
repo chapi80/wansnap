@@ -79,7 +79,12 @@
                         data-name="{{ dog.dog_name }}"
                         data-breed="{{ dog.breed }}"
                         data-gender="{{ dog.gender }}"
-                        data-image="{{ post.caption }}"
+                        data-birthday-raw="{{ post.dog.birthday }}"
+                        data-birthday="{{ post.dog.birthday|date:'Y-m-d' }}"
+                        data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
+                        data-post-id="{{ post.id }}"
+                        data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"
+                        
                         {% if post.is_own %}
                             data-memo="{{ post.memo }}"
                         {% else %}
@@ -97,12 +102,13 @@
                 <span class="close">&times;</span>
                 <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
 
-                <p><strong>うちの子の名前：</strong><span id="modal-name"></span></p>
-                <p><strong>犬種：</strong><span id="modal-breed"></span></p>
-                <p><strong>性別：</strong><span id="modal-gender"></span></p>
-                <p><strong>うちの子からひとこと：</strong><span id="modal-caption"></span></p>
+                <p><strong>うちの子の名前</strong><span id="modal-name"></span></p>
+                <p><strong>犬種</strong><span id="modal-breed"></span></p>
+                <p><strong>性別</strong><span id="modal-gender"></span></p>
+                <p><strong>うちの子からひとこと</strong><span id="modal-caption"></span></p>
                 <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
                 <button id="favorite-button" data-post-id="">★</button>
+                <button id="edit_button" style="display: none;">編集する</button>
             </div>
         </div>
 
@@ -114,6 +120,8 @@
             const gender = imgElement.getAttribute('data-gender');
             const caption = imgElement.getAttribute('data-caption');
             const memo = imgElement.getAttribute('data-memo');
+            const isOwn = imgElement.getAttribute('data-is-own') === 'true';
+            const postId = imgElement.getAttribute('data-post-id');
 
             document.getElementById('modal-image').src = image;
             document.getElementById('modal-name').textContent = name;
@@ -127,6 +135,17 @@
                 memoLine.style.display = "block";
             } else {
                 memoLine.style.display = "none";
+            }
+
+            const editButton = document.getElementById('edit_button');
+            if (isOwn) {
+                editButton.style.display = "inline-block";
+                editButton.onclick = function() {
+                    window.location.href = `/edit_post/${postId}/`;
+                };    
+            } else {
+                editButton.style.display = "none";
+                editButton.onclick = null;
             }
             
             document.getElementById('postModal').style.display = "block";
