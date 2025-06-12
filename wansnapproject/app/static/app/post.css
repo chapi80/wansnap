@@ -81,3 +81,53 @@
     padding: 8px 12px;
     border-radius: 4px;
 }
+
+.btn-post {
+    width: 200px;
+    height: 45px;
+    background-color: #ebdfbe;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.btn-post:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .centered {
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    button, .btn-post {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    .dog-info-box {
+        font-size: 14px;
+    }
+}
