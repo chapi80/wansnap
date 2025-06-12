@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from .forms import LoginForm, SignupForm, DogForm, EmailChangeForm, PostForm,DogFormSet
 from .models import Post, Dog, Favorite
-from django.db.models import Q
+from django.db.models import Q, F, ExpressionWrapper, fields
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from datetime import date
 from dateutil.relativedelta import relativedelta
-
+import re
 
 def index(request):
     return render(request, 'portfolio/index.html')
@@ -70,20 +70,35 @@ def home_view(request):
     sort = request.GET.get('sort','new')
     
     posts = Post.objects.all()
+    total_months = None
     
     if query:
-        posts = posts.filter(
-            dog__breed__icontains=query
-        ) | posts.filter(
-            dog__dog_name__icontains=query
-        ) | posts.filter(
-            caption__icontains=query
-        )
+        month_match = re.search(r'(?:(\d+)\s*[歳才]?)?\s*(\d+)\s*[かヶケカヵ]?月', query)
+        
+        if month_match:
+            years = int(month_match.group(1)) if month_match.group(1) else 0
+            months = int(month_match.group(2))
+            total_months = years * 12 + months
+        
+    if total_months is not None:
+        posts = posts.filter(dog__birthday__isnull=False)
+        posts = [
+            post for post in posts
+            if post.dog.age_months is not None and abs(post.dog.age_months - total_months) <= 1
+        ]
+    
+    elif query: 
+        base_filter = (
+            Q(dog__breed__icontains=query) |
+            Q(dog__dog_name__icontains=query) |
+            Q(caption__icontains=query)
+        )       
+        posts = posts.filter(base_filter)
     
     if sort == 'old':
-        posts = posts.order_by('created_at')
+        posts = sorted(posts, key=lambda x: x.created_at)
     else:
-        posts = posts.order_by('-created_at')
+        posts = sorted(posts, key=lambda x: x.created_at, reverse=True)
         
     context = {
         'posts': posts,

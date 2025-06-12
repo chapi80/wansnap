@@ -8,6 +8,7 @@ from django.dispatch import receiver
 import os
 from django.contrib.auth.models import User
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -51,10 +52,8 @@ class Dog(models.Model):
     def age_months(self):
         if self.birthday:
             today = date.today()
-            months = (today.year - self.birthday.year) * 12 + (today.month - self.birthday.month)
-            if today.day < self.birthday.day:
-                months -= 1
-            return months
+            diff = relativedelta(today, self.birthday)
+            return diff.years * 12 + diff.months
         return None
     
     def __str__(self):
