@@ -34,6 +34,14 @@
                 </label>
             </div>
         </form>
+
+        <script>
+            document.querySelectorAll('input[name="sort"]').forEach((radio) => {
+                radio.addEventListener('change', function () {
+                    this.closest('form').submit();
+                });
+            });
+        </script>
     </div>
     
     <div class="image-grid">
