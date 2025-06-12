@@ -29,3 +29,20 @@
     80% {opacity: 1;}
     100% {opacity: 0; display: none;}
 }
+
+button {
+    width: 200px;
+    height: 45px;
+    background-color: #ebdfbe;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button:honer {
+    opacity: 0.8;
+}
