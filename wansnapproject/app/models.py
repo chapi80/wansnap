@@ -7,6 +7,7 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 import os
 from django.contrib.auth.models import User
+from datetime import date
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -45,6 +46,16 @@ class Dog(models.Model):
     birthday = models.DateField(null=True, blank=True)
     biography = models.TextField(blank=True)
     dog_image = models.ImageField(upload_to='dog_image/', null=True, blank=True)
+    
+    @property
+    def age_months(self):
+        if self.birthday:
+            today = date.today()
+            months = (today.year - self.birthday.year) * 12 + (today.month - self.birthday.month)
+            if today.day < self.birthday.day:
+                months -= 1
+            return months
+        return None
     
     def __str__(self):
         return f"{self.dog_name}({self.owner.username}のうちの子)"
