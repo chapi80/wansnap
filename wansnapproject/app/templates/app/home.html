@@ -18,18 +18,18 @@
         <button type = "button" id="btn-post" class="btn-post" onclick="location.href='{% url 'create_post' %}'">🐾うちの子投稿🐾</button>
         <form class="search-form" method="get" action="{% url 'home' %}">
             <div class="search-row">
-                <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
+                <input type="text" name="q" placeholder="犬種や月齢などキーワード入力" value="{{ query|default:''}}">
                 <button type="submit" aria-label="検索">🔍</button>
             </div>
     
             <div class="radio-row">
                 <label>
-                    <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+                    <input type="radio" name="sort" value="new" {% if sort == 'new' or not sort %}checked{% endif %}>
                     新しい順
                 </label>
         
                 <label>
-                    <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+                    <input type="radio" name="sort" value="old" {% if sort == 'old' %}checked{% endif %}>
                     古い順
                 </label>
             </div>

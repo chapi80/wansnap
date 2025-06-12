@@ -66,16 +66,29 @@ def signup_view(request):
     
 @login_required
 def home_view(request):
-    sort_order = request.GET.get('sort','new')
+    query = request.GET.get('q')
+    sort = request.GET.get('sort','new')
     
-    if sort_order == 'old':
-        posts = Post.objects.select_related('dog').all().order_by('created_at')
+    posts = Post.objects.all()
+    
+    if query:
+        posts = posts.filter(
+            dog__breed__icontains=query
+        ) | posts.filter(
+            dog__dog_name__icontains=query
+        ) | posts.filter(
+            caption__icontains=query
+        )
+    
+    if sort == 'old':
+        posts = posts.order_by('created_at')
     else:
-        posts = Post.objects.select_related('dog').all().order_by('-created_at')
+        posts = posts.order_by('-created_at')
         
     context = {
-        'posts':posts,
-        'sort_order':sort_order,
+        'posts': posts,
+        'query': query,
+        'sort': sort,
     }
     
     return render(request, 'app/home.html', context)
