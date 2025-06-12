@@ -99,15 +99,22 @@
     opacity: 0.8;
 }
 
-form {
+.search-form {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.search-row {
+    display: flex;
     gap: 8px;
     justify-content: center;
 }
 
-form input[type="text"] {
+.search-row input[type="text"] {
     flex: 1;
     min-width: 200px;
     max-width: 400px;
@@ -117,17 +124,30 @@ form input[type="text"] {
     border: 1px solid #ccc;
 }
 
-form button[type="submit"] {
+.search-row button[type="submit"] {
     height: 40px;
     padding: 0 16px;
+    background-color: #58827e;
+    color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
 }
 
-form button[type="submit"]:hover {
+.search-row button[type="submit"]:hover {
     opacity: 0.8;
+}
+
+.radio-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.radio-row label {
+    font-weight: normal;
 }
 
 @media (max-width: 768px) {

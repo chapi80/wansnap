@@ -16,11 +16,13 @@
 
     <div class="centered">
         <button type = "button" id="btn-post" class="btn-post" onclick="location.href='{% url 'create_post' %}'">🐾うちの子投稿🐾</button>
-        <form method="get" action="{% url 'home' %}">
-            <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
-            <button type="submit" aria-label="検索">🔍</button><br><br>
+        <form class="search-form" method="get" action="{% url 'home' %}">
+            <div class="search-row">
+                <input type="text" name="q" placeholder="犬種や月齢などキーワード入力">
+                <button type="submit" aria-label="検索">🔍</button>
+            </div>
     
-            <div>
+            <div class="radio-row">
                 <label>
                     <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
                     新しい順
