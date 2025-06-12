@@ -5,25 +5,71 @@
         <meta charset='UTF-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ログイン画面</title>
-    </head>
+        <style>
+            body {
+                margin: 0;
+                font-family: sans-serif;
+                background-color: #f7f7f7;
+            }
+
+            header {
+                background-color: #a49771;
+                padding: 20px 0;
+                text-align: center;
+                color: white;
+                font-size: 2em;
+            }
+
+            .login-container {
+                max-width: 400px;
+                margin: 50px auto;
+                padding: 30px;
+                background-color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0. 0.1);
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            button {
+                padding: 10px 20px;
+                background-color: #ffa07a;
+                border: none;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: white;
+            }
+
+            a {
+                color: #ffa07a;
+            }
+        </style>
+    </head>    
 
     <body>
-        <h1>ワンスナップ</h1>
+        <header>
+            <h1>ワンスナップ</h1>
+        </header>
 
-        <h2>ログイン画面</h2>
+        <div class="login-container">
+            <h2>ログイン画面</h2>
 
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            {{ login_form.as_p }}
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {{ login_form.as_p }}
 
-            {% if login_form.non_field_errors %}
-                <p style="color: red;">{{ login_form.non_field_errors }}</p>
-            {% endif %}
+                {% if login_form.non_field_errors %}
+                    <p style="color: red;">{{ login_form.non_field_errors }}</p>
+                {% endif %}
 
-            <button type="submit">ログイン</button>
+                <button type="submit">ログイン</button>
 
-            <br><br>
-            <a href="{% url 'signup' %}">新規アカウント登録</a>
-        </form>
+                <br><br>
+                <a href="{% url 'signup' %}">新規アカウント登録</a>
+            </form>
+        </div>
     </body>
 </html>
