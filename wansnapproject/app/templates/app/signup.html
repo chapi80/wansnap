@@ -5,101 +5,175 @@
         <meta charset='UTF-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>新規アカウント登録画面</title>
+
+        <style>
+            body {
+                margin: 0;
+                font-family: sans-serif;
+                background-color: #f7f7f7;
+            }
+
+            header {
+                background-color: #a49771;
+                padding: 20px;
+                text-align: left;
+                color: #58827e;
+                font-size: 1em;
+            }
+
+            .form-container {
+                max-width: 600px;
+                margin: 40px auto;
+                padding: 30px;
+                background-color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0. 0.1);
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .dog-form {
+                margin-bottom: 30px;
+                padding: 15px;
+                border: none;
+                border-radius: 5px;
+                background-color: #fafafa
+                text-align: left;
+            }
+
+            button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button[type="submit"] {
+                background-color: #4285f4;
+                color: white;
+            }
+
+            #add-dog-button {
+                background-color: #ebdfbe;
+                color: black;
+                margin-bottom: 20px;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            a {
+                color: #4285f4;
+            }
+
+            .form-container label {
+                display: inline-block;        
+                text-align: left;
+                width: 100%;
+                margin-left: 40px;
+                margin-bottom: 4px;
+                font-weight: bold;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>ワンスナップ</h1>
+        <header>
+            <h1>ワンスナップ</h1>
+        </header>
 
-        <h2>新規アカウント登録</h2>
+        <div class="form-container">
+            <h2>新規アカウント登録</h2>
 
-        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+            <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-            {% if user_form.errors %}
-                <ul>
-                    {% for field in user_form %}
-                        {% for error in field.errors %}
-                            <li style="color:red;">{{ field.label }}: {{ error }}</li>
-                        {% endfor%}
-                    {% endfor %}
-                    {% for error in user_form.non_field_errors %}
+                {% if user_form.errors %}
+                    <ul>
+                        {% for field in user_form %}
+                            {% for error in field.errors %}
+                                <li style="color:red;">{{ field.label }}: {{ error }}</li>
+                            {% endfor%}
+                        {% endfor %}
+                        {% for error in user_form.non_field_errors %}
                         <li style="color:red;">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            
+                {{ user_form.username.label_tag }}<br>
+                {{ user_form.username }}<br><br>
+            
+                <div id="dog-forms-container">
+                    {{ dog_formset.management_form }}
+                    {% for dog_form in dog_formset %}
+
+                        <div class="dog-form">
+                            {{ dog_form.dog_name.label_tag }}<br>
+                            {{ dog_form.dog_name }}<br><br>
+                    
+                            {{ dog_form.breed.label_tag }}<br>
+                            {{ dog_form.breed }}<br><br>
+                    
+                            {{ dog_form.gender.label_tag}}<br>
+                            {{ dog_form.gender }}<br><br>
+                    
+                            {{ dog_form.birthday.label_tag }}<br>
+                            {{ dog_form.birthday }}<br><br>
+
+                            {{ dog_form.biography.label_tag }}<br>
+                            {{ dog_form.biography }}<br><br>
+                    
+                            {{ dog_form.dog_image.label_tag }}<br>
+                            {{ dog_form.dog_image }}<br><br>
+
+                        </div>
                     {% endfor %}
-                </ul>
-            {% endif %}
+                </div><br>
+
+                <button type="button" id="add-dog-button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>           
+
+                {{ user_form.email.label_tag }}<br>
+                {{ user_form.email }}<br><br>
+
+                {{ user_form.password1.label_tag }}<br>
+                {{ user_form.password1 }}<br>
+                <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
+
+                {{ user_form.password2.label_tag }}<br>
+                {{ user_form.password2 }}<br>
+                <h5>確認のため、同じパスワードを入力してください</h5><br><br>
+
+                <button type="submit">登録</button>
             
-            {{ user_form.username.label_tag }}<br>
-            {{ user_form.username }}<br><br>
-            
-            <div id="dog-forms-container">
-                {{ dog_formset.management_form }}
-                {% for dog_form in dog_formset %}
+            </form>
 
-                    <div class="dog-form">
-                        {{ dog_form.dog_name.label_tag }}<br>
-                        {{ dog_form.dog_name }}<br><br>
-                    
-                        {{ dog_form.breed.label_tag }}<br>
-                        {{ dog_form.breed }}<br><br>
-                    
-                        {{ dog_form.gender.label_tag}}<br>
-                        {{ dog_form.gender }}<br><br>
-                    
-                        {{ dog_form.birthday.label_tag }}<br>
-                        {{ dog_form.birthday }}<br><br>
-
-                        {{ dog_form.biography.label_tag }}<br>
-                        {{ dog_form.biography }}<br><br>
-                    
-                        {{ dog_form.dog_image.label_tag }}<br>
-                        {{ dog_form.dog_image }}<br><br>
-
-                    </div>
-                {% endfor %}
-            </div><br>
-
-            <button type="button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>           
-
-            {{ user_form.email.label_tag }}<br>
-            {{ user_form.email }}<br><br>
-
-            {{ user_form.password1.label_tag }}<br>
-            {{ user_form.password1 }}<br>
-            <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
-
-            {{ user_form.password2.label_tag }}<br>
-            {{ user_form.password2 }}<br>
-            <h5>確認のため、同じパスワードを入力してください</h5><br><br>
-
-            <button type="submit">登録</button>
-            
-        </form>
-
-        <script>
-            function addDogForm(){
-                const totalForms = document.getElementById("id_form-TOTAL_FORMS");
-                const container = document.getElementById("dog-forms-container");
-                const formCount = parseInt(totalForms.value);
-                const originalForm = container.querySelector(".dog-form");
+            <script>
+                function addDogForm(){
+                    const totalForms = document.getElementById("id_form-TOTAL_FORMS");
+                    const container = document.getElementById("dog-forms-container");
+                    const formCount = parseInt(totalForms.value);
+                    const originalForm = container.querySelector(".dog-form");
                 
-                const newForm = originalForm.cloneNode(true);
-                const regex = new RegExp(`form-(\\d+)-`, 'g');
+                    const newForm = originalForm.cloneNode(true);
+                    const regex = new RegExp(`form-(\\d+)-`, 'g');
 
-                newForm.innerHTML = newForm.innerHTML.replace(regex, `form-${formCount}-`);
+                    newForm.innerHTML = newForm.innerHTML.replace(regex, `form-${formCount}-`);
 
-                const fields = newForm.querySelectorAll("input, select, textarea, label");
-                fields.forEach(field => {
-                    if (field.type !== "hidden") {
-                        field.value = "";
-                    }
-                });
+                    const fields = newForm.querySelectorAll("input, select, textarea, label");
+                    fields.forEach(field => {
+                        if (field.type !== "hidden") {
+                            field.value = "";
+                        }
+                    });
 
-                container.appendChild(newForm);
-                totalForms.value = formCount + 1;
-            }    
-        </script>
+                    container.appendChild(newForm);
+                    totalForms.value = formCount + 1;
+                }    
+            </script>
         
-        <br>
-        <a href="{% url 'login' %}">ログイン画面に戻る</a>
+            <br>
+            <a href="{% url 'login' %}">ログイン画面に戻る</a>
+        </div>
     </body>
 </html>    
