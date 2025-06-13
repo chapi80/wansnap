@@ -6,24 +6,70 @@
 {% block title %}メールアドレス変更画面 - ワンスナップ{% endblock %}
 
 {% block content %}
-    <h2>メールアドレス変更</h2>        
 
-        <form action="{% url 'edit_user_email' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+    <style>
+        .submit-button {
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-            <div id="user-forms-container">
-                    <div class="user-form">
-                        {{ user_form.email.label_tag }}<br>
-                        {{ user_form.email }}<br><br>
-                    </div>
-            </div><br>
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-link {
+            color: #4285f4;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .cancel-link:hover {
+            text-decoration: underline;
+        }
+
+        .cancel-link {
+            color: #4285f4;
+            text-decoration: underline;
+        }
+
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-wrapper form {
+            text-align: left;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+
+    <div class="form-wrapper">
+        <h2>メールアドレス変更</h2>        
+
+            <form action="{% url 'edit_user_email' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div id="user-forms-container">
+                        <div class="user-form">
+                            {{ user_form.email.label_tag }}<br>
+                            {{ user_form.email }}<br><br>
+                        </div>
+                </div><br>
             
-            <button type="submit">修正する</button><br><br>
+                <button type="submit" class="submit-button">修正する</button><br><br>
 
-        </form><br>
+            </form><br>
 
-        <a href="{% url 'mypage' %}">
-            <button type="submit">キャンセル</button>
-        </a>
-        
+            <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</button>
+            </a>
+    </div>    
 {% endblock %}
