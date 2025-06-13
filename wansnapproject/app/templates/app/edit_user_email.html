@@ -8,6 +8,11 @@
 {% block content %}
 
     <style>
+        .button-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         .submit-button {
             background-color: #4285f4;
             color: white;
@@ -15,6 +20,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 150px;
         }
 
         .submit-button:hover {
@@ -64,8 +70,10 @@
                             {{ user_form.email }}<br><br>
                         </div>
                 </div><br>
-            
-                <button type="submit" class="submit-button">修正する</button><br><br>
+                
+                <div class="button-wrapper">
+                    <button type="submit" class="submit-button">修正する</button><br><br>
+                </div>
 
             </form><br>
 
