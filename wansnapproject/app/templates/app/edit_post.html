@@ -51,6 +51,11 @@
             document.getElementById("deleteModal").classList.add("hidden");
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteModal = document.getElementById("deleteModal");
+            deleteModal.style.display = "none";
+        });
+
         </script>
         
 {% endblock %}

@@ -108,7 +108,7 @@
                 <p><strong>うちの子からひとこと</strong><span id="modal-caption"></span></p>
                 <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
                 <button id="favorite-button" data-post-id="">★</button>
-                <button id="modal-edit-button" style="display: none;">編集する</button>
+                <button id="modal-edit-button" style="display: none;" onclick="goToEditPage({{ post.id }})">編集する</button>
             </div>
         </div>
 
@@ -141,6 +141,7 @@
             if (isOwn) {
                 editButton.style.display = "inline-block";
                 editButton.onclick = function() {
+                    document.getElementById('openPostDetailModal').style.display = "none"
                     window.location.href = `/edit_post/${postId}/`;
                 };    
             } else {
