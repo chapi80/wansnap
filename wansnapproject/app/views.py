@@ -290,7 +290,8 @@ def delete_post_view(request, post_id):
     post = get_object_or_404(Post, id=post_id, dog__owner=request.user)
     
     if request.method == 'POST':
+        dog_id = post.dog.id
         post.delete()
-        return redirect('dog_detail')
+        return redirect('dog_detail', dog_id=dog_id)
     
     return redirect('edit_post', post_id=post_id)
