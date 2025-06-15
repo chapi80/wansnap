@@ -9,81 +9,81 @@
 
 <style>
     .button-wrapper {
-            text-align: center;
-            margin-top: 20px;
-        }
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .submit-button {
-            background-color: #4285f4;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 150px;
-        }
+    .submit-button {
+        background-color: #4285f4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 150px;
+    }
 
-        .submit-button:hover {
-            background-color: #0056b3;
-        }
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
 
-        .cancel-link {
-            color: #4285f4;
-            text-decoration: none;
-            margin-left: 10px;
-        }
+    .cancel-link {
+        color: #4285f4;
+        text-decoration: none;
+        margin-left: 10px;
+    }
 
-        .cancel-link:hover {
-            text-decoration: underline;
-        }
+    .cancel-link:hover {
+        text-decoration: underline;
+    }
 
-        .cancel-link {
-            color: #4285f4;
-            text-decoration: underline;
-        }
+    .cancel-link {
+        color: #4285f4;
+        text-decoration: underline;
+    }
 
-        .dog-form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
+    .dog-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
 
-        .dog-form form {
-            text-align: left;
-        }
+    .dog-form form {
+        text-align: left;
+    }
 
-        h2 {
-            text-align: center;
-        }
+    h2 {
+        text-align: center;
+    }
 </style>
 
-    <h2>うちの子追加登録</h2>      
+    <h2>うちの子追加登録</h2>
+    <div class="dog-form">      
 
         <form action="{% url 'add_dog' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-          <div id="dog-forms-container">
-                <div class="dog-form">
-                    {{ dog_form.dog_name.label_tag }}<br>
-                    {{ dog_form.dog_name }}<br><br>
+            <div id="dog-forms-container">
+                
+                {{ dog_form.dog_name.label_tag }}<br>
+                {{ dog_form.dog_name }}<br><br>
                     
-                    {{ dog_form.breed.label_tag }}<br>
-                    {{ dog_form.breed }}<br><br>
+                {{ dog_form.breed.label_tag }}<br>
+                {{ dog_form.breed }}<br><br>
                     
-                    {{ dog_form.gender.label_tag}}<br>
-                    {{ dog_form.gender }}<br><br>
+                {{ dog_form.gender.label_tag}}<br>
+                {{ dog_form.gender }}<br><br>
                     
-                    {{ dog_form.birthday.label_tag }}<br>
-                    {{ dog_form.birthday }}<br><br>
+                {{ dog_form.birthday.label_tag }}<br>
+                {{ dog_form.birthday }}<br><br>
 
-                    {{ dog_form.biography.label_tag }}<br>
-                    {{ dog_form.biography }}<br><br>
+                {{ dog_form.biography.label_tag }}<br>
+                {{ dog_form.biography }}<br><br>
                     
-                    {{ dog_form.dog_image.label_tag }}<br>
-                    {{ dog_form.dog_image }}<br><br>
+                {{ dog_form.dog_image.label_tag }}<br>
+                {{ dog_form.dog_image }}<br><br>
 
-                </div>
             </div><br>
             
             <div class="button-wrapper">
@@ -91,5 +91,6 @@
                 <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</a>
             </div>
         </form>
+    </div>
 {% endblock %}
             
