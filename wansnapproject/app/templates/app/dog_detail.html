@@ -50,21 +50,21 @@
 
         <h2>🐶今までの思い出🐶</h2>
 
-        <form method="get">
+        <form class="search-fome" method="get" action="{% url 'dog_detail' dog.id %}">
 
             <div class="search-row">
-                <input type="text" name='q' placeholder="2025-5 などで検索" value="{{ request.GET.q }}">
-                <button type="submit">🔍</button><br><br>
+                <input type="month" name="q" value="{{ query|default:''}}">
+                <button type="submit" aria-label="検索">🔍</button><br><br>
             </div>
 
             <div class="radio-row">
                 <label>
-                    <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
+                    <input type="radio" name="sort" value="new" {% if sort == 'new' or not sort %}checked{% endif %}>
                     新しい順
                 </label>
         
                 <label>
-                    <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
+                    <input type="radio" name="sort" value="old" {% if sort == 'old' %}checked{% endif %}>
                     古い順
                 </label>
             </div>           
