@@ -45,12 +45,15 @@
         </div>
         
         <a href="{% url 'edit_dog' dog.id %}">
-            <button type = "button">登録情報修正</button>
+            <button type = "button" class="edit-button">登録情報修正</button>
         </a><br><br>
 
         <h1>🐶今までの思い出🐶</h1>
 
         <form method="get">
+
+            <input type="text" name='q' placeholder="2025-5 などで検索" value="{{ request.GET.q }}">
+            <button type="submit">🔍</button>
 
             <label>
                 <input type="radio" name="sort" value="new" {% if request.GET.sort == 'new' or not request.GET.sort %}checked{% endif %}>
@@ -60,10 +63,7 @@
             <label>
                 <input type="radio" name="sort" value="old" {% if request.GET.sort == 'old' %}checked{% endif %}>
                 古い順
-            </label>
-
-            <input type="text" name='q' placeholder="2025-5 などで検索" value="{{ request.GET.q }}">
-            <button type="submit">🔍</button>
+            </label>           
 
         </form>
 

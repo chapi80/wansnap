@@ -182,3 +182,25 @@
         font-size: 14px;
     }
 }
+
+button.edit-button {
+    width: 200px;
+    height: 45px;
+    background-color: #ebdfbe;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
+
+button.edit-button:hover {
+    opacity: 0.8;
+}
+
+a {
+    text-decoration: none;
+}
