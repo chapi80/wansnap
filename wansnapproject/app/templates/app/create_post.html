@@ -6,6 +6,29 @@
 {% block title %}うちの子投稿画面 - ワンスナップ{% endblock %}
 
 {% block content %}
+
+    <style>
+        .button-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-button {
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
     <h2>うちの子投稿</h2>       
 
         <form method="POST" enctype="multipart/form-data">
@@ -22,6 +45,8 @@
             {{ create_post_form.memo.label_tag }}<br>
             {{ create_post_form.memo }}<br><br>
 
-            <button type="submit">投稿する</button>
+            <div class="button-wrapper">
+                <button type="submit" class="submit-button">投稿する</button>
+            </div>
         </form>
 {% endblock %}
