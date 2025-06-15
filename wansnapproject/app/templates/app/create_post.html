@@ -27,26 +27,42 @@
             background-color: #0056b3;
         }
 
+        .create-post {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .create-post form {
+            text-align: left;
+        }
+
+        h2 {
+            text-align: center;
+        }
     </style>
+    
+    <div class="create-post">
+        <h2>うちの子投稿</h2>       
 
-    <h2>うちの子投稿</h2>       
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ create_post_form.dog.label_tag }}<br>
+                {{ create_post_form.dog }}<br><br>
 
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ create_post_form.dog.label_tag }}<br>
-            {{ create_post_form.dog }}<br><br>
+                {{ create_post_form.image.label_tag }}<br>
+                {{ create_post_form.image }}<br><br>
 
-            {{ create_post_form.image.label_tag }}<br>
-            {{ create_post_form.image }}<br><br>
+                {{ create_post_form.caption.label_tag }}<br>
+                {{ create_post_form.caption }}<br><br>
 
-            {{ create_post_form.caption.label_tag }}<br>
-            {{ create_post_form.caption }}<br><br>
+                {{ create_post_form.memo.label_tag }}<br>
+                {{ create_post_form.memo }}<br><br>
 
-            {{ create_post_form.memo.label_tag }}<br>
-            {{ create_post_form.memo }}<br><br>
-
-            <div class="button-wrapper">
-                <button type="submit" class="submit-button">投稿する</button>
-            </div>
-        </form>
+                <div class="button-wrapper">
+                    <button type="submit" class="submit-button">投稿する</button>
+                </div>
+            </form>
+    </div>   
 {% endblock %}
