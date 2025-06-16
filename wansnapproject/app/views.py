@@ -304,6 +304,9 @@ def delete_dog_view(request, dog_id):
         posts = Post.objects.filter(dog=dog)
         for post in posts:
             post.dog_name = dog.dog_name
+            post.breed = dog.breed
+            post.gender = dog.gender
+            post.birthday = dog.birthday
             post.save()
                 
         dog.delete()
