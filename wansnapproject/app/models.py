@@ -61,7 +61,6 @@ class Dog(models.Model):
 
 class Post(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='posts')
-    dog_name = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to='post_images/')
     caption = models.TextField(blank=True)
     memo = models.TextField(blank=True, null=True)
