@@ -121,16 +121,19 @@
             
             <button type="submit">修正する</button><br><br>
 
-            <button type="button" class="delete-button" id="openDeleteModal">うちの子を削除する</button>
+            <button type="button" id="openDeleteModal">うちの子を削除する</button>
 
+        </form> 
+            
             <div id="deleteModal" class="modal">
                 <div class="modal-content">
                     <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
                     <p id="delete-confirm-text">うちの子（{{ dog.dog_name }}）を削除しますか？</p>
+                    
                     <form method="POST" action="{% url 'delete_dog' dog.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="delete-button">削除する</button>
-                        <button type="button" id="cancel-delete">キャンセル</button>
+                        <button type="submit" id="delete-button">削除する</button>
+                        <button type="button" onclick="closeDeleteModal()">キャンセル</button>
                     </form>
                 </div>
             </div>
@@ -138,44 +141,41 @@
             <a href="{% url 'dog_detail' dog.id %}">
                 <button type="button">キャンセル</button>
             </a>
-        </form>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            function openDeleteModal() {
+                document.getElementById('deleteModal').style.display = "flex";
+            }
+
+            function closeDeleteModal() {
+                document.getElementById('deleteModal').style.display = "none";
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
                 const deleteButton = document.getElementById('openDeleteModal');
+                const modal = document.getElementById('deleteModal');
+                const deleteForm = modal.querySelector('form');
 
                 if (deleteButton) {
-                    deleteButton.onclick = function() {
-                        document.getElementById('deleteModal').style.display = "flex";
-                    }
-                } else {
-                    console.error("削除ボタンが見つかりません");
+                    deleteButton.onclick = openDeleteModal;
                 }
 
-                function closeDeleteModal() {
-                    document.getElementById('deleteModal').style.display = "none";
-                }
+                window.onclick = function (event) {
+                    if (event.target === modal) {
+                        closeDeleteModal();
+                    }
+                };
 
                 const closeBtn = document.querySelector('.close-btn');
                 if (closeBtn) {
-                    closeBtn.onclick = function () {
-                        closeDeleteModal();
-                    }
+                    closeBtn.onclick = closeDeleteModal;
                 }
 
-                const cancelBtn = document.getElementById('cancel-delete');
+                const cancelBtn = modal.querySelector('button[type="button"]:not(.close-btn)');
                 if (cancelBtn) {
-                    cancelBtn.onclick = function () {
-                    closeDeleteModal();
-                    }
+                    cancelBtn.onclick = closeDeleteModal;
                 }
-
-                 window.onclick = function(event) {
-                    const modal = document.getElementById('deleteModal');
-                    if (event.target === modal) {
-                        closeDeleteModal();
-                        }
-                };
             });
         </script>
 {% endblock %}
+</html>

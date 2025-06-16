@@ -305,8 +305,9 @@ def delete_dog_view(request, dog_id):
         for post in posts:
             post.dog_name = dog.dog_name
             post.save()
-
+                
         dog.delete()
+            
         return redirect('mypage')
-
-    return render(request, 'app/delete_dog.html', {'dog':dog})
+    
+    return redirect('mypage')
