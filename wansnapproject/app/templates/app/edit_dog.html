@@ -61,6 +61,34 @@
         background-color: #e53935;
         opacity: 0.8;
     }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    button.close-btn {
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 </style>
 
     <h2>うちの子の情報変更</h2>
@@ -93,16 +121,16 @@
             
             <button type="submit">修正する</button><br><br>
 
-            <button type="submit" class="delete-button">うちの子を削除する</button>
+            <button type="button" class="delete-button" id="openDeleteModal">うちの子を削除する</button>
 
-            <div id="deleteModal" class="modal" style="display: none;">
+            <div id="deleteModal" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn" onclick="colseDeleteModal()">&times;</span>
-                    <p id="delete-confirm-text">削除しますか？</p>
+                    <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
+                    <p id="delete-confirm-text">うちの子（{{ dog.dog_name }}）を削除しますか？</p>
                     <form method="POST" action="{% url 'delete_dog' dog.id %}">
                         {% csrf_token %}
                         <button type="submit" class="delete-button">削除する</button>
-                        <button type="button" onclick="closeDeleteModal()">キャンセル</button>
+                        <button type="button" id="cancel-delete">キャンセル</button>
                     </form>
                 </div>
             </div>
@@ -111,4 +139,43 @@
                 <button type="button">キャンセル</button>
             </a>
         </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteButton = document.getElementById('openDeleteModal');
+
+                if (deleteButton) {
+                    deleteButton.onclick = function() {
+                        document.getElementById('deleteModal').style.display = "flex";
+                    }
+                } else {
+                    console.error("削除ボタンが見つかりません");
+                }
+
+                function closeDeleteModal() {
+                    document.getElementById('deleteModal').style.display = "none";
+                }
+
+                const closeBtn = document.querySelector('.close-btn');
+                if (closeBtn) {
+                    closeBtn.onclick = function () {
+                        closeDeleteModal();
+                    }
+                }
+
+                const cancelBtn = document.getElementById('cancel-delete');
+                if (cancelBtn) {
+                    cancelBtn.onclick = function () {
+                    closeDeleteModal();
+                    }
+                }
+
+                 window.onclick = function(event) {
+                    const modal = document.getElementById('deleteModal');
+                    if (event.target === modal) {
+                        closeDeleteModal();
+                        }
+                };
+            });
+        </script>
 {% endblock %}
