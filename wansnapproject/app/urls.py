@@ -22,5 +22,5 @@ urlpatterns = [
     path('post/<int:post_id>/delete/', views.delete_post_view, name='delete_post'),
     path('toggle_favorite/', views.toggle_favorite, name='toggle_favorite'),
     path('is_favorited/', views.is_favorited, name='is_favorited'),
-    path('dog/<int:dog_id>/delete/', views.delete_dog, name='delete_dog'),
+    path('dog/<int:dog_id>/delete/', views.delete_dog_view, name='delete_dog'),
 ]
