@@ -93,10 +93,19 @@
             
             <button type="submit">修正する</button><br><br>
 
-            <form method="POST" action="{% url 'delete_dog' dog.id%}">
-                {% csrf_token %}
-                <button type="submit" class="delete-button">うちの子を削除する</button>
-            </form>
+            <button type="submit" class="delete-button">うちの子を削除する</button>
+
+            <div id="deleteModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="colseDeleteModal()">&times;</span>
+                    <p id="delete-confirm-text">削除しますか？</p>
+                    <form method="POST" action="{% url 'delete_dog' dog.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button">削除する</button>
+                        <button type="button" onclick="closeDeleteModal()">キャンセル</button>
+                    </form>
+                </div>
+            </div>
 
             <a href="{% url 'dog_detail' dog.id %}">
                 <button type="button">キャンセル</button>
