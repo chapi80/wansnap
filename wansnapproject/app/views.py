@@ -295,3 +295,18 @@ def delete_post_view(request, post_id):
         return redirect('dog_detail', dog_id=dog_id)
     
     return redirect('edit_post', post_id=post_id)
+
+@login_required
+def delete_dog(request, dog_id):
+    dog = get_object_or_404(Dog, id=dog_id, owner=request.user)
+
+    posts = Post.objects.filter(dog=dog)
+    for post in posts:
+        post.dog_name = dog.dog_name
+        post.save()
+
+    posts.update(dog=None)
+
+    dog.delete()
+
+    return redirect('mypage')
