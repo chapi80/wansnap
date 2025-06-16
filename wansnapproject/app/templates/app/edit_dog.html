@@ -121,7 +121,7 @@
             
             <button type="submit">修正する</button><br><br>
 
-            <button type="button" id="openDeleteModal">うちの子を削除する</button>
+            <button type="button" id="openDeleteModal" class="delete-button">うちの子を削除する</button>
 
         </form> 
             
@@ -132,7 +132,7 @@
                     
                     <form method="POST" action="{% url 'delete_dog' dog.id %}">
                         {% csrf_token %}
-                        <button type="submit" id="delete-button">削除する</button>
+                        <button type="submit" id="delete-button" class="delete-button">削除する</button>
                         <button type="button" onclick="closeDeleteModal()">キャンセル</button>
                     </form>
                 </div>
