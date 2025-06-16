@@ -91,6 +91,7 @@
     }
 </style>
 
+<div class="form-wrapper">
     <h2>うちの子の情報変更</h2>
 
         <form action="{% url 'edit_dog' dog.id %}" method="POST" enctype="multipart/form-data">
@@ -119,63 +120,68 @@
                 </div>
             </div><br>
             
-            <button type="submit">修正する</button><br><br>
+            <div class="button-wrapper">
+                <button type="submit">修正する</button><br><br>
+            </div>
 
-            <button type="button" id="openDeleteModal" class="delete-button">うちの子を削除する</button>
+            <div class="button-wrapper">
+                <button type="button" id="openDeleteModal" class="delete-button">うちの子を削除する</button>
+            </div>
 
         </form> 
             
-            <div id="deleteModal" class="modal">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
-                    <p id="delete-confirm-text">うちの子（{{ dog.dog_name }}）を削除しますか？</p>
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
+                <p id="delete-confirm-text">うちの子（{{ dog.dog_name }}）を削除しますか？</p>
                     
-                    <form method="POST" action="{% url 'delete_dog' dog.id %}">
-                        {% csrf_token %}
-                        <button type="submit" id="delete-button" class="delete-button">削除する</button>
-                        <button type="button" onclick="closeDeleteModal()">キャンセル</button>
-                    </form>
-                </div>
+                <form method="POST" action="{% url 'delete_dog' dog.id %}">
+                    {% csrf_token %}
+                    <button type="submit" id="delete-button" class="delete-button">削除する</button>
+                    <button type="button" onclick="closeDeleteModal()">キャンセル</button>
+                </form>
             </div>
+        </div>
 
-            <a href="{% url 'dog_detail' dog.id %}">
-                <button type="button">キャンセル</button>
-            </a>
+        <div class="button-wrapper">
+            <a href="{% url 'dog_detail' dog.id %}" class="cancel-link">キャンセルして戻る</a>
+        </div>
+</div>
 
-        <script>
-            function openDeleteModal() {
-                document.getElementById('deleteModal').style.display = "flex";
+    <script>
+        function openDeleteModal() {
+            document.getElementById('deleteModal').style.display = "flex";
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = "none";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButton = document.getElementById('openDeleteModal');
+            const modal = document.getElementById('deleteModal');
+            const deleteForm = modal.querySelector('form');
+
+            if (deleteButton) {
+                deleteButton.onclick = openDeleteModal;
             }
 
-            function closeDeleteModal() {
-                document.getElementById('deleteModal').style.display = "none";
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    closeDeleteModal();
+                }
+            };
+
+            const closeBtn = document.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.onclick = closeDeleteModal;
             }
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const deleteButton = document.getElementById('openDeleteModal');
-                const modal = document.getElementById('deleteModal');
-                const deleteForm = modal.querySelector('form');
-
-                if (deleteButton) {
-                    deleteButton.onclick = openDeleteModal;
-                }
-
-                window.onclick = function (event) {
-                    if (event.target === modal) {
-                        closeDeleteModal();
-                    }
-                };
-
-                const closeBtn = document.querySelector('.close-btn');
-                if (closeBtn) {
-                    closeBtn.onclick = closeDeleteModal;
-                }
-
-                const cancelBtn = modal.querySelector('button[type="button"]:not(.close-btn)');
-                if (cancelBtn) {
-                    cancelBtn.onclick = closeDeleteModal;
-                }
-            });
-        </script>
+            const cancelBtn = modal.querySelector('button[type="button"]:not(.close-btn)');
+            if (cancelBtn) {
+                cancelBtn.onclick = closeDeleteModal;
+            }
+        });
+    </script>
 {% endblock %}
 </html>

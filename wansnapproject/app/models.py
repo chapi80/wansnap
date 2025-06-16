@@ -60,10 +60,13 @@ class Dog(models.Model):
         return f"{self.dog_name}({self.owner.username}のうちの子)"
 
 class Post(models.Model):
-    dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='posts')
+    dog = models.ForeignKey(Dog, null=True, blank=True, on_delete=models.SET_NULL, related_name='posts')
     dog_name = models.CharField(max_length=50, null=True, blank=True)
-    image = models.ImageField(upload_to='post_images/')
-    caption = models.TextField(blank=True)
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+    breed = models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(max_length=10, null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+    caption = models.TextField(null=True, blank=True)
     memo = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
