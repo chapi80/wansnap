@@ -17,9 +17,9 @@
                     class ="post-image"
                     onclick="openModal(this)"
                     data-image="{{ post.image.url }}"
-                    data-name="{{ post.dog.dog_name|default:'' }}"
-                    data-breed="{{ post.dog.breed|default:'' }}"
-                    data-gender="{{ post.dog.gender|default:'' }}"
+                    data-name="{{ post.dog_name|default:'' }}"
+                    data-breed="{{ post.breed|default:'' }}"
+                    data-gender="{{ post.gender|default:'' }}"
                     data-caption="{{ post.caption|default:' (キャプションなし)'|escapejs }}"
                     data-post-id="{{ post.id }}">
             </div>
