@@ -17,46 +17,6 @@ h2 {
     text-align: left;
 }
 
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.form-group input[type="file"],
-.form-group .clearable-file-input {
-    margin-top: 5px;
-}
-
-.form-group .clearable-file-input {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.form-group .clearable-file-input label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-}
-
 .button-wrapper {
     display: flex;
     flex-direction: column;
