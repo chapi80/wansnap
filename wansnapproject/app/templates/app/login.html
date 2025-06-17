@@ -6,45 +6,78 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ログイン画面</title>
         <style>
-            body {
-                margin: 0;
-                font-family: sans-serif;
-                background-color: #f7f7f7;
-            }
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f7f7f7;
+        }
 
-            header {
-                background-color: #a49771;
-                padding: 20px;
-                text-align: left;
-                color: #58827e;
-                font-size: 1em;
-            }
+        header {
+            background-color: #a49771;
+            padding: 20px;
+            text-align: left;
+            color: #58827e;
+        }
 
-            .login-container {
-                max-width: 400px;
-                margin: 50px auto;
-                padding: 30px;
-                background-color: transparent;
-                border-radius: 8px;
-                text-align: center;
-            }
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: transparent;
+        }
 
-            button {
-                padding: 10px 20px;
-                background-color: #4285f4;
-                border: none;
-                color: white;
-                border-radius: 5px;
-                cursor: pointer;
-            }
+        .login-container h2 {
+            text-align: center;
+        }
 
-            button:hover {
-                background-color: white;
-            }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-            a {
-                color: #4285f4;
-            }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285f4;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        .link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .link a {
+            color: #4285f4;
+            text-decoration: underline;
+        }
         </style>
     </head>    
 
@@ -58,7 +91,24 @@
 
             <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
-                {{ login_form.as_p }}
+                
+                <div class="form-group">
+                    {{ login_form.email.label_tag }}<br>
+                    {{ login_form.email }}
+                    {% if login_form.email.errors %}
+                        <p style="color: red;">{{ login_form.email.errors }}</p>
+                    {% endif %}
+                </div>
+                <br>
+
+                <div class="form-group">
+                    {{ login_form.password.label_tag }}<br>
+                    {{ login_form.password }}
+                    {% if login_form.password.errors %}
+                        <p style="color: red;">{{ login_form.password.errors }}</p>
+                    {% endif %}
+                </div>
+                <br>
 
                 {% if login_form.non_field_errors %}
                     <p style="color: red;">{{ login_form.non_field_errors }}</p>
@@ -67,7 +117,9 @@
                 <button type="submit">ログイン</button>
 
                 <br><br>
-                <a href="{% url 'signup' %}">新規アカウント登録</a>
+                <div class="link">
+                    <a href="{% url 'signup' %}">新規アカウント登録</a>
+                </div>
             </form>
         </div>
     </body>
