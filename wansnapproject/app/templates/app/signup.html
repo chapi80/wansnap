@@ -7,10 +7,10 @@
         <title>新規アカウント登録画面</title>
 
         <style>
-            body {
-                margin: 0;
-                font-family: sans-serif;
-                background-color: #f7f7f7;
+           body {
+               margin: 0;
+               font-family: sans-serif;
+               background-color: #f7f7f7;
             }
 
             header {
@@ -22,21 +22,45 @@
             }
 
             .form-container {
-                max-width: 600px;
-                margin: 40px auto;
+                max-width: 400px;
+                margin: 50px auto;
                 padding: 30px;
                 background-color: transparent;
-                border-radius: 8px;
+            }
+
+            .form-container h2,
+            .centered-buttons {
                 text-align: center;
             }
 
             .dog-form {
                 margin-bottom: 30px;
                 padding: 15px;
-                border: none;
                 border-radius: 5px;
-                background-color: #fafafa
+                background-color: transparent;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
                 text-align: left;
+            }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 6px;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group input[type="password"],
+            .form-group input[type="date"],
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
             }
 
             button {
@@ -63,17 +87,39 @@
 
             a {
                 color: #4285f4;
+                text-decoration: underline;
             }
 
-            .form-container label {
-                display: inline-block;        
-                text-align: left;
-                width: 100%;
-                margin-left: 40px;
-                margin-bottom: 4px;
-                font-weight: bold;
+            h5 {
+                margin: 5px 0 20px;
+                color: #666;
+                font-weight: normal;
             }
+
+            .centered-buttons button,
+            .centered-buttons a {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .form-group input[type="radio"] {
+                width: auto;
+                margin-right: 5px;
+            }
+
+            .form-group .radio-group {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .form-group .radio-group label {
+                margin: 0;
+                font-weight: normal;
+            }
+
         </style>
+
     </head>
 
     <body>
@@ -82,7 +128,7 @@
         </header>
 
         <div class="form-container">
-            <h2>新規アカウント登録</h2>
+            <h2 class="centered-buttons">新規アカウント登録</h2>
 
             <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -100,50 +146,73 @@
                     </ul>
                 {% endif %}
             
-                {{ user_form.username.label_tag }}<br>
-                {{ user_form.username }}<br><br>
+                <div class="form-group">
+                    {{ user_form.username.label_tag }}
+                    {{ user_form.username }}
+                </div>
             
                 <div id="dog-forms-container">
                     {{ dog_formset.management_form }}
                     {% for dog_form in dog_formset %}
 
                         <div class="dog-form">
-                            {{ dog_form.dog_name.label_tag }}<br>
-                            {{ dog_form.dog_name }}<br><br>
+                            <div class="form-group">
+                                {{ dog_form.dog_name.label_tag }}
+                                {{ dog_form.dog_name }}
+                            </div>
                     
-                            {{ dog_form.breed.label_tag }}<br>
-                            {{ dog_form.breed }}<br><br>
+                            <div class="form-group">
+                                {{ dog_form.breed.label_tag }}
+                                {{ dog_form.breed }}
+                            </div>
                     
-                            {{ dog_form.gender.label_tag}}<br>
-                            {{ dog_form.gender }}<br><br>
+                            <div class="form-group">
+                                {{ dog_form.gender.label_tag }}
+                                {{ dog_form.gender }}
+                            </div>
                     
-                            {{ dog_form.birthday.label_tag }}<br>
-                            {{ dog_form.birthday }}<br><br>
+                            <div class="form-group">
+                                {{ dog_form.birthday.label_tag }}
+                                {{ dog_form.birthday }}
+                            </div>
 
-                            {{ dog_form.biography.label_tag }}<br>
-                            {{ dog_form.biography }}<br><br>
+                            <div class="form-group">
+                                {{ dog_form.biography.label_tag }}
+                                {{ dog_form.biography }}
+                            </div>
                     
-                            {{ dog_form.dog_image.label_tag }}<br>
-                            {{ dog_form.dog_image }}<br><br>
-
+                            <div class="form-group">
+                                {{ dog_form.dog_image.label_tag }}
+                                {{ dog_form.dog_image }}
+                            </div>
                         </div>
                     {% endfor %}
                 </div><br>
 
-                <button type="button" id="add-dog-button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>           
+                <div class="centered-buttons">
+                    <button type="button" id="add-dog-button" onclick="addDogForm()">+ うちの子を追加する</button><br><br>           
+                </div>
 
-                {{ user_form.email.label_tag }}<br>
-                {{ user_form.email }}<br><br>
+                <div class="form-group">
+                    {{ user_form.email.label_tag }}
+                    {{ user_form.email }}
+                </div>
 
-                {{ user_form.password1.label_tag }}<br>
-                {{ user_form.password1 }}<br>
-                <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
+                <div class="form-group">
+                    {{ user_form.password1.label_tag }}
+                    {{ user_form.password1 }}
+                    <h5>8文字以上の英数字を含むパスワードを設定してください</h5><br><br>
+                </div>
 
-                {{ user_form.password2.label_tag }}<br>
-                {{ user_form.password2 }}<br>
-                <h5>確認のため、同じパスワードを入力してください</h5><br><br>
+                <div class="form-group">
+                    {{ user_form.password2.label_tag }}
+                    {{ user_form.password2 }}
+                    <h5>確認のため、同じパスワードを入力してください</h5><br><br>
+                </div>
 
-                <button type="submit">登録</button>
+                <div class="centered-buttons">
+                    <button type="submit">登録</button>
+                </div>
             
             </form>
 
@@ -171,8 +240,9 @@
                 }    
             </script>
         
-            <br>
-            <a href="{% url 'login' %}">ログイン画面に戻る</a>
+            <div class="centered-buttons">
+                <a href="{% url 'login' %}">ログイン画面に戻る</a>
+            </div>
         </div>
     </body>
 </html>    
