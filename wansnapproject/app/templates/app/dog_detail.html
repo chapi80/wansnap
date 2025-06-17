@@ -163,7 +163,7 @@
                          alt="投稿画像"
                          class="post-image"
                          onclick="openPostDetailModal(this)"
-                         data-image="{{ post.dog_image.url }}"
+                         data-image="{{ post.image.url }}"
                          data-name="{{ post.dog_name }}"
                          data-breed="{{ post.breed }}"
                          data-gender="{{ post.gender }}"
@@ -235,10 +235,10 @@
             
             const memoLabel = document.getElementById('memo-label');
             const memoValue = document.getElementById('modal-memo');
-            if (memo) {
+            if (memo !== null && memo !== undefined) {
                 memoLabel.style.display = "block";
                 memoValue.style.display = "block";
-                memoValue.textContent = memo;
+                memoValue.textContent = memo || '';
             } else {
                 memoLabel.style.display = "none";
                 memoValue.style.display = "none";
