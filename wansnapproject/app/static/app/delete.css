@@ -2,6 +2,99 @@
     display: none;
 }
 
+h2 {
+    text-align: center;
+}
+
+.form-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.form-wrapper form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="file"],
+.form-group .clearable-file-input {
+    margin-top: 5px;
+}
+
+.form-group .clearable-file-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group .clearable-file-input label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submit-button {
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -22,6 +115,7 @@
     max-width: 400px;
     width: 80%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .close-btn {

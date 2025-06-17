@@ -12,24 +12,34 @@
 {% endblock %}
 
 {% block content %}
+<div class="form-wrapper">
     <h2>うちの子投稿編集ページ</h2>
-    
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div id="dog-forms-container">
+                    <div class="dog-form">
+                        {{ edit_post_form.dog.label_tag }}<br>
+                        {{ edit_post_form.dog }}<br><br>
 
-            {{ edit_post_form.dog.label_tag }}<br>
-            {{ edit_post_form.dog }}<br><br>
+                        {{ edit_post_form.image.label_tag }}<br>
+                        {{ edit_post_form.image }}<br><br>
 
-            {{ edit_post_form.image.label_tag }}<br>
-            {{ edit_post_form.image }}<br><br>
+                        {{ edit_post_form.caption.label_tag }}<br>
+                        {{ edit_post_form.caption }}<br><br>
+                    </div>
+                </div><br>
 
-            {{ edit_post_form.caption.label_tag }}<br>
-            {{ edit_post_form.caption }}<br><br>
+                <div class="button-wrapper">
+                    <button type="submit" class="submit-button">登録する</button>
+                </div>
 
-            <button type="submit">登録する</button><br>
-        </form>
+            </form>
 
-        <button type="button" onclick="openDeleteModal()">投稿を削除する</button>
+            <div class="button-wrapper">
+                <button type="button" class="delete-button" onclick="openDeleteModal()">投稿を削除する</button>
+            </div>
 
         <div id="deleteModal" class="modal hidden">
             <div class="modal-content">
