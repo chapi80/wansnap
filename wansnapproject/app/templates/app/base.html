@@ -12,6 +12,23 @@
     <link rel="stylesheet" href="{% static 'app/photo_style.css'%}">
     <link rel="stylesheet" href="{% static 'app/post.css'%}">
 
+    <style>
+        .logout-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .logout-button:hover {
+            background-color: #e53935;
+        }
+
+    </style>
+
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -34,9 +51,9 @@
     </main>
 
     <div id="logoutModal" style="display:none; position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
-        <div style="background:#fff; margin:100px auto; padding:20px; width:300px; text-align:center;">
+        <div id="logoutModalContent" style="background:#fff; margin:100px auto; padding:20px; width:300px; text-align:center;">
             <p>ログアウトしますか？</p>
-            <button onclick="confirmLogout()">ログアウトする</button>
+            <button onclick="confirmLogout()" class="logout-button">ログアウトする</button>
             <button onclick="closeLogoutModal()">キャンセル</button>
         </div>
     </div>

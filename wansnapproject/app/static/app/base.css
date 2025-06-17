@@ -88,3 +88,14 @@ main h2 {
     transform: scale(1.03);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+
+#logoutModalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logoutModalContent button {
+    margin: 8px 0;
+    width: 150px;
+}
