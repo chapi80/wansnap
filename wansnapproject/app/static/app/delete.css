@@ -30,3 +30,29 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-content form button {
+    width: 150px;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content form button[type="submit"] {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.modal-content form button[type="button"] {
+    background-color: #ccc;
+    color: #333;
+}
