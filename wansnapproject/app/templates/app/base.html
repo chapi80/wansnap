@@ -74,6 +74,22 @@
         function confirmLogout() {
             document.getElementById('logout-form').submit();
         }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('logoutModal');
+            const content = document.getElementById('logoutModalContent');
+
+            if (event.target === modal) {
+                closeLogoutModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const content = document.getElementById('logoutModalContent');
+            content.addEventListener('click', function (event) {
+                event.stopPropagation();
+            });
+        });
     </script>
 
     {% block extra_js %}
