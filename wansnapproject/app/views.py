@@ -258,7 +258,13 @@ def create_post_view(request):
         create_post_form = PostForm(request.POST, request.FILES, user=request.user)
         if create_post_form.is_valid():
             post = create_post_form.save(commit=False)
-            post.dog = create_post_form.cleaned_data['dog']
+            dog = create_post_form.cleaned_data['dog']
+            post.dog = dog
+            post.dog_name = dog.dog_name
+            post.breed = dog.breed
+            post.gender = dog.gender
+            post.birthday = dog.birthday
+            
             post.save()
             return redirect('home')
     else:
@@ -276,6 +282,14 @@ def edit_post_view(request, post_id):
         edit_post_form = PostForm(request.POST, request.FILES, instance=post, user=request.user)
         if edit_post_form.is_valid():
             post = edit_post_form.save()
+            dog = edit_post_form.cleaned_data['dog']
+            post.dog = dog
+            post.dog_name = dog.dog_name
+            post.breed = dog.breed
+            post.gender = dog.gender
+            post.birthday = dog.birthday
+            
+            post.save()
             return redirect('mypage')
     else:
         edit_post_form = PostForm(instance=post, user=request.user)
