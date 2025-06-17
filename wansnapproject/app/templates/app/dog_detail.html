@@ -8,7 +8,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'app/base.css' %}">
-<link rel="stylesheet" href="{% static 'app/post.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -68,27 +67,24 @@
                     古い順
                 </label>
             </div>           
-
         </form>
 
         <div class="image-grid">
             {% for post in posts %}
                 <div class="image-card">
-                    <img
-                        src="{{ post.image.url }}"
-                        alt="投稿画像"
-                        class="post-image"
-                        onclick="openPostDetailModal(this)"
-                        data-image="{{ post.dog_image.url }}"
-                        data-name="{{ post.dog_name }}"
-                        data-breed="{{ post.breed }}"
-                        data-gender="{{ post.gender }}"
-                        data-birthday-raw="{{ post.birthday }}"
-                        data-birthday="{{ post.birthday|date:'Y-m-d' }}"
-                        data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
-                        data-post-id="{{ post.id }}"
-                        data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"
-                        
+                    <img src="{{ post.image.url }}"
+                         alt="投稿画像"
+                         class="post-image"
+                         onclick="openPostDetailModal(this)"
+                         data-image="{{ post.dog_image.url }}"
+                         data-name="{{ post.dog_name }}"
+                         data-breed="{{ post.breed }}"
+                         data-gender="{{ post.gender }}"
+                         data-birthday-raw="{{ post.birthday }}"
+                         data-birthday="{{ post.birthday|date:'Y-m-d' }}"
+                         data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
+                         data-post-id="{{ post.id }}"
+                         data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"                       
                         {% if post.is_own %}
                             data-memo="{{ post.memo }}"
                         {% else %}
@@ -106,13 +102,26 @@
                 <span class="close">&times;</span>
                 <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
 
-                <p><strong>うちの子の名前</strong><span id="modal-name"></span></p>
-                <p><strong>犬種</strong><span id="modal-breed"></span></p>
-                <p><strong>性別</strong><span id="modal-gender"></span></p>
-                <p><strong>うちの子からひとこと</strong><span id="modal-caption"></span></p>
-                <p id="memo-line" style="display: none;"><strong>メモ：</strong><span id="modal-memo"></span></p>
-                <button id="favorite-button" data-post-id="">★</button>
-                <button id="modal-edit-button" style="display: none;" onclick="goToEditPage({{ post.id }})">編集する</button>
+                <button id="favorite-button" data-post-id="">☆</button><br>
+
+                <div class="dog-info-box">
+                    <div class="label">うちの子の名前</div>
+                    <div class="value" id="modal-name"></div><br>
+
+                    <div class="label">犬種</div>
+                    <div class="value" id="modal-breed"></div><br>
+
+                    <div class="label">性別</div>
+                    <div class="value" id="modal-gender"></div><br>
+
+                    <div class="label">うちの子からひとこと</div>
+                    <div class="value" id="modal-caption"></div><br>
+
+                    <div class="label" id="memo-label" style="display: none;">メモ</div>
+                    <div class="value" id="modal-memo" style="display: none;"></div><br>
+                </div>
+
+                <button id="modal-edit-button" class="edit-button" style="display: none;">編集する</button>
             </div>
         </div>
 
@@ -132,13 +141,16 @@
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
             document.getElementById('modal-caption').textContent = caption;
-            document.getElementById('modal-memo').textContent = memo;
             
-            const memoLine = document.getElementById('memo-line');
+            const memoLabel = document.getElementById('memo-label');
+            const memoValue = document.getElementById('modal-memo');
             if (memo) {
-                memoLine.style.display = "block";
+                memoLabel.style.display = "block";
+                memoValue.style.display = "block";
+                memoValue.textContent = memo;
             } else {
-                memoLine.style.display = "none";
+                memoLabel.style.display = "none";
+                memoValue.style.display = "none";
             }
 
             const editButton = document.getElementById('modal-edit-button');
@@ -153,7 +165,16 @@
                 editButton.onclick = null;
             }
             
-            document.getElementById('openPostDetailModal').style.display = "flex";
+            document.getElementById('favorite-button').setAttribute('data-post-id', postId);
+
+            fetch(`/is_favorited/?post_id=${postId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const favBtn = document.getElementById('favorite-button');
+                    favBtn.textContent = data.is_favorited ? '★' : '☆';
+                });
+
+            document.getElementById('openPostDetailModal').style.display = "block";   
         }
 
         document.addEventListener('DOMContentLoaded', function (){
@@ -162,14 +183,31 @@
 
             closeBtn.onclick = function () {
                 modal.style.display = "none";
-            }
+            };
 
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
-            }
+            };
+
+            document.getElementById('favorite-button').onclick = function () {
+                const postId = this.getAttribute('data-post-id');
+                fetch(`/toggle_favorite/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `post_id=${postId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.textContent = data.status === 'added' ? '★' : '☆';
+                });
+            };
         });
+
     </script>
 
 {% endblock %}
