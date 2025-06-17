@@ -73,6 +73,16 @@
     background: none;
     border: none;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+#favorite-button.not-favorited {
+    color: black;
+    text-shadow: 0 0 0 black;
+}
+
+#favorite-button.favorited {
+    color: gold;
 }
 
 #modal-edit-button {
@@ -245,14 +255,22 @@
                 editButton.style.display = "none";
                 editButton.onclick = null;
             }
-            
-            document.getElementById('favorite-button').setAttribute('data-post-id', postId);
 
+            const favBtn = document.getElementById('favorite-button');
+            favBtn.setAttribute('data-post-id', postId);
+            
             fetch(`/is_favorited/?post_id=${postId}`)
                 .then(response => response.json())
                 .then(data => {
-                    const favBtn = document.getElementById('favorite-button');
-                    favBtn.textContent = data.is_favorited ? '★' : '☆';
+                    if (data.is_favorited) {
+                    favBtn.textContent = '★';
+                    favBtn.classList.add('favorited');
+                    favBtn.classList.remove('not-favorited');
+                    } else {
+                        favBtn.textContent = '☆';
+                        favBtn.classList.add('not-favorited');
+                        favBtn.classList.remove('favorited');
+                    }
                 });
 
             document.getElementById('openPostDetailModal').style.display = "block";   
@@ -261,6 +279,7 @@
         document.addEventListener('DOMContentLoaded', function (){
             const modal = document.getElementById('openPostDetailModal');
             const closeBtn = modal.querySelector('.close');
+            const favBtn = document.getElementById('favorite-button');
 
             closeBtn.onclick = function () {
                 modal.style.display = "none";
@@ -272,7 +291,7 @@
                 }
             };
 
-            document.getElementById('favorite-button').onclick = function () {
+            favBtn.onclick = function () {
                 const postId = this.getAttribute('data-post-id');
                 fetch(`/toggle_favorite/`, {
                     method: 'POST',
@@ -284,7 +303,15 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    this.textContent = data.status === 'added' ? '★' : '☆';
+                    if (data.status === 'added') {
+                        this.textContent = '★';
+                        this.classList.add('favorited');
+                        this.classList.remove('not-favorited');
+                    } else if (data.status === 'removed') {
+                        this.textContent = '☆';
+                        this.classList.add('not-favorited');
+                        this.classList.remove('favorited');
+                    }
                 });
             };
         });
