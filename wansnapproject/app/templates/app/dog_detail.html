@@ -65,11 +65,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #favorite-button {
-    margin-left: auto;
     font-size: 20px;
     background: none;
     border: none;
@@ -77,9 +76,8 @@
 }
 
 #modal-edit-button {
-    margin: 0 auto;
     padding: 8px 16px;
-    background-color: #a49771;
+    background-color: #4285f4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -181,7 +179,9 @@
                 <span class="close">&times;</span>
                 <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
 
-                <button id="favorite-button" data-post-id="">☆</button><br>
+                <div class="modal-buttons">
+                    <button id="favorite-button" data-post-id="">☆</button><br>
+                </div>
 
                 <div class="dog-info-box">
                     <div class="label">うちの子の名前</div>
@@ -200,7 +200,9 @@
                     <div class="value" id="modal-memo" style="display: none;"></div><br>
                 </div>
 
-                <button id="modal-edit-button" class="edit-button" style="display: none;">編集する</button>
+                <div class="modal-buttons">
+                    <button id="modal-edit-button" class="edit-button" style="display: none;">編集する</button>
+                </div>
             </div>
         </div>
 
