@@ -41,6 +41,14 @@
         h2 {
             text-align: center;
         }
+
+        .cancel-link {
+            color: #4285f4;
+            text-decoration: underline;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
     </style>
     
     <div class="create-post">
@@ -63,6 +71,8 @@
                 <div class="button-wrapper">
                     <button type="submit" class="submit-button">投稿する</button>
                 </div>
-            </form>
+            </form><br>
+
+            <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</a>
     </div>   
 {% endblock %}
