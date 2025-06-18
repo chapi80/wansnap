@@ -178,7 +178,15 @@
             .then(response => response.json())
             .then(data => {
                 const favBtn = document.getElementById('favorite-button');
-                favBtn.textContent = data.is_favorited ? '★':'☆';
+                if (data.is_favorited) {
+                    favBtn.textContent = '★';
+                    favBtn.classList.add('favorited');
+                    favBtn.classList.remove('not-favorited');
+                } else {
+                    favBtn.textContent = '☆';
+                    favBtn.classList.add('not-favorited');
+                    favBtn.classList.remove('favorited');
+                }
             });
 
         document.getElementById('postModal').style.display = "block";
@@ -211,7 +219,15 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    favBtn.textContent = data.status === 'added' ? '★' : '☆';
+                    if (data.status === 'added') {
+                        favBtn.textContent = '★';
+                        favBtn.classList.add('favorited');
+                        favBtn.classList.remove('not-favorited');
+                    } else if (data.status === 'removed') {
+                        favBtn.textContent = '☆';
+                        favBtn.classList.add('not-favorited');
+                        favBtn.classList.remove('favorited');
+                    }
                 });
         };
     });
