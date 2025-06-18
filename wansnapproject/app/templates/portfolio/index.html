@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang='ja'>
 
+{% load static %}
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +18,9 @@
 
     <h2>アプリの画面</h2>
     <div class="screenshot-gallery">
-    
+        <img src="{% static 'images/home.png' %}" alt="ホーム画面" style="width: 100%; max-width: 300px; border-radius: 8px;">
+        <img src="{% static 'images/mypage.png' %}" alt="マイページ画面" style="width: 100%; max-width: 300px; border-radius: 8px;">
+        <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面" style="width: 100%; max-width: 300px; border-radius: 8px;">   
     </div>
 
     <a href="/app/">アプリへ移動</a>
