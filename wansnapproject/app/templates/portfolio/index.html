@@ -3,7 +3,6 @@
 
 {% load static %}
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +11,63 @@
 
 {% block content %}
 
+<style>
+
+.screenshot-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+}
+
+.phone-frame {
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.phone-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.caption {
+    font-size: 14px;
+    color: #666;
+    margin: 8px 0;
+}
+
+</style>
+
+
 <body>
     <h1>ポートフォリオ</h1>
     <p>ワンスナップという、犬専用の写真投稿アプリのご紹介です🐶📷</p>
 
     <h2>アプリの画面</h2>
     <div class="screenshot-gallery">
-        <img src="{% static 'images/home.png' %}" alt="ホーム画面" style="width: 100%; max-width: 300px; border-radius: 8px;">
-        <img src="{% static 'images/mypage.png' %}" alt="マイページ画面" style="width: 100%; max-width: 300px; border-radius: 8px;">
-        <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面" style="width: 100%; max-width: 300px; border-radius: 8px;">   
+
+        <div class="phone-frame">
+            <img src="{% static 'images/home.png' %}" alt="ホーム画面">
+            <p class="caption">ホーム画面</p>
+        </div>
+
+        <div class="phone-frame">
+            <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
+            <p class="caption">マイページ画面</p>
+        </div>
+
+        <div class="phone-frame">
+            <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
+            <p class="caption">うちの子の部屋画面</p>
+        </div>
+
     </div>
 
     <a href="/app/">アプリへ移動</a>
