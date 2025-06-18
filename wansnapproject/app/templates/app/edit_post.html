@@ -44,6 +44,8 @@
                 <button type="button" class="delete-button" onclick="openDeleteModal()">投稿を削除する</button>
             </div>
 
+            <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</a>
+
         <div id="deleteModal" class="modal hidden">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
