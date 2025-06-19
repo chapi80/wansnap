@@ -257,23 +257,23 @@ def create_post_view(request):
     if request.method == 'POST':
         create_post_form = PostForm(request.POST, request.FILES, user=request.user)
         
-        if not request.FILES.get('image'):
-            messages.error(request, '画像が登録されていません')
-            return render(request, 'app/create_post.html', {
-                'create_post_form': create_post_form
-            })
-        
         if create_post_form.is_valid():
-            post = create_post_form.save(commit=False)
-            dog = create_post_form.cleaned_data['dog']
-            post.dog = dog
-            post.dog_name = dog.dog_name
-            post.breed = dog.breed
-            post.gender = dog.gender
-            post.birthday = dog.birthday
-            
-            post.save()
-            return redirect('home')
+            dog = create_post_form.cleaned_data.get('dog')
+
+            if not dog:
+                create_post_form.add_error('dog', 'うちの子を選択してください')
+            elif not request.FILES.get('image'):
+                create_post_form.add_error('image', '画像を選択してください')
+            else:
+                post = create_post_form.save(commit=False)
+                post.dog = dog
+                post.dog_name = dog.dog_name
+                post.breed = dog.breed
+                post.gender = dog.gender
+                post.birthday = dog.birthday
+                post.save()
+                return redirect('home')   
+        
     else:
         create_post_form = PostForm(user=request.user)
     
