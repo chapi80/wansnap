@@ -114,3 +114,13 @@ main h2 {
     width: 150px;
 }
 
+.cancel-button {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 8px 0;
+    width: 150px;
+}
