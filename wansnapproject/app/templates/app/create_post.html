@@ -52,7 +52,16 @@
     </style>
     
     <div class="create-post">
-        <h2>うちの子投稿</h2>       
+        <h2>うちの子投稿</h2>
+            
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
 
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}

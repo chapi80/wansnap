@@ -256,6 +256,13 @@ def edit_user_password_view(request):
 def create_post_view(request):
     if request.method == 'POST':
         create_post_form = PostForm(request.POST, request.FILES, user=request.user)
+        
+        if not request.FILES.get('image'):
+            messages.error(request, '画像が登録されていません')
+            return render(request, 'app/create_post.html', {
+                'create_post_form': create_post_form
+            })
+        
         if create_post_form.is_valid():
             post = create_post_form.save(commit=False)
             dog = create_post_form.cleaned_data['dog']
