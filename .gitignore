@@ -1,6 +1,11 @@
+# Python用
 __pycache__/
 *.py[cod]
-db.sqlite3
-media/
-.venv/
+*.sqlite3
+*.log
+
+# 環境
 .env
+.venv/
+media/
+db.sqlite3
