@@ -159,25 +159,29 @@
         <div class="image-grid">
             {% for post in posts %}
                 <div class="image-card">
-                    <img src="{{ post.image.url }}"
-                         alt="投稿画像"
-                         class="post-image"
-                         onclick="openPostDetailModal(this)"
-                         data-image="{{ post.image.url }}"
-                         data-name="{{ post.dog_name }}"
-                         data-breed="{{ post.breed }}"
-                         data-gender="{{ post.gender }}"
-                         data-birthday-raw="{{ post.birthday }}"
-                         data-birthday="{{ post.birthday|date:'Y-m-d' }}"
-                         data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
-                         data-post-id="{{ post.id }}"
-                         data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"                       
-                        {% if post.is_own %}
-                            data-memo="{{ post.memo }}"
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}"
+                            alt="投稿画像"
+                            class="post-image"
+                            onclick="openPostDetailModal(this)"
+                            data-image="{{ post.image.url }}"
+                            data-name="{{ post.dog_name }}"
+                            data-breed="{{ post.breed }}"
+                            data-gender="{{ post.gender }}"
+                            data-birthday-raw="{{ post.birthday }}"
+                            data-birthday="{{ post.birthday|date:'Y-m-d' }}"
+                            data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
+                            data-post-id="{{ post.id }}"
+                            data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"                       
+                            {% if post.is_own %}
+                                data-memo="{{ post.memo }}"
+                            {% else %}
+                                data-memo=""
+                            {% endif %}
+                        >
                         {% else %}
-                            data-memo=""
+                            <p>画像はありません</p>
                         {% endif %}
-                    >
                 </div>
             {% empty %}
                 <p>まだ投稿がありません</p>
