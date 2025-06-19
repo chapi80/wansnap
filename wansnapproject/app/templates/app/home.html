@@ -47,20 +47,24 @@
     <div class="image-grid">
         {% for post in posts %}
             <div class="image-card">
-                <img src="{{ post.image.url }}"
-                alt="投稿画像"
-                class="post-image"
-                onclick="openModal(this)"
-                data-image="{{ post.image.url }}"
-                data-name="{{ post.dog_name }}"
-                data-breed="{{ post.breed }}"
-                data-gender="{{ post.gender }}"
-                data-birthday-raw="{{ post.birthday }}"
-                data-birthday="{{ post.birthday|date:'Y-m-d' }}"
-                data-age-months="{{ post.dog.age_months}}"
-                data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
-                data-post-id="{{ post.id }}"
-                >
+                {% if post.image %}
+                    <img src="{{ post.image.url }}"
+                    alt="投稿画像"
+                    class="post-image"
+                    onclick="openModal(this)"
+                    data-image="{{ post.image.url }}"
+                    data-name="{{ post.dog_name }}"
+                    data-breed="{{ post.breed }}"
+                    data-gender="{{ post.gender }}"
+                    data-birthday-raw="{{ post.birthday }}"
+                    data-birthday="{{ post.birthday|date:'Y-m-d' }}"
+                    data-age-months="{{ post.dog.age_months}}"
+                    data-caption="{{ post.caption|default:' (キャプションなし) '|escapejs }}"
+                    data-post-id="{{ post.id }}"
+                    >
+                {% else %}
+                    <p>画像がありません</p>
+                {% endif %}
             </div>
         {% empty %}
             <p>まだ投稿がありません</p>
