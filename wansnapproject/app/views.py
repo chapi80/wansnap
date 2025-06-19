@@ -230,8 +230,9 @@ def edit_user_email_view(request):
         email_form = EmailChangeForm(request.POST, instance=request.user)
         if email_form.is_valid():
             email_form.save()
-            messages.success(request, 'メールアドレスを変更しました。')
+            messages.success(request, 'メールアドレスを変更しました')
             return redirect('mypage')
+
     else:
         email_form = EmailChangeForm(instance=request.user)
     return render(request, 'app/edit_user_email.html',{

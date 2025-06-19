@@ -66,8 +66,8 @@
 
                 <div id="user-forms-container">
                         <div class="user-form">
-                            {{ user_form.email.label_tag }}<br>
-                            {{ user_form.email }}<br><br>
+                            <label for="id_email">メールアドレス</label><br>
+                            <input type="email" name="email" id="id_email" value="{{ user_form.email.value|default_if_none:'' }}"><br><br>      
                         </div>
                 </div><br>
                 
