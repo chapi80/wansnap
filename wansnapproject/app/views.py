@@ -217,6 +217,7 @@ def edit_dog_view(request, dog_id):
         dog_form = DogForm(request.POST, request.FILES, instance=dog)
         if dog_form.is_valid():
             dog_form.save()
+            messages.success(request, f'{dog.dog_name}の情報を変更しました')
             return redirect('dog_detail', dog_id=dog.id)
     else:
         dog_form = DogForm(instance=dog)
@@ -285,11 +286,16 @@ def create_post_view(request):
 @login_required
 def edit_post_view(request, post_id):
     post = get_object_or_404(Post, id=post_id, dog__owner=request.user)
+    original_image = post.image
     
     if request.method == 'POST':
         edit_post_form = PostForm(request.POST, request.FILES, instance=post, user=request.user)
         if edit_post_form.is_valid():
-            post = edit_post_form.save()
+            post = edit_post_form.save(commit=False)
+            
+            if not post.image:
+                post.image = original_image
+            
             dog = edit_post_form.cleaned_data['dog']
             post.dog = dog
             post.dog_name = dog.dog_name

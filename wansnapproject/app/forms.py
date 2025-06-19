@@ -83,3 +83,5 @@ class PostForm(forms.ModelForm):
         super().__init__(*args,**kwargs)
         if user is not None:
             self.fields['dog'].queryset = Dog.objects.filter(owner=user)
+        
+        self.fields['image'].required = False
