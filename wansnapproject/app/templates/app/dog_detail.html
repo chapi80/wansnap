@@ -93,12 +93,53 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+#popup-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.popup {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeout 5s forwards;
+}
+
+.popup.success {
+    background-color: #b2a017;
+    color: black;
+}
+
+.popup.error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeout {
+    0% { opacity: 1;}
+    80% {opacity: 1;}
+    100% {opacity: 0; display: none;}
+}
+
 </style>
 
 {% endblock %}
 
 {% block content %}
     <h2>{{ dog.dog_name }}の部屋</h2>
+
+        {% if messages %}
+            <div id="popup-message">
+                {% for message in messages %}
+                    <div class="popup {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
     
         {% if dog.dog_image and dog.dog_image.name %}
             <div class="dog-detail-container">

@@ -298,6 +298,7 @@ def edit_post_view(request, post_id):
             post.birthday = dog.birthday
             
             post.save()
+            messages.success(request, '投稿を変更しました')
             return redirect('mypage')
     else:
         edit_post_form = PostForm(instance=post, user=request.user)
@@ -314,6 +315,7 @@ def delete_post_view(request, post_id):
     if request.method == 'POST':
         dog_id = post.dog.id
         post.delete()
+        messages.success(request, '投稿を削除しました')
         return redirect('dog_detail', dog_id=dog_id)
     
     return redirect('edit_post', post_id=post_id)
@@ -332,7 +334,7 @@ def delete_dog_view(request, dog_id):
             post.save()
                 
         dog.delete()
-            
+        messages.success(request, f'{dog.dog_name}の情報を削除しました')    
         return redirect('mypage')
     
     return redirect('mypage')
