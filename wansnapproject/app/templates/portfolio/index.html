@@ -20,6 +20,19 @@
     padding: 20px;
 }
 
+.horizontal-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 16px;
+}
+
+.phone-frame {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+}
+
 .phone-frame {
     width: 220px;
     border: 1px solid #ccc;
@@ -75,22 +88,24 @@ body {
 
     <h2>🐾 アプリの画面 🐾</h2>
     <div class="screenshot-gallery">
+        <div class="horizontal-scroll">
 
-        <div class="phone-frame">
-            <img src="{% static 'images/home.png' %}" alt="ホーム画面">
-            <p class="caption">ホーム画面</p>
+            <div class="phone-frame">
+                <img src="{% static 'images/home.png' %}" alt="ホーム画面">
+                <p class="caption">ホーム画面</p>
+            </div>
+
+            <div class="phone-frame">
+                <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
+                <p class="caption">マイページ画面</p>
+            </div>
+
+            <div class="phone-frame">
+                <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
+                <p class="caption">うちの子の部屋画面</p>
+            </div>
+
         </div>
-
-        <div class="phone-frame">
-            <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
-            <p class="caption">マイページ画面</p>
-        </div>
-
-        <div class="phone-frame">
-            <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
-            <p class="caption">うちの子の部屋画面</p>
-        </div>
-
     </div>
 
     <a href="https://drive.google.com/file/d/130922_PTro9oAfSemrWg2Sh_BYpuzQQR/view?usp=drive_link" target="_blank" class="doc-link">
