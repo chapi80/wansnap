@@ -20,14 +20,6 @@
     padding: 20px;
 }
 
-.horizontal-scroll {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 16px;
-}
-
 .phone-frame {
     scroll-snap-align: start;
     flex: 0 0 auto;
@@ -75,6 +67,53 @@ body {
     background-color: #fffaf0;
 }
 
+.slider {
+  width: 80%;
+  max-width: 800px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+.navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation button {
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.navigation button:hover {
+  background-color: rgba(0,0,0,0.7);
+}
 </style>
 
 <body class="text-center">
@@ -88,21 +127,28 @@ body {
 
     <h2>🐾 アプリの画面 🐾</h2>
     <div class="screenshot-gallery">
-        <div class="horizontal-scroll">
+        <div class="slider">
 
-            <div class="phone-frame">
-                <img src="{% static 'images/home.png' %}" alt="ホーム画面">
-                <p class="caption">ホーム画面</p>
+            <div class="slides">
+                <div class="phone-frame">
+                    <img src="{% static 'images/home.png' %}" alt="ホーム画面">
+                    <p class="caption">ホーム画面</p>
+                </div>
+
+                <div class="phone-frame">
+                    <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
+                    <p class="caption">マイページ画面</p>
+                </div>
+
+                <div class="phone-frame">
+                    <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
+                    <p class="caption">うちの子の部屋画面</p>
+                </div>
             </div>
 
-            <div class="phone-frame">
-                <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
-                <p class="caption">マイページ画面</p>
-            </div>
-
-            <div class="phone-frame">
-                <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
-                <p class="caption">うちの子の部屋画面</p>
+            <div class="slides">
+                <button class="prev">Prev</button>
+                <button class="next">Next</button>
             </div>
 
         </div>
@@ -126,6 +172,34 @@ body {
 
 
     <a href="{% url 'login' %}" class="app-button">アプリへ移動</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slidesContainer = document.querySelector('.slides');
+            const slideElements  = document.querySelectorAll('.slide');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                slidesContainer.style.transform = `translateX(${-index * 100}%)`;
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex === 0) ? slideElements.length - 1 : currentIndex - 1;
+                showSlide(currentIndex);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex === slideElements.length - 1) ? 0 : currentIndex + 1;
+                showSlide(currentIndex);
+            }
+
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+
+        });
+    </script>
 </body>
 
 {% endblock %}
