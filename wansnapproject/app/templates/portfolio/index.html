@@ -20,31 +20,10 @@
     padding: 20px;
 }
 
-.phone-frame {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
-}
-
-.phone-frame {
-    width: 220px;
-    border: 1px solid #ccc;
-    border-radius: 24px;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.phone-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
 .caption {
     font-size: 14px;
     color: #666;
-    margin: 8px 0;
+    margin: 8px;
 }
 
 .text-center {
@@ -68,51 +47,57 @@ body {
 }
 
 .slider {
-  width: 80%;
-  max-width: 800px;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+    border: none;
 }
 
 .slides {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slide {
-  min-width: 100%;
-  box-sizing: border-box;
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
 
 .slide img {
-  width: 100%;
-  display: block;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    display: block;
+    margin: 0 auto;
 }
 
 .navigation {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 12px;
 }
 
 .navigation button {
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .navigation button:hover {
-  background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.7);
 }
 </style>
 
@@ -128,29 +113,27 @@ body {
     <h2>🐾 アプリの画面 🐾</h2>
     <div class="screenshot-gallery">
         <div class="slider">
-
             <div class="slides">
-                <div class="phone-frame">
+                <div class="slide">
                     <img src="{% static 'images/home.png' %}" alt="ホーム画面">
                     <p class="caption">ホーム画面</p>
                 </div>
 
-                <div class="phone-frame">
+                <div class="slide">
                     <img src="{% static 'images/mypage.png' %}" alt="マイページ画面">
                     <p class="caption">マイページ画面</p>
                 </div>
 
-                <div class="phone-frame">
+                <div class="slide">
                     <img src="{% static 'images/detail.png' %}" alt="うちの子の部屋画面">
                     <p class="caption">うちの子の部屋画面</p>
                 </div>
             </div>
 
-            <div class="slides">
-                <button class="prev">Prev</button>
-                <button class="next">Next</button>
+            <div class="navigation">
+                <button class="prev">👈</button>
+                <button class="next">👉</button>
             </div>
-
         </div>
     </div>
 
