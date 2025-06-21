@@ -56,6 +56,10 @@ class DogForm(forms.ModelForm):
             'biography':'うちの子からひとこと',
             'dog_image':'マイページ用写真',
         }
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['dog_image'].widget.attrs.update({'class': 'file-input'})
  
 DogFormSet = modelformset_factory(Dog, form=DogForm, extra=1, can_delete=False)       
        
