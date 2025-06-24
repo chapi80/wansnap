@@ -61,6 +61,7 @@
                     data-age-months="{{ post.dog.age_months}}"
                     data-caption="{{ post.caption|default:''|escape }}"
                     data-post-id="{{ post.id }}"
+                    data-is-favorited="{% if post.is_favorited %}true{% else %}false{% endif %}"
                     >
                 {% else %}
                     <p>画像がありません</p>
@@ -154,21 +155,19 @@
 
             document.getElementById('favorite-button').setAttribute('data-post-id', postId);
 
-            fetch("{% url 'toggle_favorite' %}?post_id=" + postId)
-                .then(response => response.json())
-                .then(data => {
-                    const favBtn = document.getElementById('favorite-button');
-                    if (data.is_favorited) {
-                        favBtn.textContent = '★';
-                        favBtn.classList.add('favorited');
-                        favBtn.classList.remove('not-favorited');
-                    } else {
-                        favBtn.textContent = '☆';
-                        favBtn.classList.add('not-favorited');
-                        favBtn.classList.remove('favorited');
-                    }
-                });
-            
+            const isFavorited = imgElement.getAttribute('data-is-favorited') === 'true';
+            const favBtn = document.getElementById('favorite-button');
+            if (isFavorited) {
+                favBtn.textContent = '★';
+                favBtn.classList.add('favorited');
+                favBtn.classList.remove('not-favorited');
+            } else {
+                favBtn.textContent = '☆';
+                favBtn.classList.add('not-favorited');
+                favBtn.classList.remove('favorited');
+            }
+
+            document.getElementById('favorite-button').setAttribute('data-post-id', postId);
             document.getElementById('postModal').style.display = "block";
         }
 
@@ -203,10 +202,12 @@
                         favBtn.textContent = '★';
                         favBtn.classList.add('favorited');
                         favBtn.classList.remove('not-favorited');
+                        document.querySelector(`img[data-post-id="${postId}"]`)?.setAttribute('data-is-favorited', 'true');
                     } else if (data.status === 'removed') {
                         favBtn.textContent = '☆';
                         favBtn.classList.add('not-favorited');
                         favBtn.classList.remove('favorited');
+                        document.querySelector(`img[data-post-id="${postId}"]`)?.setAttribute('data-is-favorited', 'false');
                     }
                 });
             };

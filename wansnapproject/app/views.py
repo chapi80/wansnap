@@ -100,6 +100,9 @@ def home_view(request):
     else:
         posts = sorted(posts, key=lambda x: x.created_at, reverse=True)
         
+    for post in posts:
+        post.is_favorited = Favorite.objects.filter(user=request.user, post=post).exists()
+        
     context = {
         'posts': posts,
         'query': query,
