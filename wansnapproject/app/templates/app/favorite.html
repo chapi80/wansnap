@@ -184,7 +184,7 @@
 
         document.getElementById('favorite-button').setAttribute('data-post-id', postId);
 
-        fetch(`/is_favorited/?post_id=${postId}`)
+        fetch("{% url 'toggle_favorite' %}?post_id=" + postId)
             .then(response => response.json())
             .then(data => {
                 const favBtn = document.getElementById('favorite-button');
@@ -219,7 +219,7 @@
         
         favBtn.onclick = function() {
             const postId = this.getAttribute('data-post-id');
-            fetch(`/toggle_favorite/`, {
+            fetch("{% url 'toggle_favorite' %}", {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': '{{ csrf_token }}',
