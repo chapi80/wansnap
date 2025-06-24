@@ -6,51 +6,6 @@
 {% block title %}お気に入り一覧画面 - ワンスナップ{% endblock %}
 
 {% block content %}
-    <h2>お気に入り一覧</h2>
-  
-{% if favorites %}
-    <div class="image-grid">
-        {% for post in favorites %}
-            <div class="image-card">
-                <img src="{{ post.image.url }}"
-                    alt="お気に入り画像"
-                    class ="post-image"
-                    onclick="openModal(this)"
-                    data-image="{{ post.image.url }}"
-                    data-name="{{ post.dog_name|default:'' }}"
-                    data-breed="{{ post.breed|default:'' }}"
-                    data-gender="{{ post.gender|default:'' }}"
-                    data-caption="{{ post.caption|default:' (キャプションなし)'|escapejs }}"
-                    data-post-id="{{ post.id }}">
-            </div>
-        {% endfor %}
-    </div>
-{% else %}
-    <p>まだお気に入りが登録されていません</p>
-{% endif %}
-
-<div id="postModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
-
-        <button id="favorite-button" data-post-id="">☆</button><br>
-
-        <div class="dog-info-box">
-            <div class="label">うちの子の名前</div>
-            <div class="value" id="modal-name"></div><br>
-
-            <div class="label">犬種</div>
-            <div class="value" id="modal-breed"></div><br>
-
-            <div class="label">性別</div>
-            <div class="value" id="modal-gender"></div><br>
-
-            <div class="label">うちの子からひとこと</div>
-            <div class="value" id="modal-caption"></div><br>
-        </div>
-    </div>
-</div>
 
 <style>
     .image-grid {
@@ -157,6 +112,55 @@
     }
 
 </style>
+
+<h2>お気に入り一覧</h2>
+  
+{% if favorites %}
+    <div class="image-grid">
+        {% for post in favorites %}
+            <div class="image-card">
+                <img src="{{ post.image.url }}"
+                    alt="お気に入り画像"
+                    class ="post-image"
+                    onclick="openModal(this)"
+                    data-image="{{ post.image.url }}"
+                    data-name="{{ post.dog_name|default:'' }}"
+                    data-breed="{{ post.breed|default:'' }}"
+                    data-gender="{{ post.gender|default:'' }}"
+                    data-caption="{{ post.caption|default:' (キャプションなし)'|escapejs }}"
+                    data-post-id="{{ post.id }}">
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>まだお気に入りが登録されていません</p>
+{% endif %}
+
+<div id="postModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
+
+        <button id="favorite-button" data-post-id="">☆</button><br>
+
+        <div class="dog-info-box">
+            <div class="label">うちの子の名前</div>
+            <div class="value" id="modal-name"></div><br>
+
+            <div class="label">犬種</div>
+            <div class="value" id="modal-breed"></div><br>
+
+            <div class="label">性別</div>
+            <div class="value" id="modal-gender"></div><br>
+
+            <div class="label">うちの子からひとこと</div>
+            <div class="value" id="modal-caption"></div><br>
+        </div>
+    </div>
+</div>
+
+
+
 
 {% block extra_js %}
 <script>

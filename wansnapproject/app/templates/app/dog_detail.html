@@ -279,10 +279,11 @@
             
             const memoLabel = document.getElementById('memo-label');
             const memoValue = document.getElementById('modal-memo');
-            if (memo !== null && memo !== undefined) {
+            if (memo !== null && memo !== undefined && memo.trim() !== '') {
                 memoLabel.style.display = "block";
                 memoValue.style.display = "block";
-                memoValue.textContent = memo || '';
+                const escapedMemo = escapeHtml(memo).replace(/\n/g, '<br>');
+                memoValue.innerHTML = escapedMemo;
             } else {
                 memoLabel.style.display = "none";
                 memoValue.style.display = "none";
