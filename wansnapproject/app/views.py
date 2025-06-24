@@ -140,6 +140,7 @@ def dog_detail_view(request, dog_id):
     
     for post in posts:
         post.is_own = (post.dog.owner == request.user)
+        post.is_favorited = Favorite.objects.filter(user=request.user, post=post).exists()
         
     if dog.birthday:
         today = date.today()

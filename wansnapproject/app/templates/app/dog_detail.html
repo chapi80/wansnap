@@ -210,7 +210,8 @@
                             data-birthday="{{ post.birthday|date:'Y-m-d' }}"
                             data-caption="{{ post.caption|default:''|escape }}"
                             data-post-id="{{ post.id }}"
-                            data-is-own="{% if post.is_own %}true{% else %}false{% endif %}"                       
+                            data-is-own="{% if post.is_own %}true{% else %}false{% endif %}" 
+                            data-is-favorited="{% if post.is_favorited %}true{% else %}false{% endif %}"                      
                             {% if post.is_own %}
                                 data-memo="{{ post.memo }}"
                             {% else %}
@@ -269,6 +270,19 @@
             const memo = imgElement.getAttribute('data-memo');
             const isOwn = imgElement.getAttribute('data-is-own') === 'true';
             const postId = imgElement.getAttribute('data-post-id');
+            const isFavorited = imgElement.getAttribute('data-is-favorited') === 'true';
+            const favBtn = document.getElementById('favorite-button');
+            
+            favBtn.setAttribute('data-post-id', postId);
+            if (isFavorited) {
+                favBtn.textContent = '★';
+                favBtn.classList.add('favorited');
+                favBtn.classList.remove('not-favorited');
+            } else {
+                favBtn.textContent = '☆';
+                favBtn.classList.add('not-favorited');
+                favBtn.classList.remove('favorited');
+            }
 
             document.getElementById('modal-image').src = image;
             document.getElementById('modal-name').textContent = name;
@@ -301,23 +315,6 @@
                 editButton.style.display = "none";
                 editButton.onclick = null;
             }
-
-            const favBtn = document.getElementById('favorite-button');
-            favBtn.setAttribute('data-post-id', postId);
-            
-            fetch("{% url 'toggle_favorite' %}?post_id=" + postId)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.is_favorited) {
-                    favBtn.textContent = '★';
-                    favBtn.classList.add('favorited');
-                    favBtn.classList.remove('not-favorited');
-                    } else {
-                        favBtn.textContent = '☆';
-                        favBtn.classList.add('not-favorited');
-                        favBtn.classList.remove('favorited');
-                    }
-                });
 
             document.getElementById('openPostDetailModal').style.display = "block";   
         }
