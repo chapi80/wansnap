@@ -130,7 +130,8 @@
                     data-birthday-raw="{{ post.birthday }}"
                     data-birthday="{{ post.birthday|date:'Y-m-d' }}"
                     data-caption="{{ post.caption|default:''|escape }}"
-                    data-post-id="{{ post.id }}">
+                    data-post-id="{{ post.id }}"
+                    data-is-favorited="{% if post.is_favorited %}true{% else %}false{% endif %}">
             </div>
         {% endfor %}
     </div>
@@ -182,23 +183,19 @@
         const escapedCaption = escapeHtml(caption).replace(/\n/g, '<br>');
         document.getElementById('modal-caption').innerHTML = escapedCaption;
 
+        const isFavorited = imgElement.getAttribute('data-is-favorited') === 'true';
+        const favBtn = document.getElementById('favorite-button');
+        if (isFavorited) {
+            favBtn.textContent = '★';
+            favBtn.classList.add('favorited');
+            favBtn.classList.remove('not-favorited');
+        } else {
+            favBtn.textContent = '☆';
+            favBtn.classList.add('not-favorited');
+            favBtn.classList.remove('favorited');
+        }
+
         document.getElementById('favorite-button').setAttribute('data-post-id', postId);
-
-        fetch("{% url 'toggle_favorite' %}?post_id=" + postId)
-            .then(response => response.json())
-            .then(data => {
-                const favBtn = document.getElementById('favorite-button');
-                if (data.is_favorited) {
-                    favBtn.textContent = '★';
-                    favBtn.classList.add('favorited');
-                    favBtn.classList.remove('not-favorited');
-                } else {
-                    favBtn.textContent = '☆';
-                    favBtn.classList.add('not-favorited');
-                    favBtn.classList.remove('favorited');
-                }
-            });
-
         document.getElementById('postModal').style.display = "block";
     }
 

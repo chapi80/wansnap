@@ -166,6 +166,10 @@ def dog_detail_view(request, dog_id):
 @login_required
 def favorite_list_view(request):
     favorite_posts = Post.objects.filter(favorites__user=request.user).order_by('-created_at')
+    
+    for post in favorite_posts:
+        post.is_favorited = True
+    
     return render(request, 'app/favorite.html', {'favorites':favorite_posts})
 
 @login_required
