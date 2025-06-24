@@ -294,7 +294,8 @@
                 editButton.style.display = "inline-block";
                 editButton.onclick = function() {
                     document.getElementById('openPostDetailModal').style.display = "none"
-                    window.location.href = `/edit_post/${postId}/`;
+                    const editUrl = "{% url 'edit_post' 0 %}".replace("0", postId);
+                    window.location.href = editUrl;
                 };    
             } else {
                 editButton.style.display = "none";
