@@ -29,24 +29,21 @@
 
         .cancel-link {
             color: #4285f4;
-            text-decoration: none;
-            margin-left: 10px;
+            text-decoration: underline;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
         }
 
         .cancel-link:hover {
             text-decoration: underline;
         }
 
-        .cancel-link {
-            color: #4285f4;
-            text-decoration: underline;
-        }
-
         .form-wrapper {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
+            max-width: 400px;
+            margin: 60px auto 50px;
+            padding: 30px;
+            background-color: transparent;
         }
 
         .form-wrapper form {
@@ -55,7 +52,27 @@
 
         h2 {
             text-align: center;
+            margin-top: 0;
         }
+
+        .user-form {
+        margin-bottom: 20px;
+    }
+
+    .user-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .user-form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
     </style>
 
     <div class="form-wrapper">
