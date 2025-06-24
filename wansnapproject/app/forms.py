@@ -45,7 +45,7 @@ class DogForm(forms.ModelForm):
       
     class Meta:
         model = Dog
-        fields = ['dog_name', 'breed', 'birthday', 'gender', 'biography', 'dog_image']
+        fields = ['dog_name', 'breed', 'birthday', 'gender', 'dog_image']
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
         }
@@ -53,7 +53,6 @@ class DogForm(forms.ModelForm):
             'dog_name':'うちの子の名前',
             'breed':'犬種',
             'birthday':'うちの子の誕生日',
-            'biography':'うちの子からひとこと',
             'dog_image':'マイページ用写真',
         }
         

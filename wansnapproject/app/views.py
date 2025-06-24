@@ -152,7 +152,6 @@ def dog_detail_view(request, dog_id):
     dog_breed = dog.breed
     dog_gender = dog.gender
     dog_birthday = dog.birthday
-    dog_biography = dog.biography
     
     return render(request, 'app/dog_detail.html', {
         'dog':dog,
@@ -160,7 +159,6 @@ def dog_detail_view(request, dog_id):
         'dog_breed':dog_breed,
         'dog_gender':dog_gender,
         'dog_birthday':dog_birthday,
-        'dog_biography':dog_biography,
         'dog_age_months':age_display,       
         'request':request,
     })
