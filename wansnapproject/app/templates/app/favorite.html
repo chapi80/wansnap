@@ -124,10 +124,12 @@
                     class ="post-image"
                     onclick="openModal(this)"
                     data-image="{{ post.image.url }}"
-                    data-name="{{ post.dog_name|default:'' }}"
-                    data-breed="{{ post.breed|default:'' }}"
-                    data-gender="{{ post.gender|default:'' }}"
-                    data-caption="{{ post.caption|default:' (キャプションなし)'|escapejs }}"
+                    data-name="{{ post.dog_name }}"
+                    data-breed="{{ post.breed }}"
+                    data-gender="{{ post.gender }}"
+                    data-birthday-raw="{{ post.birthday }}"
+                    data-birthday="{{ post.birthday|date:'Y-m-d' }}"
+                    data-caption="{{ post.caption|default:''|escape }}"
                     data-post-id="{{ post.id }}">
             </div>
         {% endfor %}
@@ -175,7 +177,11 @@
         document.getElementById('modal-name').textContent = imgElement.getAttribute('data-name');
         document.getElementById('modal-breed').textContent = imgElement.getAttribute('data-breed');
         document.getElementById('modal-gender').textContent = imgElement.getAttribute('data-gender');
-        document.getElementById('modal-caption').textContent = imgElement.getAttribute('data-caption');
+        
+        const caption = imgElement.getAttribute('data-caption') || '';
+        const escapedCaption = escapeHtml(caption).replace(/\n/g, '<br>');
+        document.getElementById('modal-caption').innerHTML = escapedCaption;
+
         document.getElementById('favorite-button').setAttribute('data-post-id', postId);
 
         fetch(`/is_favorited/?post_id=${postId}`)
@@ -235,6 +241,13 @@
                 });
         };
     });
+
+    function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+    }
+
 </script>
 {% endblock %}
 
