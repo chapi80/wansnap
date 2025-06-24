@@ -114,7 +114,6 @@
             const birthday = imgElement.getAttribute('data-birthday');
             const caption = imgElement.getAttribute('data-caption') || '';
             const escapedCaption = escapeHtml(caption).replace(/\n/g, '<br>');
-            document.getElementById('modal-caption').innerHTML = escapedCaption;
             const postId = imgElement.getAttribute('data-post-id');
 
             document.getElementById('modal-image').src = image;
@@ -122,6 +121,7 @@
             document.getElementById('modal-breed').textContent = breed;
             document.getElementById('modal-gender').textContent = gender;
             document.getElementById('modal-birthday').textContent = birthdayRaw;
+            document.getElementById('modal-caption').innerHTML = escapedCaption;
             
 
             if (birthday) {
