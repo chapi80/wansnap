@@ -88,3 +88,4 @@ class PostForm(forms.ModelForm):
             self.fields['dog'].queryset = Dog.objects.filter(owner=user)
         
         self.fields['image'].required = False
+        self.fields['image'].widget.attrs.update({'class': 'file-input'})

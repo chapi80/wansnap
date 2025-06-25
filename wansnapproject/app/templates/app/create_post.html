@@ -69,6 +69,36 @@
             font-weight: bold;
             margin-bottom: 6px;
         }
+
+        .file-label {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #ccc;
+            color: #333;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+            text-align: center;
+            max-width: 100%;
+            width: fit-content;
+            margin: 10px auto 0;
+        }
+
+        .file-label:hover {
+            background-color: #bbb;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-wrapper {
+            display: block;
+            text-align: center;
+        }
+
     </style>
     
     <div class="create-post">
@@ -82,10 +112,13 @@
                     <span style="color:red">{{ error }}</span><br>
                 {% endfor %}
 
-                {{ create_post_form.image.label_tag }}<br>
-                {{ create_post_form.image }}<br><br>
+                {{ create_post_form.image.label_tag }}
+                <div class="file-wrapper">
+                <label for="{{ create_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
+                    {{ create_post_form.image }}
+                </div>
                 {% for error in create_post_form.image.errors %}
-                     <span style="color:red">{{ error }}</span><br>
+                    <span style="color:red">{{ error }}</span><br>
                 {% endfor %}
 
                 {{ create_post_form.caption.label_tag }}<br>
