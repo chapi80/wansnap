@@ -9,10 +9,10 @@
 
 <style>
     .form-wrapper {
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
+        max-width: 400px;
+        margin: 60px auto 50px;
+        padding: 30px;
+        background-color: transparent;
     }
 
     .form-wrapper form {
@@ -21,6 +21,7 @@
 
     h2 {
         text-align: center;
+        margin-top: 0;
     }
 
     .button-wrapper {
@@ -68,7 +69,7 @@
     }
 
     .cancel-link:hover {
-        background-color: #e6f0ff;
+        text-decoration: underline;
     }
 
     .modal-content {
@@ -95,6 +96,26 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .dog-form input[type="text"],
+    .dog-form input[type="email"],
+    .dog-form input[type="password"],
+    .dog-form input[type="date"],
+    .dog-form select,
+    .dog-form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .dog-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
     }
 
 </style>
@@ -126,7 +147,7 @@
             </div><br>
             
             <div class="button-wrapper">
-                <button type="submit" class="submit-button">保存する</button><br><br>
+                <button type="submit" class="submit-button">保存する</button><br>
             </div>
 
             <div class="button-wrapper">
