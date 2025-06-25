@@ -28,16 +28,15 @@
 
                             <div class="file-wrapper">
                                 <label for="{{ edit_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
-                                <input type="file" name="{{ edit_post_form.image.name }}" id="{{ edit_post_form.image.id_for_label }}" class="file-input">
+                                {{ edit_post_form.image }}
                             </div>
 
-                            <div class="image-info">
-                                {% if edit_post_form.image.clear_checkbox %}
-                                    <div class="clear-checkbox">
-                                        {{ edit_post_form.image.clear_checkbox }} {{ edit_post_form.image.clear_checkbox.label_tag }}
-                                    </div>
-                                {% endif %}
-                            </div>
+                            {% if edit_post_form.image.clear_checkbox %}
+                                <div class="clear-checkbox">
+                                    <{{ edit_post_form.image.clear_checkbox }} {{ edit_post_form.image.clear_checkbox.label_tag }}
+                                </div>
+                            {% endif %}
+
                         </div>
 
 
