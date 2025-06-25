@@ -23,8 +23,23 @@
                         {{ edit_post_form.dog.label_tag }}<br>
                         {{ edit_post_form.dog }}<br><br>
 
-                        {{ edit_post_form.image.label_tag }}<br>
-                        {{ edit_post_form.image }}<br><br>
+                        <div class="form-group">
+                            <label class="section-label">写真（変更する場合は再選択）:</label>
+
+                            <div class="file-wrapper">
+                                <label for="{{ edit_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
+                                <input type="file" name="{{ edit_post_form.image.name }}" id="{{ edit_post_form.image.id_for_label }}" class="file-input">
+                            </div>
+
+                            <div class="image-info">
+                                {% if edit_post_form.image.clear_checkbox %}
+                                    <div class="clear-checkbox">
+                                        {{ edit_post_form.image.clear_checkbox }} {{ edit_post_form.image.clear_checkbox.label_tag }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
 
                         {{ edit_post_form.caption.label_tag }}<br>
                         {{ edit_post_form.caption }}<br><br>
