@@ -122,10 +122,10 @@
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 13px;
 }
 
 .search-row button[type="submit"] {
-    height: 40px;
     padding: 0 16px;
     background-color: #58827e;
     color: white;
@@ -133,6 +133,15 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-row input[type="text"],
+.search-row button[type="submit"] {
+    height: 44px;
+    box-sizing: border-box;
 }
 
 .search-row button[type="submit"]:hover {
