@@ -47,7 +47,8 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 150px;
+    width: auto;
+    white-space: nowrap;
     transition: background-color 0.3s ease;
 }
 
@@ -112,15 +113,21 @@ h2 {
 }
 
 .cancel-link {
-        display: inline-block;
-        margin-top: 20px;
-        text-decoration: underline;
-        color: #4285f4;
-        font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: underline;
+    color: #4285f4;
+    font-weight: bold;
+    text-align: center;
     }
 
 .cancel-link:hover {
     background-color: #e6f0ff;
+}
+
+.button-wrapper + .cancel-link {
+    display: block;
+    text-align: center;
 }
 
 .file-label {
