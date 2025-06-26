@@ -26,21 +26,23 @@
 
 .modal-content {
     background-color: #fff;
-    padding: 20px 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
+    margin: 5% auto;
+    padding: 16px;
+    border-radius: 8px;
+    width: 85%;
+    max-width: 420px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .close {
-    position: absolute;
-    right: 15px;
-    top: 10px;
     font-size: 28px;
     font-weight: bold;
-    color: #aaa;
+    color: #333;
+    float: right;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .close:hover {
@@ -68,12 +70,27 @@
     margin-top: 20px;
 }
 
+.favorite-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.edit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 #favorite-button {
-    font-size: 20px;
+    font-size: 32px;
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.3s;
+    padding: 0;
+    text-align: left;
+    display: block;
+    margin: 10px 0 0 0;
 }
 
 #favorite-button.not-favorited {
@@ -230,9 +247,9 @@
         <div id ="openPostDetailModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <img id="modal-image" src="" alt="投稿画像" style="width: 100%;"><br><br>
+                <img id="modal-image" src="" alt="投稿画像" style="width: 100%;">
 
-                <div class="modal-buttons">
+                <div class="modal-buttons favorite-wrapper">
                     <button id="favorite-button" data-post-id="">☆</button><br>
                 </div>
 
@@ -253,7 +270,7 @@
                     <div class="value" id="modal-memo" style="display: none;"></div><br>
                 </div>
 
-                <div class="modal-buttons">
+                <div class="modal-buttons edit-wrapper">
                     <button id="modal-edit-button" class="edit-button" style="display: none;">編集する</button>
                 </div>
             </div>
