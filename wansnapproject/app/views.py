@@ -119,7 +119,6 @@ def mypage_view(request):
 @login_required
 def dog_detail_view(request, dog_id):
     dog = get_object_or_404(Dog, id=dog_id, owner=request.user)
-    posts = Post.objects.filter(dog=dog)
     
     sort_order = request.GET.get('sort','new')
     q = request.GET.get('q')
@@ -164,7 +163,8 @@ def dog_detail_view(request, dog_id):
         'dog_gender':dog_gender,
         'dog_birthday':dog_birthday,
         'dog_age_months':age_display,       
-        'request':request,
+        'sort': sort_order,
+        'query': q,
     })
     
 @login_required

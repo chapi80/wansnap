@@ -253,12 +253,12 @@
 
             <div class="radio-row">
                 <label>
-                    <input type="radio" name="sort" value="new" {% if sort == 'new' or not sort %}checked{% endif %}>
+                    <input type="radio" name="sort" value="new" {% if sort == 'new' or not sort %}checked{% endif %} onchange="this.form.submit();">
                     新しい順
                 </label>
         
                 <label>
-                    <input type="radio" name="sort" value="old" {% if sort == 'old' %}checked{% endif %}>
+                    <input type="radio" name="sort" value="old" {% if sort == 'old' %}checked{% endif %} onchange="this.form.submit();">
                     古い順
                 </label>
             </div>           
