@@ -9,6 +9,45 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'app/base.css' %}">
 <style>
+.search-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.search-row input[type="month"],
+.search-row button[type="submit"] {
+    height: 44px;
+    box-sizing: border-box;
+}
+
+.search-row input[type="month"] {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+}
+
+.search-row button[type="submit"] {
+    padding: 0 16px;
+    background-color: #58827e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-row button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -143,6 +182,20 @@
     100% {opacity: 0; display: none;}
 }
 
+.edit-button {
+    padding: 8px 16px;
+    background-color: #4285f4 !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-button:hover {
+    opacity: 0.9;
+}
+
 </style>
 
 {% endblock %}
@@ -191,7 +244,7 @@
 
         <h2>🐶今までの思い出🐶</h2>
 
-        <form class="search-fome" method="get" action="{% url 'dog_detail' dog.id %}">
+        <form class="search-form" method="get" action="{% url 'dog_detail' dog.id %}">
 
             <div class="search-row">
                 <input type="month" name="q" value="{{ query|default:''}}">
