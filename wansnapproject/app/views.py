@@ -318,6 +318,7 @@ def edit_post_view(request, post_id):
         
     return render(request, 'app/edit_post.html',{
         'edit_post_form':edit_post_form,
+        'post': post,
         'post_id':post.id,
     })
 

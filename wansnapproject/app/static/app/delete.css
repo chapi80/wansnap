@@ -133,6 +133,8 @@ h2 {
     cursor: pointer;
     transition: background-color 0.2s ease;
     text-align: center;
+    width: auto;
+    padding: 6px 12px;
 }
 
 .file-label:hover {
@@ -144,8 +146,8 @@ h2 {
 }
 
 .file-wrapper {
-    position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     margin-top: 10px;
 }
 
@@ -171,8 +173,9 @@ h2 {
 
 .clear-checkbox {
     display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 5px;
+    margin-top: 5px;
 }
 
 .section-label {
@@ -183,14 +186,16 @@ h2 {
 }
 
 .image-info {
+    text-align: center;
     margin-top: 10px;
     font-size: 0.9em;
+    word-break: break-word;
 }
 
 @media (max-width: 480px) {
     .file-label {
         font-size: 14px;
-        width: 100%;
+        width: auto;
     }
     .current-image-info {
         font-size: 13px;
