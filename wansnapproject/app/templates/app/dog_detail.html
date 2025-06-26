@@ -196,6 +196,14 @@
     opacity: 0.9;
 }
 
+.no-posts {
+    text-align: left;
+    padding-left: 16px;
+    margin-bottom: 80px;
+    font-size: 16px;
+}
+
+
 </style>
 
 {% endblock %}
@@ -264,38 +272,40 @@
             </div>           
         </form>
 
-        <div class="image-grid">
-            {% for post in posts %}
-                <div class="image-card">
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}"
-                            alt="投稿画像"
-                            class="post-image"
-                            onclick="openPostDetailModal(this)"
-                            data-image="{{ post.image.url }}"
-                            data-name="{{ post.dog_name }}"
-                            data-breed="{{ post.breed }}"
-                            data-gender="{{ post.gender }}"
-                            data-birthday-raw="{{ post.birthday }}"
-                            data-birthday="{{ post.birthday|date:'Y-m-d' }}"
-                            data-caption="{{ post.caption|default:''|escape }}"
-                            data-post-id="{{ post.id }}"
-                            data-is-own="{% if post.is_own %}true{% else %}false{% endif %}" 
-                            data-is-favorited="{% if post.is_favorited %}true{% else %}false{% endif %}"                      
-                            {% if post.is_own %}
-                                data-memo="{{ post.memo }}"
-                            {% else %}
-                                data-memo=""
-                            {% endif %}
-                        >
+        {% if posts %}
+            <div class="image-grid">
+                {% for post in posts %}
+                    <div class="image-card">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}"
+                                alt="投稿画像"
+                                class="post-image"
+                                onclick="openPostDetailModal(this)"
+                                data-image="{{ post.image.url }}"
+                                data-name="{{ post.dog_name }}"
+                                data-breed="{{ post.breed }}"
+                                data-gender="{{ post.gender }}"
+                                data-birthday-raw="{{ post.birthday }}"
+                                data-birthday="{{ post.birthday|date:'Y-m-d' }}"
+                                data-caption="{{ post.caption|default:''|escape }}"
+                                data-post-id="{{ post.id }}"
+                                data-is-own="{% if post.is_own %}true{% else %}false{% endif %}" 
+                                data-is-favorited="{% if post.is_favorited %}true{% else %}false{% endif %}"                      
+                                {% if post.is_own %}
+                                    data-memo="{{ post.memo }}"
+                                {% else %}
+                                    data-memo=""
+                                {% endif %}
+                            >
                         {% else %}
                             <p>画像はありません</p>
                         {% endif %}
-                </div>
-            {% empty %}
-                <p>まだ投稿がありません</p>
-            {% endfor%}
-        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-posts">まだ投稿がありません</p>
+        {% endif%}
         
         <div id ="openPostDetailModal" class="modal" style="display: none;">
             <div class="modal-content">
