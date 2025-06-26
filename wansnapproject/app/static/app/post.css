@@ -116,13 +116,13 @@
 
 .search-row input[type="text"] {
     flex: 1;
-    min-width: 200px;
-    max-width: 400px;
+    min-width: 250px;
+    max-width: 480px;
     height: 40px;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .search-row button[type="submit"] {
