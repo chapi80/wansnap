@@ -36,6 +36,10 @@
                                     <div class="current-filename">
                                         現在: <a href="{{ post.image.url }}" target="_blank">{{ post.image.name }}</a>
                                     </div>
+                                </div>
+                                <div class="change-note">
+                                    変更：<a href="#" id="change-link" target="_blank"><span id="change-filename">選択されていません</span></a>
+                                </div>
         
                                     {% if edit_post_form.image.clear_checkbox %}
                                         <div class="clear-checkbox">
@@ -96,6 +100,22 @@
             });
 
             deleteModal.style.display = "none";
+
+            const fileInput = document.getElementById('{{ edit_post_form.image.id_for_label }}');
+            const changeFilename = document.getElementById('change-filename');
+            const changeLink = document.getElementById('change-link');
+
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const tempUrl = URL.createObjectURL(file);
+                    changeFilename.textContent = file.name;
+                    changeLink.href = tempUrl;
+                } else {
+                    changeFilename.textContent = '選択されていません';
+                    changeLink.href = '#';
+                }
+            });
         });
 
         </script>
