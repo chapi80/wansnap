@@ -56,10 +56,60 @@
     h2 {
         text-align: center;
     }
+
+    .dog-form input[type="text"],
+    .dog-form input[type="email"],
+    .dog-form input[type="password"],
+    .dog-form input[type="date"],
+    .dog-form select,
+    .dog-form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .dog-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .file-label {
+        display: inline-block;
+        padding: 10px 16px;
+        background-color: #ccc;
+        color: #333;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-top: 10px;
+        text-align: center;
+        max-width: 100%;
+        width: fit-content;
+        margin: 10px auto 0;
+    }
+
+    .file-label:hover {
+        background-color: #bbb;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .file-wrapper {
+        display: block;
+        text-align: center;
+    }
+
 </style>
 
-    <h2>うちの子追加登録</h2>
-    <div class="dog-form">      
+<div class="dog-form">
+    <h2>うちの子新規追加</h2>
 
         <form action="{% url 'add_dog' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -81,16 +131,56 @@
                 {{ dog_form.biography.label_tag }}<br>
                 {{ dog_form.biography }}<br><br>
                     
-                {{ dog_form.dog_image.label_tag }}<br>
-                {{ dog_form.dog_image }}<br><br>
+                {{ dog_form.dog_image.label_tag }}
+                <div class="file-wrapper">
+                    <label for="{{ dog_form.dog_image.id_for_label }}" class="file-label">画像を選択</label>
+                    {{ dog_form.dog_image }}
+                </div>
 
-            </div><br>
+                <div class="change-note" id="change-note" style="display: none;">
+                     選択した画像：
+                    <a href="#" id="change-link" target="_blank" style="display: none;">
+                        <span id="change-filename"></span>
+                    </a>
+                    <span id="change-fallback">選択されていません</span>
+                </div><br>
             
             <div class="button-wrapper">
                 <button type="submit" class="submit-button">登録する</button><br><br>
                 <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</a>
             </div>
         </form>
-    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.querySelector('input[type="file"]');
+        const note = document.getElementById('change-note');
+        const filenameSpan = document.getElementById('change-filename');
+        const fallbackSpan = document.getElementById('change-fallback');
+        const link = document.getElementById('change-link');
+
+        function updateFileNote(file) {
+            if (file) {
+                filenameSpan.textContent = file.name;
+                link.href = URL.createObjectURL(file);
+                link.style.display = 'inline';
+                fallbackSpan.style.display = 'none';
+            } else {
+                filenameSpan.textContent = '';
+                fallbackSpan.style.display = 'inline';
+                link.style.display = 'none';
+            }
+            note.style.display = 'block';
+        }
+
+        input.addEventListener('change', function () {
+            updateFileNote(input.files[0]);
+        });
+
+        updateFileNote(null);
+    });
+</script>
+
 {% endblock %}
             
