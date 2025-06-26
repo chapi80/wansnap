@@ -117,6 +117,15 @@
                 <label for="{{ create_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
                     {{ create_post_form.image }}
                 </div>
+
+                <div class="change-note" id="change-note" style="display: none;">
+                    選択した画像：
+                    <a href="#" id="change-link" target="_blank" style="display: none;">
+                        <span id="change-filename"></span>
+                    </a>
+                    <span id="change-fallback">選択されていません</span>
+                </div><br>
+
                 {% for error in create_post_form.image.errors %}
                     <span style="color:red">{{ error }}</span><br>
                 {% endfor %}
@@ -133,5 +142,35 @@
             </form><br>
 
             <a href="{% url 'mypage' %}" class="cancel-link">キャンセル</a>
-    </div>   
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.querySelector('input[type="file"]');
+            const note = document.getElementById('change-note');
+            const filenameSpan = document.getElementById('change-filename');
+            const fallback = document.getElementById('change-fallback');
+            const link = document.getElementById('change-link');
+
+            function updateFileNote(file) {
+                if (file) {
+                    filenameSpan.textContent = file.name;
+                    link.href = URL.createObjectURL(file);
+                    link.style.display = 'inline';
+                    fallback.style.display = 'none';
+                } else {
+                    link.style.display = 'none';
+                    fallback.style.display = 'inline';
+                }
+                note.style.display = 'block';
+            }
+
+            input.addEventListener('change', function () {
+                updateFileNote(input.files[0]);
+            });
+
+            updateFileNote(null);
+        });
+    </script>
+
 {% endblock %}
