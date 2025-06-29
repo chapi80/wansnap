@@ -72,29 +72,60 @@
         text-decoration: underline;
     }
 
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.6);
+        align-items: center;
+        justify-content: center;
+    }
+
     .modal-content {
         background-color: #fff;
-        padding: 20px;
+        padding: 8px 12px;
         border-radius: 8px;
-        max-width: 320px;
+        max-width: 260px;   
         width: 90%;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
     }
-    
+
+    .modal-content p {
+        font-size: 14px;         
+        margin: 10px 0;           
+    }
+
     .modal-content form {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 4px;                 
         align-items: center;
     }
 
     .modal-content form button {
-        width: 150px;
-        padding: 10px;
+        width: 140px;     
+        padding: 8px 12px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal.show {
+        display: flex;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 20px;
         cursor: pointer;
     }
 
@@ -157,7 +188,7 @@
         </form> 
             
         <div id="deleteModal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content" style="margin:100px auto;">
                 <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
                 <p id="delete-confirm-text">うちの子（{{ dog.dog_name }}）を削除しますか？</p>
                     
@@ -176,11 +207,11 @@
 
     <script>
         function openDeleteModal() {
-            document.getElementById('deleteModal').style.display = "flex";
+            document.getElementById('deleteModal').classList.add('show');
         }
 
         function closeDeleteModal() {
-            document.getElementById('deleteModal').style.display = "none";
+            document.getElementById('deleteModal').classList.remove('show');
         }
 
         document.addEventListener('DOMContentLoaded', function () {
