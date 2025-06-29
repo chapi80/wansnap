@@ -152,6 +152,33 @@
         margin-bottom: 6px;
     }
 
+    .file-label {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ccc;
+        color: #333;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        text-align: center;
+        width: auto;
+    }
+
+    .file-label:hover {
+        background-color: #bbb;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .file-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
 </style>
 
 <div class="form-wrapper">
@@ -174,9 +201,28 @@
                     {{ dog_form.birthday.label_tag }}<br>
                     {{ dog_form.birthday }}<br><br>
                     
-                    {{ dog_form.dog_image.label_tag }}<br>
-                    {{ dog_form.dog_image }}<br><br>
+                    <div class="form-group">
+                        <label class="section-label">写真（変更する場合は再選択）:</label>
 
+                        <div class="file-wrapper">
+                            <label for="{{ dog_form.dog_image.id_for_label }}" class="file-label">画像を選択</label>
+                            <input type="file" name="{{ dog_form.dog_image.name }}" id="{{ dog_form.dog_image.id_for_label }}" class="file-input">
+                        </div>
+
+                        {% if dog.dog_image %}
+                            <div class="image-info">
+                                <div class="current-filename">
+                                    現在: <a href="{{ dog.dog_image.url }}" target="_blank">{{ dog.dog_image.name }}</a>
+                                </div>
+                            </div>
+                            <div class="change-note" id="change-note" style="display: none;">
+                                変更：<a href="#" id="change-link" target="_blank"><span id="change-filename"></span></a>
+                            </div>
+                            <div class="change-note" id="no-change-note">
+                                変更：選択されていません
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div><br>
             
@@ -240,6 +286,30 @@
             const cancelBtn = modal.querySelector('button[type="button"]:not(.close-btn)');
             if (cancelBtn) {
                 cancelBtn.onclick = closeDeleteModal;
+            }
+
+            const fileInput = document.getElementById('{{ dog_form.dog_image.id_for_label }}');
+            const changeFilename = document.getElementById('change-filename');
+            const changeLink = document.getElementById('change-link');
+            const changeNote = document.getElementById('change-note');
+            const noChangeNote = document.getElementById('no-change-note');
+
+            if (fileInput) {
+                fileInput.addEventListener('change', function () {
+                    const file = this.files[0];
+                    if (file) {
+                        const tempUrl = URL.createObjectURL(file);
+                        changeFilename.textContent = file.name;
+                        changeLink.href = tempUrl;
+                        changeNote.style.display = 'block';
+                        noChangeNote.style.display = 'none';
+                    } else {
+                        changeFilename.textContent = '選択されていません';
+                        changeLink.href = '#';
+                        changeNote.style.display = 'none';
+                        noChangeNote.style.display = 'block';
+                    }
+                });
             }
         });
     </script>
