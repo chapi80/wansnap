@@ -34,9 +34,13 @@ body {
 
 .header-left a,
 .header-left a:visited {
-    color: #5C4033;
+    font-family: 'Kosugi Maru', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1.2px;
+    color: #4A3226;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 800;
+    text-shadow: 0.5px 0.5px #D9C2A6;
 }
 
 .header-right a {
