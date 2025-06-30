@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #a49771;
+    background-color: #E0C9A6;
     padding: 12px 20px;
     position: fixed;
     top: 0;
@@ -27,11 +27,12 @@ body {
 .header-left h1 {
     margin: 0;
     font-size: 24px;
+    color: #5C4033;
 }
 
 .header-right a {
     margin-left: 20px;
-    color: #333333;
+    color: #5C4033;
     text-decoration: none;
     font-weight: bold;
 }

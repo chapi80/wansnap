@@ -82,7 +82,8 @@
     border-radius: 10px;
     margin-bottom: 16px;
     padding: 10px 16px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #EADAC0;
 }
 
 .mypage-section summary {
