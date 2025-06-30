@@ -15,7 +15,7 @@
 <div class="form-wrapper">
     <h2>うちの子投稿編集ページ</h2>
             
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data" class="post-form">
                 {% csrf_token %}
                 
                 {{ edit_post_form.dog.label_tag }}<br>
@@ -35,15 +35,19 @@
                         現在:
                         <a href="{{ post.image.url }}" target="_blank">{{ post.image.name }}</a>
                     </div>
-                {% endif %}
+                    
+                    <div class="change-note" id="no-change-note">
+                        変更：選択されていません
+                    </div>
 
-                <div class="change-note" id="change-note" style="display: none;">
-                    選択した画像：
-                    <a href="#" id="change-link" target="_blank" style="display: none;">
-                        <span id="change-filename"></span>
-                    </a>
-                    <span id="change-fallback">選択されていません</span>
-                </div><br>
+                    <div class="change-note" id="change-note" style="display: none;">
+                        変更：
+                        <a href="#" id="change-link" target="_blank">
+                            <span id="change-filename"></span>
+                        </a>
+                    </div><br>
+                {% endif %}                
+
                 {% for error in edit_post_form.image.errors %}
                     <span style="color:red">{{ error }}</span><br>
                 {% endfor %}

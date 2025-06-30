@@ -4,25 +4,46 @@
 
 h2 {
     text-align: center;
+    margin-top: 0;
 }
 
 .form-wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+    max-width: 400px;
+    margin: 60px auto 50px;
+    padding: 30px;
+    background-color: transparent;
 }
 
 .form-wrapper form {
     text-align: left;
 }
 
+.post-form input[type="text"],
+.post-form input[type="email"],
+.post-form input[type="password"],
+.post-form input[type="date"],
+.post-form select,
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.post-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
 .button-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
     margin-top: 20px;
+    gap: 10px;
 }
 
 .submit-button {
@@ -33,7 +54,6 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     width: 150px;
-    transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
@@ -47,9 +67,10 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: auto;
     white-space: nowrap;
-    transition: background-color 0.3s ease;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .delete-button:hover {
@@ -118,11 +139,10 @@ h2 {
     text-decoration: underline;
     color: #4285f4;
     font-weight: bold;
-    text-align: center;
-    }
+}
 
 .cancel-link:hover {
-    background-color: #e6f0ff;
+    text-decoration: underline;
 }
 
 .button-wrapper + .cancel-link {
@@ -141,7 +161,6 @@ h2 {
     transition: background-color 0.2s ease;
     text-align: center;
     width: auto;
-    padding: 6px 12px;
 }
 
 .file-label:hover {
@@ -174,29 +193,11 @@ h2 {
     line-height: 1.4;
 }
 
-.current-filename {
-    margin-bottom: 5px;
-}
-
-.clear-checkbox {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 5px;
-}
-
 .section-label {
     font-weight: bold;
     margin: 20px 0 10px;
     text-align: left;
     width: 100%;
-}
-
-.image-info {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 0.9em;
-    word-break: break-word;
 }
 
 @media (max-width: 480px) {
@@ -207,4 +208,24 @@ h2 {
     .current-image-info {
         font-size: 13px;
     }
+}
+
+.image-info {
+    text-align: left;
+    margin-top: 10px;
+    font-size: 14px;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.current-filename {
+    margin-bottom: 5px;
+}
+
+.change-note {
+    text-align: left;
+    margin-top: 5px;
+    font-size: 14px;
+    word-break: break-word;
+    line-height: 1.4;
 }
