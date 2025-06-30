@@ -28,6 +28,15 @@ body {
     margin: 0;
     font-size: 24px;
     color: #5C4033;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-left a,
+.header-left a:visited {
+    color: #5C4033;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .header-right a {
