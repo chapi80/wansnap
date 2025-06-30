@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.forms import modelformset_factory
 from django.contrib.auth import get_user_model
 from .models import User, Dog, Post
-from django.forms.widgets import ClearableFileInput
+from django.forms.widgets import FileInput
 
 User = get_user_model()
 
@@ -89,6 +89,6 @@ class PostForm(forms.ModelForm):
             self.fields['dog'].queryset = Dog.objects.filter(owner=user)
         
         self.fields['image'].required = False
-        self.fields['image'].widget = ClearableFileInput()
+        self.fields['image'].widget = FileInput()
         self.fields['image'].widget.attrs.update({'class': 'file-input'})
         

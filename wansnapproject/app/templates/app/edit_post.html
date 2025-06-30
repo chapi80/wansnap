@@ -18,55 +18,47 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 
-                <div id="dog-forms-container">
-                    <div class="dog-form">
-                        {{ edit_post_form.dog.label_tag }}<br>
-                        {{ edit_post_form.dog }}<br><br>
+                {{ edit_post_form.dog.label_tag }}<br>
+                {{ edit_post_form.dog }}<br><br>
+                {% for error in edit_post_form.dog.errors %}
+                    <span style="color:red">{{ error }}</span><br>
+                {% endfor %}
 
-                        <div class="form-group">
-                            <label class="section-label">写真（変更する場合は再選択）:</label>
-
-                            <div class="file-wrapper">
-                                <label for="{{ edit_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
-                                <input type="file" name="{{ edit_post_form.image.name }}" id="{{ edit_post_form.image.id_for_label }}" class="file-input">
-                            </div>
-
-                            {% if post.image %}
-                                <div class="image-info">
-                                    <div class="current-filename">
-                                        現在: <a href="{{ post.image.url }}" target="_blank">{{ post.image.name }}</a>
-                                    </div>
-                                </div>
-                                <div class="change-note" id="change-note" style="display: none;">
-                                    変更：<a href="#" id="change-link" target="_blank"><span id="change-filename"></span></a>
-                                </div>
-                                <div class="change-note" id="no-change-note">
-                                    変更：選択されていません
-                                </div>
-        
-                                    {% if edit_post_form.image.clear_checkbox %}
-                                        <div class="clear-checkbox">
-                                            {{ edit_post_form.image.clear_checkbox }} {{ edit_post_form.image.clear_checkbox.label_tag }}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-
-                        </div>
-
-                        {{ edit_post_form.caption.label_tag }}<br>
-                        {{ edit_post_form.caption }}<br><br>
-
-                        {{ edit_post_form.memo.label_tag }}<br>
-                        {{ edit_post_form.memo }}<br><br>
-                    </div>
+                写真：<br>
+                <div class="file-wrapper">
+                    <label for="{{ edit_post_form.image.id_for_label }}" class="file-label">画像を選択</label>
+                    {{ edit_post_form.image }}
                 </div>
+
+                {% if post.image %}
+                    <div class="image-info">
+                        現在:
+                        <a href="{{ post.image.url }}" target="_blank">{{ post.image.name }}</a>
+                    </div>
+                {% endif %}
+
+                <div class="change-note" id="change-note" style="display: none;">
+                    選択した画像：
+                    <a href="#" id="change-link" target="_blank" style="display: none;">
+                        <span id="change-filename"></span>
+                    </a>
+                    <span id="change-fallback">選択されていません</span>
+                </div><br>
+                {% for error in edit_post_form.image.errors %}
+                    <span style="color:red">{{ error }}</span><br>
+                {% endfor %}
+        
+                {{ edit_post_form.caption.label_tag }}<br>
+                {{ edit_post_form.caption }}<br><br>
+
+                {{ edit_post_form.memo.label_tag }}<br>
+                {{ edit_post_form.memo }}<br><br>
 
                 <div class="button-wrapper">
                     <button type="submit" class="submit-button">登録する</button>
                 </div>
 
-            </form>
+            </form><br>
 
             <div class="button-wrapper">
                 <button type="button" class="delete-button" onclick="openDeleteModal()">投稿を削除する</button>
