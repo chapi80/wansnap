@@ -15,7 +15,7 @@
     <h2>🏠ホーム🏠</h2>
 
     <div class="centered">
-        <button type = "button" id="btn-post" class="btn-post" onclick="location.href='{% url 'create_post' %}'">🐾うちの子投稿🐾</button>
+        <button type = "button" id="btn-post" class="btn-post" onclick="location.href='{% url 'create_post' %}'">🐾うちの子投稿</button>
         <form class="search-form" method="get" action="{% url 'home' %}">
             <div class="search-row">
                 <input type="text" name="q" placeholder="犬種や月齢などキーワード入力" value="{{ query|default:''}}">
