@@ -93,7 +93,21 @@
             content.addEventListener('click', function (event) {
                 event.stopPropagation();
             });
+
+            restoreScrollPosition();
         });
+
+        function saveScrollPosition() {
+            localStorage.setItem('scrollPosition', window.scrollY);
+        }
+
+        function restoreScrollPosition() {
+            const scrollPos = localStorage.getItem('scrollPosition');
+            if (scrollPos !== null) {
+                window.scrollTo(0, parseInt(scrollPos));
+                localStorage.removeItem('scrollPosition');
+            }
+        }
     </script>
 
     {% block extra_js %}

@@ -252,7 +252,7 @@
 
         <h2>🐶今までの思い出🐶</h2>
 
-        <form class="search-form" method="get" action="{% url 'dog_detail' dog.id %}">
+        <form class="search-form" method="get" action="{% url 'dog_detail' dog.id %}" onsubmit="saveScrollPosition()">
 
             <div class="search-row">
                 <input type="month" name="q" value="{{ query|default:''}}">
