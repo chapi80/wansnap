@@ -45,38 +45,53 @@
 
 body {
     background-color: #fffaf0;
+    font-family: sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+h1, h2 {
+  max-width: 100%;
+  font-size: clamp(20px, 8vw, 36px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+  margin: 0 16px;
 }
 
 .slider {
-    width: 80%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 320px;
     margin: 0 auto;
     overflow: hidden;
-    position: relative;
-    background: transparent;
-    border: none;
+    box-sizing: border-box;
 }
 
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .slide {
-    min-width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
     box-sizing: border-box;
-    padding: 0;
-    margin: 0;
     text-align: center;
 }
 
 .slide img {
     width: 100%;
+    max-width: 100%;
+    height: auto;
     border: none;
     box-shadow: none;
     background-color: transparent;
     display: block;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .navigation {
@@ -102,29 +117,37 @@ body {
 }
 
 a {
-  font-family: inherit;
+    font-family: inherit;
 }
 
 p {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 16px;
-  line-height: 1.8;
-  text-align: left;
-  word-break: keep-all;
+    box-sizing: border-box;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px;
+    line-height: 1.8;
+    text-align: left;
+    word-break: break-word;
 }
 
 @media (max-width: 600px) {
   p {
-    max-width: 90%;
+    width: 100%;
+    max-width: 100%;
     padding: 0 12px;
   }
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 </style>
 
 <body class="text-center">
-    <h1>🐾 ポートフォリオ 🐾</h1><br>
+    <h2>🐾 ポートフォリオ 🐾</h2><br>
     <p>
         ワンスナップという、犬専用の写真投稿アプリのご紹介です🐶📷<br>
         他人の評価に左右されたくないけど、かわいいうちの子を見てほしい！<br>
@@ -132,7 +155,7 @@ p {
         投稿・閲覧ができるアプリを作成しました。
     </p><br>
 
-    <h2>🐾 アプリの画面 🐾</h2>
+    <h3>🐾 アプリの画面 🐾</h3>
     <div class="screenshot-gallery">
         <div class="slider">
             <div class="slides">
