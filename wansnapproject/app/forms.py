@@ -4,6 +4,7 @@ from django.forms import modelformset_factory
 from django.contrib.auth import get_user_model
 from .models import User, Dog, Post
 from django.forms.widgets import FileInput
+import re
 
 User = get_user_model()
 
@@ -28,8 +29,18 @@ class SignupForm(forms.ModelForm):
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
             
-        if password1 and password2 and password1 != password2:
-            self.add_error('password2', "パスワードが一致しません")
+        if password1 and password2:
+            if password1 != password2:
+                self.add_error('password2', "パスワードが一致しません")
+            
+            if not re.search(r'[A-Za-z]', password1):
+                self.add_error('password1', "パスワードには英字を含めてください")
+            
+            if not re.search(r'[0-9]', password1):
+                self.add_error('password1', "パスワードには数字を含めてください")
+            
+            if len(password1) < 8:
+                self.add_error('password1', "パスワードは8文字以上にしてください")           
 
 class DogForm(forms.ModelForm):
     GENDER_CHOICES = [
