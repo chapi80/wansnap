@@ -202,10 +202,33 @@
                 </div>
             
                 <div id="dog-forms-container">
+
+                    {% if dog_formset.non_form_errors %}
+                        <ul>
+                            {% for error in dog_formset.non_form_errors %}
+                                <li style="color:red;">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    
                     {{ dog_formset.management_form }}
                     {% for dog_form in dog_formset %}
 
                         <div class="dog-form">
+
+                            {% if dog_form.errors %}
+                                <ul>
+                                    {% for field in dog_form %}
+                                        {% for error in field.errors %}
+                                            <li style="color:red;">{{ field.label }}: {{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in dog_form.non_field_errors %}
+                                        <li style="color:red;">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
                             <div class="form-group">
                                 {{ dog_form.dog_name.label_tag }}
                                 {{ dog_form.dog_name }}
