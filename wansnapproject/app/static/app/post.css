@@ -36,11 +36,13 @@
 
 .modal-content {
     background-color: #fff;
-    margin: 5% auto;
+    margin: 15% auto;
     padding: 16px;
     border-radius: 8px;
-    width: 85%;
-    max-width: 420px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
