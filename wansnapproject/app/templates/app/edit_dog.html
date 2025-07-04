@@ -124,6 +124,22 @@
         display: flex;
     }
 
+    .modal-cancel-button {
+        background-color: #eee;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s ease;
+    }
+
+    .modal-cancel-button:hover {
+        background-color: #ddd;
+    }
+
+
     .close-btn {
         position: absolute;
         top: 8px;
@@ -244,7 +260,7 @@
                 <form method="POST" action="{% url 'delete_dog' dog.id %}">
                     {% csrf_token %}
                     <button type="submit" id="delete-button" class="delete-button">削除する</button>
-                    <button type="button" onclick="closeDeleteModal()">キャンセル</button>
+                    <button type="button" class="modal-cancel-button" onclick="closeDeleteModal()">キャンセル</button>
                 </form>
             </div>
         </div>
