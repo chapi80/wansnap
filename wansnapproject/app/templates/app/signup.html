@@ -311,8 +311,31 @@
 
                     const fields = newForm.querySelectorAll("input, select, textarea, label");
                     fields.forEach(field => {
-                        if (field.type !== "hidden") {
+                        if (field.type === "file") {
+                            const newInput = document.createElement('input');
+                            newInput.type = 'file';
+                            newInput.name = field.name;
+                            newInput.id = field.id;
+                            newInput.className = field.className;
+                            newInput.accept = field.accept;
+                            newInput.required = field.required;
+
+                            field.parentNode.replaceChild(newInput, field);
+                        } else if (field.type !== "hidden") {
                             field.value = "";
+                        }  
+                    });
+
+                    const changeNotes = newForm.querySelectorAll('.change-note');
+                    changeNotes.forEach(note => {
+                        const link = note.querySelector('.change-link');
+                        const filename = note.querySelector('.change-filename');
+                        const fallback = note.querySelector('.change-fallback');
+                        if (link && filename && fallback) {
+                            link.href = '#';
+                            link.style.display = 'none';
+                            filename.textContent = '';
+                            fallback.style.display = 'inline';
                         }
                     });
 
