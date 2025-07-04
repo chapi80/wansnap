@@ -232,6 +232,13 @@
                                     <label for="{{ dog_form.dog_image.id_for_label }}" class="file-label">画像を選択</label>
                                     {{ dog_form.dog_image }}
                                 </div>
+                                <div class="change-note">
+                                    選択した画像：
+                                    <a href="#" target="_blank" class="change-link" style="display: none;">
+                                        <span class="change-filename"></span>
+                                    </a>
+                                    <span class="change-fallback">選択されていません</span>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
@@ -265,6 +272,32 @@
             </form><br>
 
             <script>
+                function handleFileInputChange() {
+                    const container = this.closest('.form-group');
+                    const link = container.querySelector('.change-link');
+                    const filenameSpan = container.querySelector('.change-filename');
+                    const fallback = container.querySelector('.change-fallback');
+
+                    if (this.files.length > 0) {
+                        const file = this.files[0];
+                        filenameSpan.textContent = file.name;
+                        link.href = URL.createObjectURL(file);
+                        link.style.display = 'inline';
+                        fallback.style.display = 'none';
+                    } else {
+                        filenameSpan.textContent = '';
+                        link.href = '#';
+                        link.style.display = 'none';
+                        fallback.style.display = 'inline';
+                    }
+                }
+
+                function setupFileInputListeners() {
+                    document.querySelectorAll('input[type="file"]').forEach((input) => {
+                        input.addEventListener('change', handleFileInputChange);
+                    });
+                }
+
                 function addDogForm(){
                     const totalForms = document.getElementById("id_form-TOTAL_FORMS");
                     const container = document.getElementById("dog-forms-container");
@@ -285,7 +318,16 @@
 
                     container.appendChild(newForm);
                     totalForms.value = formCount + 1;
-                }    
+
+                    const newFileInputs = newForm.querySelectorAll('input[type="file"]');
+                    newFileInputs.forEach(input => {
+                        input.addEventListener('change', handleFileInputChange);
+                    });
+                }
+                
+                document.addEventListener('DOMContentLoaded', () => {
+                    setupFileInputListeners();
+                });
             </script>
         
             <div class="centered-buttons">
