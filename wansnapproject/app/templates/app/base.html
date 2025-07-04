@@ -31,6 +31,9 @@
             background-color: #e53935;
         }
 
+        
+
+
     </style>
 
     {% block extra_css %}{% endblock %}
@@ -54,8 +57,9 @@
         {% block content %}{% endblock %}
     </main>
 
-    <div id="logoutModal" style="display:none; position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
-        <div id="logoutModalContent" style="background:#fff; margin:100px auto; padding:20px; width:300px; text-align:center;">
+    <div id="logoutModal">
+        <div id="logoutModalContent" class="modal-content">
+            <span class="close-btn" onclick="closeLogoutModal()">&times;</span>
             <p>ログアウトしますか？</p>
             <button onclick="confirmLogout()" class="logout-button">ログアウトする</button>
             <button onclick="closeLogoutModal()" class="cancel-button">キャンセル</button>
@@ -68,7 +72,7 @@
 
     <script>
         function openLogoutModal() {
-            document.getElementById('logoutModal').style.display = 'block';
+            document.getElementById('logoutModal').style.display = 'flex';
         }
 
         function closeLogoutModal() {
@@ -89,6 +93,9 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('logoutModal');
+            modal.style.display = 'none';
+
             const content = document.getElementById('logoutModalContent');
             content.addEventListener('click', function (event) {
                 event.stopPropagation();
@@ -97,10 +104,6 @@
             restoreScrollPosition();
         });
 
-        function saveScrollPosition() {
-            localStorage.setItem('scrollPosition', window.scrollY);
-        }
-
         function restoreScrollPosition() {
             const scrollPos = localStorage.getItem('scrollPosition');
             if (scrollPos !== null) {
@@ -108,6 +111,7 @@
                 localStorage.removeItem('scrollPosition');
             }
         }
+
     </script>
 
     {% block extra_js %}
