@@ -63,12 +63,13 @@
     line-height: 1.4;
     text-decoration: none;
     font-family: inherit;
-    background-color: #EADAC0;
-    color: #5C4033;      
+    background-color: #d9c2a6;
+    color: #5C4033;
+    border: 2px solid #5C4033;    
 }
 
 .mypage-button:hover {
-    background-color: #D9C2A6;
+    background-color: #ebdfbe;
 }
 
 .emoji {
