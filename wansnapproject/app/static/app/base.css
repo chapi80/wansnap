@@ -117,6 +117,10 @@ main h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+#logoutModal {
+    z-index: 2000;
+}
+
 #logoutModalContent {
     display: flex;
     flex-direction: column;
