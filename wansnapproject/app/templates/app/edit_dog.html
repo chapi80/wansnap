@@ -224,20 +224,23 @@
                             <label for="{{ dog_form.dog_image.id_for_label }}" class="file-label">画像を選択</label>
                             <input type="file" name="{{ dog_form.dog_image.name }}" id="{{ dog_form.dog_image.id_for_label }}" class="file-input">
                         </div>
-
-                        {% if dog.dog_image %}
-                            <div class="image-info">
-                                <div class="current-filename">
+                        
+                        <div class="image-info">
+                            <div class="current-filename">
+                                {% if dog.dog_image %}
                                     現在: <a href="{{ dog.dog_image.url }}" target="_blank">{{ dog.dog_image.name }}</a>
-                                </div>
+                                {% else %}
+                                    現在：登録がありません
+                                {% endif %}
                             </div>
+                            
                             <div class="change-note" id="change-note" style="display: none;">
                                 変更：<a href="#" id="change-link" target="_blank"><span id="change-filename"></span></a>
                             </div>
                             <div class="change-note" id="no-change-note">
                                 変更：選択されていません
-                            </div>
-                        {% endif %}
+                            </div>                      
+                        </div>
                     </div>
                 </div>
             </div><br>
